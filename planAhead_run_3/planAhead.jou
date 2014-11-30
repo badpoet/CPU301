@@ -1,0 +1,59 @@
+#-----------------------------------------------------------
+# PlanAhead v14.7 (64-bit)
+# Build 321239 by xbuild on Fri Sep 27 19:29:51 MDT 2013
+# Start of session at: Mon Dec 01 04:51:24 2014
+# Process ID: 6200
+# Log file: C:/COA/cpu301/planAhead_run_3/planAhead.log
+# Journal file: C:/COA/cpu301/planAhead_run_3/planAhead.jou
+#-----------------------------------------------------------
+start_gui
+source C:/COA/cpu301/pa.fromNetlist.tcl
+startgroup
+set_property package_pin C7 [get_ports {SSD_h[6]}]
+endgroup
+startgroup
+set_property package_pin C7 [get_ports {SSD_h[6]}]
+endgroup
+startgroup
+set_property package_pin D7 [get_ports {SSD_h[5]}]
+endgroup
+startgroup
+set_property package_pin E7 [get_ports {SSD_h[4]}]
+endgroup
+startgroup
+set_property package_pin F7 [get_ports {SSD_h[3]}]
+endgroup
+startgroup
+set_property package_pin A8 [get_ports {SSD_h[2]}]
+endgroup
+startgroup
+set_property package_pin E8 [get_ports {SSD_h[1]}]
+endgroup
+startgroup
+set_property package_pin F8 [get_ports {SSD_h[0]}]
+endgroup
+startgroup
+set_property package_pin C9 [get_ports {SSD_l[6]}]
+endgroup
+startgroup
+set_property package_pin D9 [get_ports {SSD_l[5]}]
+endgroup
+startgroup
+set_property package_pin D9 [get_ports {SSD_l[5]}]
+endgroup
+startgroup
+set_property package_pin E9 [get_ports {SSD_l[4]}]
+endgroup
+startgroup
+set_property package_pin F9 [get_ports {SSD_l[3]}]
+endgroup
+startgroup
+set_property package_pin G9 [get_ports {SSD_l[2]}]
+endgroup
+startgroup
+set_property package_pin A10 [get_ports {SSD_l[1]}]
+endgroup
+startgroup
+set_property package_pin B10 [get_ports {SSD_l[0]}]
+endgroup
+save_constraints

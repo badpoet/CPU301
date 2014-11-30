@@ -1,0 +1,7 @@
+vhdl work "C:\COA\cpu301\ssd.vhd"
+vhdl work "C:\COA\cpu301\pcreg.vhd"
+vhdl work "C:\COA\cpu301\pcmux.vhd"
+vhdl work "C:\COA\cpu301\ifetcher.vhd"
+vhdl work "C:\COA\cpu301\clkgen.vhd"
+vhdl work "C:\COA\cpu301\clkbase.vhd"
+vhdl work "C:\COA\cpu301\cputop.vhd"

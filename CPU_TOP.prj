@@ -1,0 +1,7 @@
+vhdl work "ssd.vhd"
+vhdl work "pcreg.vhd"
+vhdl work "pcmux.vhd"
+vhdl work "ifetcher.vhd"
+vhdl work "clkgen.vhd"
+vhdl work "clkbase.vhd"
+vhdl work "cputop.vhd"
