@@ -128,15 +128,10 @@ signal Clk_x4 : STD_LOGIC;
 
 signal Pc_d : STD_LOGIC_VECTOR (15 downto 0);
 signal Pc_q : STD_LOGIC_VECTOR (15 downto 0);
-<<<<<<< HEAD
 signal Inst_IF : STD_LOGIC_VECTOR (15 downto 0);
 
 signal Npc_ID : STD_LOGIC_VECTOR (15 downto 0);
 signal Inst_ID : STD_LOGIC_VECTOR (15 downto 0);
-=======
-signal Branch_pc : STD_LOGIC_VECTOR (15 downto 0);
-signal Inst_data : STD_LOGIC_VECTOR (15 downto 0);
->>>>>>> 87caec6832f8919d490b402cf9f2edcb8515ab01
 
 begin
 	
@@ -156,19 +151,6 @@ begin
 	Clk_gen_c : CLK_GEN port map ( Clk_base => Clk_base, Clk => Clk, 
 		Clk_x2 => Clk_x2, Clk_x4 => Clk_x4, Rst => Rst );
 	
-<<<<<<< HEAD
-=======
-	Pc_mux_c : PC_MUX port map ( Npc => Pc_d, Branch_pc => Branch_pc, Pc => Pc_q,
-		Pc_src => '0' );
-	Pc_branch_calc_c : Pc_branch_calc port map (
-		Pc => Pc_q,
-      Immediate => "0000000000000000",
-      Reg => "0000000000000000",
-		Condition_jump => "00",
-      Branch_pc => Branch_pc,
-      Equal_zero => '0'
-	);
->>>>>>> 87caec6832f8919d490b402cf9f2edcb8515ab01
 	Pc_reg_c : PC_REG port map ( Clk => Clk, Pc_d => Pc_d, Pc_q => Pc_q, Rst => Rst );
 	Inst_fetcher_c : INST_FETCHER port map ( 
 		Clk => Clk, RAM2_we => RAM2_we, RAM2_oe => RAM2_oe, RAM2_en => RAM2_en, 
