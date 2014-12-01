@@ -98,6 +98,15 @@ component INST_FETCHER is
            RAM2_data : inout  STD_LOGIC_VECTOR (15 downto 0));
 end component;
 
+component IF_ID_REGS is
+    Port ( Clk : in  STD_LOGIC;
+           Rst : in  STD_LOGIC;
+           Npc_d : in  STD_LOGIC_VECTOR (15 downto 0);
+           Inst_d : in  STD_LOGIC_VECTOR (15 downto 0);
+           Npc_q : out  STD_LOGIC_VECTOR (15 downto 0);
+           Inst_q : out  STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
 -- WIRES
 
 -- 16 bit integer passed to seven segment displays
@@ -110,7 +119,10 @@ signal Clk_x4 : STD_LOGIC;
 
 signal Pc_d : STD_LOGIC_VECTOR (15 downto 0);
 signal Pc_q : STD_LOGIC_VECTOR (15 downto 0);
-signal Inst_data : STD_LOGIC_VECTOR (15 downto 0);
+signal Inst_IF : STD_LOGIC_VECTOR (15 downto 0);
+
+signal Npc_ID : STD_LOGIC_VECTOR (15 downto 0);
+signal Inst_ID : STD_LOGIC_VECTOR (15 downto 0);
 
 begin
 	
@@ -119,7 +131,7 @@ begin
 	LED(14) <= Clk_x2;
 	LED(13) <= Clk_x4;
 	LED(12) <= Clk_base;
-	SSD_data <= Inst_data(7 downto 0);
+	SSD_data <= Inst_ID(7 downto 0);
 	
 	Seven_seg_display_c : SEVEN_SEG_DISPLAY port map ( Data => SSD_data,
 		Output_h => SSD_h, Output_l => SSD_l );
@@ -130,14 +142,16 @@ begin
 	Clk_gen_c : CLK_GEN port map ( Clk_base => Clk_base, Clk => Clk, 
 		Clk_x2 => Clk_x2, Clk_x4 => Clk_x4, Rst => Rst );
 	
-	Pc_mux_c : PC_MUX port map ( Npc => Pc_d, Branch_pc => Pc_q, Pc => Pc_q,
-		Pc_src => '0' );
 	Pc_reg_c : PC_REG port map ( Clk => Clk, Pc_d => Pc_d, Pc_q => Pc_q, Rst => Rst );
 	Inst_fetcher_c : INST_FETCHER port map ( 
 		Clk => Clk, RAM2_we => RAM2_we, RAM2_oe => RAM2_oe, RAM2_en => RAM2_en, 
-		Pc => Pc_q, Inst => Inst_data, Clk2 => Clk_x4, RAM2_addr => RAM2_addr,
+		Pc => Pc_q, Inst => Inst_IF, Clk2 => Clk_x4, RAM2_addr => RAM2_addr,
 		RAM2_data => RAM2_data, Rst => Rst );
-		
+	If_ID_regs_c : IF_ID_REGS port map ( Clk => Clk, Npc_d => Pc_q, Npc_q => Npc_ID, 
+		Inst_d => Inst_IF, Inst_q => Inst_ID, Rst => Rst );
+
+	Pc_mux_c : PC_MUX port map ( Npc => Pc_d, Branch_pc => Pc_q, Pc => Pc_q,
+		Pc_src => '0' );	
 	RAM1_data <= (others => 'Z');
 	RAM1_addr <= (others => '0');
 	RAM1_oe <= '1';

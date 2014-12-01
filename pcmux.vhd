@@ -40,7 +40,7 @@ end PC_MUX;
 architecture RTL of PC_MUX is
 
 begin
-	Npc <= STD_LOGIC_VECTOR(UNSIGNED(pc) + 4);
+	Npc <= STD_LOGIC_VECTOR(UNSIGNED(pc) + 1);
 
 end RTL;
 

@@ -4,13 +4,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Parameter xsthdpdir set to xst
 
 
 Total REAL time to Xst completion: 0.00 secs
-Total CPU time to Xst completion: 0.09 secs
+Total CPU time to Xst completion: 0.08 secs
  
 --> Reading design: CPU_TOP.prj
 
@@ -109,16 +109,18 @@ Architecture rtl of Entity seven_seg_display is up to date.
 Compiling vhdl file "C:/COA/cpu301/clkbase.vhd" in Library work.
 Architecture rtl of Entity clk_base_gen is up to date.
 Compiling vhdl file "C:/COA/cpu301/clkgen.vhd" in Library work.
-Entity <clk_gen> compiled.
-Entity <clk_gen> (Architecture <rtl>) compiled.
-Compiling vhdl file "C:/COA/cpu301/pcmux.vhd" in Library work.
-Architecture rtl of Entity pc_mux is up to date.
+Architecture rtl of Entity clk_gen is up to date.
 Compiling vhdl file "C:/COA/cpu301/pcreg.vhd" in Library work.
 Architecture rtl of Entity pc_reg is up to date.
 Compiling vhdl file "C:/COA/cpu301/ifetcher.vhd" in Library work.
 Architecture rtl of Entity inst_fetcher is up to date.
+Compiling vhdl file "C:/COA/cpu301/ifidregs.vhd" in Library work.
+Architecture rtl of Entity if_id_regs is up to date.
+Compiling vhdl file "C:/COA/cpu301/pcmux.vhd" in Library work.
+Architecture rtl of Entity pc_mux is up to date.
 Compiling vhdl file "C:/COA/cpu301/cputop.vhd" in Library work.
-Architecture structrual of Entity cpu_top is up to date.
+Entity <cpu_top> compiled.
+Entity <cpu_top> (Architecture <structrual>) compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -131,11 +133,13 @@ Analyzing hierarchy for entity <CLK_BASE_GEN> in library <work> (architecture <r
 
 Analyzing hierarchy for entity <CLK_GEN> in library <work> (architecture <rtl>).
 
-Analyzing hierarchy for entity <PC_MUX> in library <work> (architecture <rtl>).
-
 Analyzing hierarchy for entity <PC_REG> in library <work> (architecture <rtl>).
 
 Analyzing hierarchy for entity <INST_FETCHER> in library <work> (architecture <rtl>).
+
+Analyzing hierarchy for entity <IF_ID_REGS> in library <work> (architecture <rtl>).
+
+Analyzing hierarchy for entity <PC_MUX> in library <work> (architecture <rtl>).
 
 
 =========================================================================
@@ -155,15 +159,18 @@ Entity <CLK_BASE_GEN> analyzed. Unit <CLK_BASE_GEN> generated.
 Analyzing Entity <CLK_GEN> in library <work> (Architecture <rtl>).
 Entity <CLK_GEN> analyzed. Unit <CLK_GEN> generated.
 
-Analyzing Entity <PC_MUX> in library <work> (Architecture <rtl>).
-Entity <PC_MUX> analyzed. Unit <PC_MUX> generated.
-
 Analyzing Entity <PC_REG> in library <work> (Architecture <rtl>).
 Entity <PC_REG> analyzed. Unit <PC_REG> generated.
 
 Analyzing Entity <INST_FETCHER> in library <work> (Architecture <rtl>).
 INFO:Xst:2679 - Register <RAM2_data> in unit <INST_FETCHER> has a constant value of ZZZZZZZZZZZZZZZZ during circuit operation. The register is replaced by logic.
 Entity <INST_FETCHER> analyzed. Unit <INST_FETCHER> generated.
+
+Analyzing Entity <IF_ID_REGS> in library <work> (Architecture <rtl>).
+Entity <IF_ID_REGS> analyzed. Unit <IF_ID_REGS> generated.
+
+Analyzing Entity <PC_MUX> in library <work> (Architecture <rtl>).
+Entity <PC_MUX> analyzed. Unit <PC_MUX> generated.
 
 
 =========================================================================
@@ -205,16 +212,6 @@ Synthesizing Unit <CLK_GEN>.
 Unit <CLK_GEN> synthesized.
 
 
-Synthesizing Unit <PC_MUX>.
-    Related source file is "C:/COA/cpu301/pcmux.vhd".
-WARNING:Xst:647 - Input <Pc_src> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:647 - Input <Branch_pc> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 16-bit adder for signal <Npc>.
-    Summary:
-	inferred   1 Adder/Subtractor(s).
-Unit <PC_MUX> synthesized.
-
-
 Synthesizing Unit <PC_REG>.
     Related source file is "C:/COA/cpu301/pcreg.vhd".
     Found 16-bit register for signal <Pc>.
@@ -230,6 +227,25 @@ WARNING:Xst:647 - Input <Clk> is never used. This port will be preserved and lef
     Summary:
 	inferred  16 D-type flip-flop(s).
 Unit <INST_FETCHER> synthesized.
+
+
+Synthesizing Unit <IF_ID_REGS>.
+    Related source file is "C:/COA/cpu301/ifidregs.vhd".
+    Found 16-bit register for signal <Inst>.
+    Found 16-bit register for signal <Npc>.
+    Summary:
+	inferred  32 D-type flip-flop(s).
+Unit <IF_ID_REGS> synthesized.
+
+
+Synthesizing Unit <PC_MUX>.
+    Related source file is "C:/COA/cpu301/pcmux.vhd".
+WARNING:Xst:647 - Input <Pc_src> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <Branch_pc> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 16-bit adder for signal <Npc>.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+Unit <PC_MUX> synthesized.
 
 
 Synthesizing Unit <CPU_TOP>.
@@ -250,7 +266,8 @@ WARNING:Xst:2565 - Inout <RAM1_data<6>> is never assigned.
 WARNING:Xst:2565 - Inout <RAM1_data<7>> is never assigned.
 WARNING:Xst:2565 - Inout <RAM1_data<8>> is never assigned.
 WARNING:Xst:2565 - Inout <RAM1_data<9>> is never assigned.
-WARNING:Xst:646 - Signal <Inst_data<15:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Npc_ID> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:646 - Signal <Inst_ID<15:8>> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
 Unit <CPU_TOP> synthesized.
 
 
@@ -264,9 +281,9 @@ Macro Statistics
  16-bit adder                                          : 1
 # Counters                                             : 1
  31-bit up counter                                     : 1
-# Registers                                            : 6
+# Registers                                            : 8
  1-bit register                                        : 4
- 16-bit register                                       : 2
+ 16-bit register                                       : 4
 # Comparators                                          : 1
  31-bit comparator less                                : 1
 
@@ -284,6 +301,14 @@ WARNING:Xst:2677 - Node <Inst_reg_12> of sequential type is unconnected in block
 WARNING:Xst:2677 - Node <Inst_reg_13> of sequential type is unconnected in block <Inst_fetcher_c>.
 WARNING:Xst:2677 - Node <Inst_reg_14> of sequential type is unconnected in block <Inst_fetcher_c>.
 WARNING:Xst:2677 - Node <Inst_reg_15> of sequential type is unconnected in block <Inst_fetcher_c>.
+WARNING:Xst:2677 - Node <Inst_8> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_9> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_10> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_11> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_12> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_13> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_14> of sequential type is unconnected in block <If_ID_regs_c>.
+WARNING:Xst:2677 - Node <Inst_15> of sequential type is unconnected in block <If_ID_regs_c>.
 
 =========================================================================
 Advanced HDL Synthesis Report
@@ -295,8 +320,8 @@ Macro Statistics
  16-bit adder                                          : 1
 # Counters                                             : 1
  31-bit up counter                                     : 1
-# Registers                                            : 36
- Flip-Flops                                            : 36
+# Registers                                            : 68
+ Flip-Flops                                            : 68
 # Comparators                                          : 1
  31-bit comparator less                                : 1
 
@@ -311,8 +336,8 @@ Optimizing unit <CPU_TOP> ...
 Optimizing unit <PC_REG> ...
 
 Optimizing unit <INST_FETCHER> ...
-WARNING:Xst:1710 - FF/Latch <Pc_reg_c/Pc_1> (without init value) has a constant value of 0 in block <CPU_TOP>. This FF/Latch will be trimmed during the optimization process.
-WARNING:Xst:1710 - FF/Latch <Pc_reg_c/Pc_0> (without init value) has a constant value of 0 in block <CPU_TOP>. This FF/Latch will be trimmed during the optimization process.
+
+Optimizing unit <IF_ID_REGS> ...
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_15> of sequential type is unconnected in block <CPU_TOP>.
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_14> of sequential type is unconnected in block <CPU_TOP>.
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_13> of sequential type is unconnected in block <CPU_TOP>.
@@ -321,6 +346,30 @@ WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_11> of sequential type is uncon
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_10> of sequential type is unconnected in block <CPU_TOP>.
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_9> of sequential type is unconnected in block <CPU_TOP>.
 WARNING:Xst:2677 - Node <Inst_fetcher_c/Inst_reg_8> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_15> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_14> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_13> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_12> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_11> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_10> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_9> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_8> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_7> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_6> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_5> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_4> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_3> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_2> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_1> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Npc_0> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_15> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_14> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_13> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_12> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_11> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_10> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_9> of sequential type is unconnected in block <CPU_TOP>.
+WARNING:Xst:2677 - Node <If_ID_regs_c/Inst_8> of sequential type is unconnected in block <CPU_TOP>.
 
 Mapping all equations...
 Building and optimizing final netlist ...
@@ -332,8 +381,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 57
- Flip-Flops                                            : 57
+# Registers                                            : 67
+ Flip-Flops                                            : 67
 
 =========================================================================
 
@@ -362,21 +411,22 @@ Design Statistics
 # IOs                              : 106
 
 Cell Usage :
-# BELS                             : 179
+# BELS                             : 185
 #      GND                         : 1
 #      INV                         : 10
-#      LUT1                        : 17
+#      LUT1                        : 19
 #      LUT2                        : 1
 #      LUT3                        : 31
 #      LUT4                        : 18
-#      MUXCY                       : 55
+#      MUXCY                       : 57
 #      VCC                         : 1
-#      XORCY                       : 45
-# FlipFlops/Latches                : 57
-#      FDC                         : 15
+#      XORCY                       : 47
+# FlipFlops/Latches                : 67
+#      FDC                         : 25
 #      FDCE                        : 2
 #      FDE                         : 40
-# Clock Buffers                    : 1
+# Clock Buffers                    : 2
+#      BUFG                        : 1
 #      BUFGP                       : 1
 # IO Buffers                       : 81
 #      IBUF                        : 9
@@ -388,13 +438,13 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                       38  out of   8672     0%  
- Number of Slice Flip Flops:             49  out of  17344     0%  
- Number of 4 input LUTs:                 77  out of  17344     0%  
+ Number of Slices:                       44  out of   8672     0%  
+ Number of Slice Flip Flops:             59  out of  17344     0%  
+ Number of 4 input LUTs:                 79  out of  17344     0%  
  Number of IOs:                         106
  Number of bonded IOBs:                  82  out of    250    32%  
     IOB Flip Flops:                       8
- Number of GCLKs:                         1  out of     24     4%  
+ Number of GCLKs:                         2  out of     24     8%  
 
 ---------------------------
 Partition Resource Summary:
@@ -419,7 +469,7 @@ Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
 Clk_in                             | BUFGP                  | 32    |
 Clk_base_gen_c/Tmp                 | NONE(Clk_gen_c/Clk_s)  | 11    |
-Clk_gen_c/Clk_s                    | NONE(Pc_reg_c/Pc_15)   | 14    |
+Clk_gen_c/Clk_s1                   | BUFG                   | 24    |
 -----------------------------------+------------------------+-------+
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
@@ -428,7 +478,7 @@ Asynchronous Control Signals Information:
 -------------------------------------------------+-------------------------+-------+
 Control Signal                                   | Buffer(FF name)         | Load  |
 -------------------------------------------------+-------------------------+-------+
-Clk_base_gen_c/Rst_inv(Pc_reg_c/Rst_inv1_INV_0:O)| NONE(Clk_base_gen_c/Tmp)| 17    |
+Clk_base_gen_c/Rst_inv(Pc_reg_c/Rst_inv1_INV_0:O)| NONE(Clk_base_gen_c/Tmp)| 27    |
 -------------------------------------------------+-------------------------+-------+
 
 Timing Summary:
@@ -512,44 +562,46 @@ Delay:               8.591ns (Levels of Logic = 45)
 
 =========================================================================
 Timing constraint: Default period analysis for Clock 'Clk_base_gen_c/Tmp'
-  Clock period: 3.057ns (frequency: 327.118MHz)
+  Clock period: 2.717ns (frequency: 368.053MHz)
   Total number of paths / destination ports: 4 / 4
 -------------------------------------------------------------------------
-Delay:               3.057ns (Levels of Logic = 1)
-  Source:            Clk_gen_c/Clk_s (FF)
+Delay:               2.717ns (Levels of Logic = 1)
+  Source:            Clk_gen_c/Cnt_0 (FF)
   Destination:       Clk_gen_c/Clk_s (FF)
   Source Clock:      Clk_base_gen_c/Tmp rising
   Destination Clock: Clk_base_gen_c/Tmp rising
 
-  Data Path: Clk_gen_c/Clk_s to Clk_gen_c/Clk_s
+  Data Path: Clk_gen_c/Cnt_0 to Clk_gen_c/Clk_s
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q            16   0.591   1.034  Clk_gen_c/Clk_s (Clk_gen_c/Clk_s)
-     INV:I->O              1   0.704   0.420  Clk_gen_c/Clk_s_not00011_INV_0 (Clk_gen_c/Clk_s_not0001)
-     FDCE:D                    0.308          Clk_gen_c/Clk_s
+     FDE:C->Q              1   0.591   0.420  Clk_gen_c/Cnt_0 (Clk_gen_c/Cnt_0)
+     INV:I->O              2   0.704   0.447  Clk_gen_c/Cnt_inv1_INV_0 (Clk_gen_c/Cnt_inv)
+     FDCE:CE                   0.555          Clk_gen_c/Clk_s
     ----------------------------------------
-    Total                      3.057ns (1.603ns logic, 1.454ns route)
-                                       (52.4% logic, 47.6% route)
+    Total                      2.717ns (1.850ns logic, 0.867ns route)
+                                       (68.1% logic, 31.9% route)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_s'
-  Clock period: 4.226ns (frequency: 236.630MHz)
-  Total number of paths / destination ports: 105 / 14
+Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_s1'
+  Clock period: 4.344ns (frequency: 230.203MHz)
+  Total number of paths / destination ports: 136 / 16
 -------------------------------------------------------------------------
-Delay:               4.226ns (Levels of Logic = 14)
-  Source:            Pc_reg_c/Pc_3 (FF)
+Delay:               4.344ns (Levels of Logic = 16)
+  Source:            Pc_reg_c/Pc_1 (FF)
   Destination:       Pc_reg_c/Pc_15 (FF)
-  Source Clock:      Clk_gen_c/Clk_s rising
-  Destination Clock: Clk_gen_c/Clk_s rising
+  Source Clock:      Clk_gen_c/Clk_s1 rising
+  Destination Clock: Clk_gen_c/Clk_s1 rising
 
-  Data Path: Pc_reg_c/Pc_3 to Pc_reg_c/Pc_15
+  Data Path: Pc_reg_c/Pc_1 to Pc_reg_c/Pc_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              3   0.591   0.706  Pc_reg_c/Pc_3 (Pc_reg_c/Pc_3)
-     LUT1:I0->O            1   0.704   0.000  Pc_mux_c/Madd_Npc_cy<3>_rt (Pc_mux_c/Madd_Npc_cy<3>_rt)
-     MUXCY:S->O            1   0.464   0.000  Pc_mux_c/Madd_Npc_cy<3> (Pc_mux_c/Madd_Npc_cy<3>)
+     FDC:C->Q              3   0.591   0.706  Pc_reg_c/Pc_1 (Pc_reg_c/Pc_1)
+     LUT1:I0->O            1   0.704   0.000  Pc_mux_c/Madd_Npc_cy<1>_rt (Pc_mux_c/Madd_Npc_cy<1>_rt)
+     MUXCY:S->O            1   0.464   0.000  Pc_mux_c/Madd_Npc_cy<1> (Pc_mux_c/Madd_Npc_cy<1>)
+     MUXCY:CI->O           1   0.059   0.000  Pc_mux_c/Madd_Npc_cy<2> (Pc_mux_c/Madd_Npc_cy<2>)
+     MUXCY:CI->O           1   0.059   0.000  Pc_mux_c/Madd_Npc_cy<3> (Pc_mux_c/Madd_Npc_cy<3>)
      MUXCY:CI->O           1   0.059   0.000  Pc_mux_c/Madd_Npc_cy<4> (Pc_mux_c/Madd_Npc_cy<4>)
      MUXCY:CI->O           1   0.059   0.000  Pc_mux_c/Madd_Npc_cy<5> (Pc_mux_c/Madd_Npc_cy<5>)
      MUXCY:CI->O           1   0.059   0.000  Pc_mux_c/Madd_Npc_cy<6> (Pc_mux_c/Madd_Npc_cy<6>)
@@ -564,8 +616,8 @@ Delay:               4.226ns (Levels of Logic = 14)
      XORCY:CI->O           1   0.804   0.000  Pc_mux_c/Madd_Npc_xor<15> (Pc_d<15>)
      FDC:D                     0.308          Pc_reg_c/Pc_15
     ----------------------------------------
-    Total                      4.226ns (3.520ns logic, 0.706ns route)
-                                       (83.3% logic, 16.7% route)
+    Total                      4.344ns (3.638ns logic, 0.706ns route)
+                                       (83.7% logic, 16.3% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_base_gen_c/Tmp'
@@ -606,19 +658,19 @@ Offset:              3.038ns (Levels of Logic = 1)
                                        (58.4% logic, 41.6% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_base_gen_c/Tmp'
-  Total number of paths / destination ports: 58 / 16
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_s1'
+  Total number of paths / destination ports: 84 / 42
 -------------------------------------------------------------------------
 Offset:              5.870ns (Levels of Logic = 2)
-  Source:            Inst_fetcher_c/Inst_reg_7 (FF)
+  Source:            If_ID_regs_c/Inst_7 (FF)
   Destination:       SSD_h<6> (PAD)
-  Source Clock:      Clk_base_gen_c/Tmp rising
+  Source Clock:      Clk_gen_c/Clk_s1 rising
 
-  Data Path: Inst_fetcher_c/Inst_reg_7 to SSD_h<6>
+  Data Path: If_ID_regs_c/Inst_7 to SSD_h<6>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDE:C->Q              7   0.591   0.883  Inst_fetcher_c/Inst_reg_7 (Inst_fetcher_c/Inst_reg_7)
+     FDC:C->Q              7   0.591   0.883  If_ID_regs_c/Inst_7 (If_ID_regs_c/Inst_7)
      LUT4:I0->O            1   0.704   0.420  Seven_seg_display_c/Mrom_Output_h41 (SSD_h_4_OBUF)
      OBUF:I->O                 3.272          SSD_h_4_OBUF (SSD_h<4>)
     ----------------------------------------
@@ -626,20 +678,20 @@ Offset:              5.870ns (Levels of Logic = 2)
                                        (77.8% logic, 22.2% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_s'
-  Total number of paths / destination ports: 24 / 24
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_base_gen_c/Tmp'
+  Total number of paths / destination ports: 2 / 2
 -------------------------------------------------------------------------
 Offset:              4.394ns (Levels of Logic = 1)
-  Source:            Pc_reg_c/Pc_11 (FF)
-  Destination:       RAM2_addr<11> (PAD)
-  Source Clock:      Clk_gen_c/Clk_s rising
+  Source:            Clk_gen_c/Clk_s (FF)
+  Destination:       LED<15> (PAD)
+  Source Clock:      Clk_base_gen_c/Tmp rising
 
-  Data Path: Pc_reg_c/Pc_11 to RAM2_addr<11>
+  Data Path: Clk_gen_c/Clk_s to LED<15>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              3   0.591   0.531  Pc_reg_c/Pc_11 (Pc_reg_c/Pc_11)
-     OBUF:I->O                 3.272          RAM2_addr_11_OBUF (RAM2_addr<11>)
+     FDCE:C->Q             3   0.591   0.531  Clk_gen_c/Clk_s (Clk_gen_c/Clk_s1)
+     OBUF:I->O                 3.272          LED_15_OBUF (LED<15>)
     ----------------------------------------
     Total                      4.394ns (3.863ns logic, 0.531ns route)
                                        (87.9% logic, 12.1% route)
@@ -667,13 +719,13 @@ Offset:              4.863ns (Levels of Logic = 1)
 
 
 Total REAL time to Xst completion: 5.00 secs
-Total CPU time to Xst completion: 4.66 secs
+Total CPU time to Xst completion: 4.58 secs
  
 --> 
 
-Total memory usage is 261336 kilobytes
+Total memory usage is 261272 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   38 (   0 filtered)
+Number of warnings :   69 (   0 filtered)
 Number of infos    :    6 (   0 filtered)
 
