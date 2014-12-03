@@ -43,13 +43,13 @@ begin
 	process (op, srcB) begin
 		case op is
 			when "0000"=>
-				result <= STD_LOGIC_VECTOR(UNSIGNED(srcA) + UNSIGNED(srcB));
+				result <= srcA + srcB;
 			when "0001"=>
 				result <= srcA and srcB;
 			when "0010"=>
 				result <= srcA /= srcB;
 			when "0011"=>
-				result <= STD_LOGIC_VECTOR(UNSIGNED(srcA) - UNSIGNED(srcB));
+				result <= srcA - srcB;
 			when "0100"=>
 				result <= not srcA;
 			when "0101"=>
