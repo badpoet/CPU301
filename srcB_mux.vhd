@@ -31,6 +31,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity srcB_mux is
     Port ( id_ex : in  STD_LOGIC_VECTOR (15 downto 0);
+			  immediate : in  STD_LOGIC_VECTOR (15 downto 0);
            ex_mem : in  STD_LOGIC_VECTOR (15 downto 0);
            mem_wb : in  STD_LOGIC_VECTOR (15 downto 0);
            ALUsrcB : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -44,7 +45,9 @@ architecture RTL of srcB_mux is
 begin
 
 	process (ALUsrcA, ex_mem_REGdes, mem_wb_REGdes) begin
-		if (ALUsrcB = ex_mem_REGdes) then
+		if (ALUsrcB = "0111") then
+			srcB <= immediate;
+		elsif (ALUsrcB = ex_mem_REGdes) then
 			srcB <= ex_mem;
 		elsif (ALUsrcB = mem_wb_REGdes) then
 			srcB <= mem_wb;

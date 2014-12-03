@@ -54,8 +54,8 @@ begin
 				result <= not srcA;
 			when "0101"=>
 				result <= srcA or srcB;
-			when "0110"=>z
-				if (srcB = "000000000000000") then
+			when "0110"=>
+				if (srcB = "0000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sll 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
@@ -63,7 +63,7 @@ begin
 			when "0111"=>
 				result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
 			when "1000"=>
-				if (srcB = "000000000000000") then
+				if (srcB = "0000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sra 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(srcA) sra conv_integer(srcB));
