@@ -43,25 +43,25 @@ begin
 	process (op, srcB) begin
 		case op is
 			when "0000"=>
-				result <= srcA+srcB;
+				result <= STD_LOGIC_VECTOR(UNSIGNED(srcA) + UNSIGNED(srcB));
 			when "0001"=>
-				result <= srcA&srcB;
+				result <= srcA and srcB;
 			when "0010"=>
-				result <= srcA != srcB;
+				result <= srcA /= srcB;
 			when "0011"=>
-				result <= srcA-srcB;
+				result <= STD_LOGIC_VECTOR(UNSIGNED(srcA) - UNSIGNED(srcB));
 			when "0100"=>
-				result <= ~srcA;
+				result <= not srcA;
 			when "0101"=>
-				result <= srcA|srcB;
-			when "0110"=>
+				result <= srcA or srcB;
+			when "0110"=>z
 				if (srcB = "000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sll 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
 				end if;
 			when "0111"=>
-				result <= to_stdlogicvector(to_bitvector(srcA) srl conv_integer(srcB));
+				result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
 			when "1000"=>
 				if (srcB = "000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sra 8);
@@ -69,7 +69,7 @@ begin
 					result <= to_stdlogicvector(to_bitvector(srcA) sra conv_integer(srcB));
 				end if;
 			when "1001"=>
-				result <= to_stdlogicvector(to_bitvector(srcA) rol conv_integer(srcB));
+				result <= to_stdlogicvector(to_bitvector(srcA) sra conv_integer(srcB));
 			when others=>
 				result <= (others => '0');
 		end case;
