@@ -45,7 +45,8 @@ architecture RTL of srcB_mux is
 begin
 
 	process (ALUsrcA, ex_mem_REGdes, mem_wb_REGdes) begin
-		if (ALUsrcB = "0111") then
+		if (ALUsrcA = "0000")
+		elsif (ALUsrcB = "0111") then
 			srcB <= immediate;
 		elsif (ALUsrcB = ex_mem_REGdes) then
 			srcB <= ex_mem;
