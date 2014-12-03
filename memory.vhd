@@ -45,35 +45,34 @@ entity MEMORY is
 end MEMORY;
 
 architecture RTL of MEMORY is
-	type state is (none, read, write);
-	signal st: state := none;
+	signal step: std_logic := '0';
 begin
 
 	RAM1_en <= '0';
 	RAM1_oe <= '0';
-	RAM1_we <= '1';
 	RAM1_addr <= "00" & addr;
-	process (Clk, Rst) begin
-		if (Rst = '0') then
-			state <= none;
-		elsif (Clk'event and Clk = '1') then
-			case MEMop is
-				when "00"=>
-					state <= none;
-				when "10"=>
-					state <= read;
-				when "11"=>
-					state <= write;
-				when others=>
-					state <= none;
-			end case;
-		end if;
-	end process;
+	memout <= RAM1_data;
 	process (Clk2, Rst) begin
 		if (Rst = '0') then
-			RAM1_data <= (others => 'Z');
+			step <= '0';
 		elsif (Clk2'event and Clk2 = '1') then
-			memout <= RAM2_data;
+			step <= not step;
+			case MEMop is
+				when "10"=>
+					RAM1_we <= '1';
+					if (step = '0') then
+						RAM1_data <= (others => 'Z');
+					end if;
+				when "11"=>
+					RAM1_data <= data;
+					if (step = '0') then
+						RAM1_we <= '1';
+					else
+						RAM1_we <= '0';
+					end if;
+				when others=>
+					RAM1_we <= '1';
+			end case;
 		end if;
 	end process;
 	
