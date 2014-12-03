@@ -131,9 +131,13 @@ Synthesizing Unit <REG_HEAP>.
     Related source file is "C:/COA/cpu301/regheap.vhd".
     Found 16-bit 8-to-1 multiplexer for signal <Rx_q>.
     Found 16-bit 8-to-1 multiplexer for signal <Ry_q>.
+    Found 16-bit register for signal <IH>.
+    Found 16-bit register for signal <RA>.
     Found 128-bit register for signal <Reg>.
+    Found 16-bit register for signal <SP>.
+    Found 16-bit register for signal <T>.
     Summary:
-	inferred 128 D-type flip-flop(s).
+	inferred 192 D-type flip-flop(s).
 	inferred  32 Multiplexer(s).
 Unit <REG_HEAP> synthesized.
 
@@ -142,8 +146,8 @@ Unit <REG_HEAP> synthesized.
 HDL Synthesis Report
 
 Macro Statistics
-# Registers                                            : 8
- 16-bit register                                       : 8
+# Registers                                            : 12
+ 16-bit register                                       : 12
 # Multiplexers                                         : 2
  16-bit 8-to-1 multiplexer                             : 2
 
@@ -158,8 +162,8 @@ Macro Statistics
 Advanced HDL Synthesis Report
 
 Macro Statistics
-# Registers                                            : 128
- Flip-Flops                                            : 128
+# Registers                                            : 192
+ Flip-Flops                                            : 192
 # Multiplexers                                         : 32
  1-bit 8-to-1 multiplexer                              : 32
 
@@ -173,7 +177,7 @@ Optimizing unit <REG_HEAP> ...
 
 Mapping all equations...
 Building and optimizing final netlist ...
-Found area constraint ratio of 100 (+ 5) on block REG_HEAP, actual ratio is 1.
+Found area constraint ratio of 100 (+ 5) on block REG_HEAP, actual ratio is 2.
 
 Final Macro Processing ...
 
@@ -181,8 +185,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 128
- Flip-Flops                                            : 128
+# Registers                                            : 192
+ Flip-Flops                                            : 192
 
 =========================================================================
 
@@ -208,22 +212,22 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 60
+# IOs                              : 124
 
 Cell Usage :
-# BELS                             : 233
+# BELS                             : 237
 #      INV                         : 1
 #      LUT3                        : 128
-#      LUT4                        : 8
+#      LUT4                        : 12
 #      MUXF5                       : 64
 #      MUXF6                       : 32
-# FlipFlops/Latches                : 128
-#      FDCE                        : 128
+# FlipFlops/Latches                : 192
+#      FDCE                        : 192
 # Clock Buffers                    : 1
 #      BUFGP                       : 1
-# IO Buffers                       : 59
+# IO Buffers                       : 123
 #      IBUF                        : 27
-#      OBUF                        : 32
+#      OBUF                        : 96
 =========================================================================
 
 Device utilization summary:
@@ -231,11 +235,12 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      141  out of   8672     1%  
+ Number of Slices:                      142  out of   8672     1%  
  Number of Slice Flip Flops:            128  out of  17344     0%  
- Number of 4 input LUTs:                137  out of  17344     0%  
- Number of IOs:                          60
- Number of bonded IOBs:                  60  out of    250    24%  
+ Number of 4 input LUTs:                141  out of  17344     0%  
+ Number of IOs:                         124
+ Number of bonded IOBs:                 124  out of    250    49%  
+    IOB Flip Flops:                      64
  Number of GCLKs:                         1  out of     24     4%  
 
 ---------------------------
@@ -259,7 +264,7 @@ Clock Information:
 -----------------------------------+------------------------+-------+
 Clock Signal                       | Clock buffer(FF name)  | Load  |
 -----------------------------------+------------------------+-------+
-Clk                                | BUFGP                  | 128   |
+Clk                                | BUFGP                  | 192   |
 -----------------------------------+------------------------+-------+
 
 Asynchronous Control Signals Information:
@@ -267,7 +272,7 @@ Asynchronous Control Signals Information:
 -----------------------------------+------------------------+-------+
 Control Signal                     | Buffer(FF name)        | Load  |
 -----------------------------------+------------------------+-------+
-Rst_inv(Rst_inv1_INV_0:O)          | NONE(Reg_0_0)          | 128   |
+Rst_inv(Rst_inv1_INV_0:O)          | NONE(IH_0)             | 192   |
 -----------------------------------+------------------------+-------+
 
 Timing Summary:
@@ -275,7 +280,7 @@ Timing Summary:
 Speed Grade: -4
 
    Minimum period: No path found
-   Minimum input arrival time before clock: 4.443ns
+   Minimum input arrival time before clock: 4.647ns
    Maximum output required time after clock: 6.355ns
    Maximum combinational path delay: 7.903ns
 
@@ -285,27 +290,27 @@ All values displayed in nanoseconds (ns)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk'
-  Total number of paths / destination ports: 640 / 256
+  Total number of paths / destination ports: 960 / 384
 -------------------------------------------------------------------------
-Offset:              4.443ns (Levels of Logic = 2)
-  Source:            Rw<2> (PAD)
-  Destination:       Reg_1_0 (FF)
+Offset:              4.647ns (Levels of Logic = 2)
+  Source:            Rw<3> (PAD)
+  Destination:       Reg_7_0 (FF)
   Destination Clock: Clk rising
 
-  Data Path: Rw<2> to Reg_1_0
+  Data Path: Rw<3> to Reg_7_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O             8   1.218   0.932  Rw_2_IBUF (Rw_2_IBUF)
-     LUT4:I0->O           16   0.704   1.034  Reg_1_and00001 (Reg_1_and0000)
-     FDCE:CE                   0.555          Reg_1_0
+     IBUF:I->O            12   1.218   1.136  Rw_3_IBUF (Rw_3_IBUF)
+     LUT4:I0->O           16   0.704   1.034  T_cmp_eq00001 (T_cmp_eq0000)
+     FDCE:CE                   0.555          T_0
     ----------------------------------------
-    Total                      4.443ns (2.477ns logic, 1.966ns route)
-                                       (55.8% logic, 44.2% route)
+    Total                      4.647ns (2.477ns logic, 2.170ns route)
+                                       (53.3% logic, 46.7% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk'
-  Total number of paths / destination ports: 256 / 32
+  Total number of paths / destination ports: 320 / 96
 -------------------------------------------------------------------------
 Offset:              6.355ns (Levels of Logic = 4)
   Source:            Reg_0_15 (FF)
@@ -350,11 +355,11 @@ Delay:               7.903ns (Levels of Logic = 5)
 
 
 Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.63 secs
+Total CPU time to Xst completion: 4.53 secs
  
 --> 
 
-Total memory usage is 261400 kilobytes
+Total memory usage is 262744 kilobytes
 
 Number of errors   :    0 (   0 filtered)
 Number of warnings :    0 (   0 filtered)

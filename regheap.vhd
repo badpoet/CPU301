@@ -32,27 +32,54 @@ use IEEE.NUMERIC_STD.ALL;
 entity REG_HEAP is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
-           Rx : in  STD_LOGIC_VECTOR (2 downto 0);
-           Ry : in  STD_LOGIC_VECTOR (2 downto 0);
-		   Rw_en : in  STD_LOGIC;
-           Rw : in  STD_LOGIC_VECTOR (2 downto 0);
-           Rw_d : in  STD_LOGIC_VECTOR (15 downto 0);
+           Rx : in  STD_LOGIC_VECTOR (3 downto 0);
+           Ry : in  STD_LOGIC_VECTOR (3 downto 0);
+           Rw : in  STD_LOGIC_VECTOR (3 downto 0);
+           Rw_data : in  STD_LOGIC_VECTOR (15 downto 0);
+		   PC : in  STD_LOGIC_VECTOR (15 downto 0);
            Rx_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Ry_q : out  STD_LOGIC_VECTOR (15 downto 0));
 end REG_HEAP;
 
+-- 0000 zero (write behavior effects nothing)
+-- 0001 SP
+-- 0010 T
+-- 0011 RA
+-- 0100 IH
+-- 0101 PC (write behavior effects nothing)
+-- 0111 Imm (read behavior is uncertain!)
+-- 1xxx Rx
+
 architecture RTL of REG_HEAP is
-	type Reg_t is ARRAY (0 to 7) of STD_LOGIC_VECTOR (15 downto 0);
+	type Reg_t is ARRAY (0 to 15) of STD_LOGIC_VECTOR (15 downto 0);
 	signal Reg : Reg_t;
 begin
 	process (Clk, Rst) begin
 		if (Rst = '0') then
 			Reg <= (others => (others => '0'));
-		elsif (Clk'event and Clk = '1' and Rw_en = '1') then
-			Reg(TO_INTEGER(unsigned(Rw))) <= Rw_d;
+		elsif (Clk'event and Clk = '1') then
+			Reg(TO_INTEGER(unsigned(Rw(3 downto 0)))) <= Rw_data;
 		end if;
 	end process;
-	Rx_q <= Reg(TO_INTEGER(unsigned(Rx)));
-	Ry_q <= Reg(TO_INTEGER(unsigned(Ry)));
+	
+	process (Rx) begin
+		if (Rx = "0000") then 
+			Rx_q <= (others => '0');
+		elsif (Rx = "0101") then
+			Rx_q <= PC;
+		else
+			Rx_q <= Reg(TO_INTEGER(unsigned(Rx)));
+		end if;
+	end process;
+	
+	process (Ry) begin
+		if (Ry = "0000") then
+			Ry_q <= (others => '0');
+		elsif (Ry = "0101") then
+			Ry_q <= PC;
+		else
+			Ry_q <= Reg(TO_INTEGER(unsigned(Ry)));
+		end if;
+	end process;
 end RTL;
 
