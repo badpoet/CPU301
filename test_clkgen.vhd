@@ -41,7 +41,7 @@ ARCHITECTURE behavior OF test_clkgen IS
  
     COMPONENT CLK_GEN
     PORT(
-         Clk_in : IN  std_logic;
+         Clk_base : IN  std_logic;
 		 Rst : IN  std_logic;
          Clk : OUT  std_logic;
          Clk_x2 : OUT  std_logic;
@@ -51,7 +51,7 @@ ARCHITECTURE behavior OF test_clkgen IS
     
 
    --Inputs
-   signal Clk_in : std_logic := '0';
+   signal Clk_base : std_logic := '0';
    signal Rst : std_logic := '0';
 
  	--Outputs
@@ -60,13 +60,13 @@ ARCHITECTURE behavior OF test_clkgen IS
    signal Clk_x4 : std_logic;
 
    -- Clock period definitions
-   constant Clk_in_period : time := 10 ns;
+   constant Clk_base_period : time := 20 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: CLK_GEN PORT MAP (
-          Clk_in => Clk_in,
+          Clk_base => Clk_base,
           Clk => Clk,
 		  Rst => Rst,
           Clk_x2 => Clk_x2,
@@ -74,12 +74,12 @@ BEGIN
         );
 
    -- Clock process definitions
-   Clk_in_process :process
+   Clk_base_process :process
    begin
-		Clk_in <= '0';
-		wait for Clk_in_period/2;
-		Clk_in <= '1';
-		wait for Clk_in_period/2;
+		Clk_base <= '0';
+		wait for Clk_base_period/2;
+		Clk_base <= '1';
+		wait for Clk_base_period/2;
    end process;
 
    -- Stimulus process
@@ -90,7 +90,7 @@ BEGIN
       wait for 100 ns;	
 	  Rst <= '1';
 
-      wait for Clk_in_period*10;
+      wait for Clk_base_period*10;
 
       -- insert stimulus here 
 

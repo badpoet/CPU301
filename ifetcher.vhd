@@ -35,7 +35,7 @@ entity INST_FETCHER is
            RAM2_we : out  STD_LOGIC;
            RAM2_oe : out  STD_LOGIC;
            RAM2_en : out  STD_LOGIC;
-           Pc : in  STD_LOGIC_VECTOR (15 downto 0);
+           PC : in  STD_LOGIC_VECTOR (15 downto 0);
            Inst : out  STD_LOGIC_VECTOR (15 downto 0);
            Clk2 : in  STD_LOGIC;
            RAM2_addr : out  STD_LOGIC_VECTOR (17 downto 0);
@@ -48,13 +48,13 @@ begin
 	RAM2_en <= '0';
 	RAM2_oe <= '0';
 	RAM2_we <= '1';
-	process (Clk2, Pc, Rst) begin
+	process (Clk2, PC, Rst) begin
 		if (Rst = '0') then
 			RAM2_data <= "ZZZZZZZZZZZZZZZZ";
 		elsif (Clk2'event and Clk2 = '1') then
 			Inst_reg <= RAM2_data;
 		end if;
-		RAM2_addr (15 downto 0) <= Pc;
+		RAM2_addr (15 downto 0) <= PC;
 		RAM2_addr (17 downto 16) <= "00";
 	end process;
 	Inst <= Inst_reg;

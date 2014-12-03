@@ -1,0 +1,107 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 4
+-n 3 -fastpaths -xml PC_MUX.twx PC_MUX.ncd -o PC_MUX.twr PC_MUX.pcf
+
+Design file:              PC_MUX.ncd
+Physical constraint file: PC_MUX.pcf
+Device,package,speed:     xc3s1200e,fg320,-4 (PRODUCTION 1.27 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+INFO:Timing:3390 - This architecture does not support a default System Jitter 
+   value, please add SYSTEM_JITTER constraint to the UCF to modify the Clock 
+   Uncertainty calculation.
+INFO:Timing:3389 - This architecture does not support 'Discrete Jitter' and 
+   'Phase Error' calculations, these terms will be zero in the Clock 
+   Uncertainty calculation.  Please make appropriate modification to 
+   SYSTEM_JITTER to account for the unsupported Discrete Jitter and Phase 
+   Error.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+Branch_PC<0>   |NPC<0>         |    7.959|
+Branch_PC<1>   |NPC<1>         |    6.530|
+Branch_PC<2>   |NPC<2>         |    6.927|
+Branch_PC<3>   |NPC<3>         |    7.373|
+Branch_PC<4>   |NPC<4>         |    6.924|
+Branch_PC<5>   |NPC<5>         |    7.549|
+Branch_PC<6>   |NPC<6>         |    6.777|
+Branch_PC<7>   |NPC<7>         |    6.639|
+Branch_PC<8>   |NPC<8>         |    6.215|
+Branch_PC<9>   |NPC<9>         |    6.861|
+Branch_PC<10>  |NPC<10>        |    6.270|
+Branch_PC<11>  |NPC<11>        |    6.868|
+Branch_PC<12>  |NPC<12>        |    6.713|
+Branch_PC<13>  |NPC<13>        |    7.774|
+Branch_PC<14>  |NPC<14>        |    7.424|
+Branch_PC<15>  |NPC<15>        |    6.456|
+PC_next<0>     |NPC<0>         |    7.701|
+PC_next<1>     |NPC<1>         |    6.760|
+PC_next<2>     |NPC<2>         |    6.611|
+PC_next<3>     |NPC<3>         |    7.378|
+PC_next<4>     |NPC<4>         |    6.777|
+PC_next<5>     |NPC<5>         |    8.775|
+PC_next<6>     |NPC<6>         |    7.038|
+PC_next<7>     |NPC<7>         |    5.920|
+PC_next<8>     |NPC<8>         |    7.319|
+PC_next<9>     |NPC<9>         |    7.582|
+PC_next<10>    |NPC<10>        |    7.157|
+PC_next<11>    |NPC<11>        |    8.187|
+PC_next<12>    |NPC<12>        |    7.174|
+PC_next<13>    |NPC<13>        |    8.809|
+PC_next<14>    |NPC<14>        |    8.273|
+PC_next<15>    |NPC<15>        |    7.575|
+PC_src         |NPC<0>         |    8.011|
+PC_src         |NPC<1>         |    7.793|
+PC_src         |NPC<2>         |    8.980|
+PC_src         |NPC<3>         |    9.010|
+PC_src         |NPC<4>         |    8.443|
+PC_src         |NPC<5>         |   10.431|
+PC_src         |NPC<6>         |    9.583|
+PC_src         |NPC<7>         |    6.914|
+PC_src         |NPC<8>         |    8.219|
+PC_src         |NPC<9>         |    8.903|
+PC_src         |NPC<10>        |    8.243|
+PC_src         |NPC<11>        |    8.916|
+PC_src         |NPC<12>        |    7.051|
+PC_src         |NPC<13>        |   10.358|
+PC_src         |NPC<14>        |    9.082|
+PC_src         |NPC<15>        |    8.258|
+---------------+---------------+---------+
+
+
+Analysis completed Wed Dec 03 14:27:43 2014 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 174 MB
+
+
+

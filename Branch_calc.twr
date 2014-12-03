@@ -1,0 +1,415 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 4
+-n 3 -fastpaths -xml Branch_calc.twx Branch_calc.ncd -o Branch_calc.twr
+Branch_calc.pcf
+
+Design file:              Branch_calc.ncd
+Physical constraint file: Branch_calc.pcf
+Device,package,speed:     xc3s1200e,fg320,-4 (PRODUCTION 1.27 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:2698 - No timing constraints found, doing default enumeration.
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+INFO:Timing:3390 - This architecture does not support a default System Jitter 
+   value, please add SYSTEM_JITTER constraint to the UCF to modify the Clock 
+   Uncertainty calculation.
+INFO:Timing:3389 - This architecture does not support 'Discrete Jitter' and 
+   'Phase Error' calculations, these terms will be zero in the Clock 
+   Uncertainty calculation.  Please make appropriate modification to 
+   SYSTEM_JITTER to account for the unsupported Discrete Jitter and Phase 
+   Error.
+
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Pad to Pad
+-----------------+---------------+---------+
+Source Pad       |Destination Pad|  Delay  |
+-----------------+---------------+---------+
+Condition_jump<0>|Branch_PC<0>   |   10.223|
+Condition_jump<0>|Branch_PC<1>   |   10.744|
+Condition_jump<0>|Branch_PC<2>   |   11.067|
+Condition_jump<0>|Branch_PC<3>   |   11.855|
+Condition_jump<0>|Branch_PC<4>   |   11.360|
+Condition_jump<0>|Branch_PC<5>   |   10.261|
+Condition_jump<0>|Branch_PC<6>   |   10.873|
+Condition_jump<0>|Branch_PC<7>   |    9.581|
+Condition_jump<0>|Branch_PC<8>   |   11.051|
+Condition_jump<0>|Branch_PC<9>   |   10.773|
+Condition_jump<0>|Branch_PC<10>  |   10.509|
+Condition_jump<0>|Branch_PC<11>  |    9.434|
+Condition_jump<0>|Branch_PC<12>  |    9.349|
+Condition_jump<0>|Branch_PC<13>  |   10.470|
+Condition_jump<0>|Branch_PC<14>  |   10.357|
+Condition_jump<0>|Branch_PC<15>  |    9.694|
+Condition_jump<0>|PC_src         |    7.864|
+Condition_jump<1>|Branch_PC<0>   |   10.312|
+Condition_jump<1>|Branch_PC<1>   |   10.833|
+Condition_jump<1>|Branch_PC<2>   |   11.156|
+Condition_jump<1>|Branch_PC<3>   |   11.944|
+Condition_jump<1>|Branch_PC<4>   |   11.449|
+Condition_jump<1>|Branch_PC<5>   |   10.350|
+Condition_jump<1>|Branch_PC<6>   |   10.962|
+Condition_jump<1>|Branch_PC<7>   |    9.670|
+Condition_jump<1>|Branch_PC<8>   |   11.140|
+Condition_jump<1>|Branch_PC<9>   |   10.862|
+Condition_jump<1>|Branch_PC<10>  |   10.598|
+Condition_jump<1>|Branch_PC<11>  |    9.523|
+Condition_jump<1>|Branch_PC<12>  |    9.438|
+Condition_jump<1>|Branch_PC<13>  |   10.559|
+Condition_jump<1>|Branch_PC<14>  |   10.446|
+Condition_jump<1>|Branch_PC<15>  |    9.783|
+Condition_jump<1>|PC_src         |    8.279|
+Condition_jump<2>|Branch_PC<0>   |    9.396|
+Condition_jump<2>|Branch_PC<1>   |   10.277|
+Condition_jump<2>|Branch_PC<2>   |   10.614|
+Condition_jump<2>|Branch_PC<3>   |   10.683|
+Condition_jump<2>|Branch_PC<4>   |   10.660|
+Condition_jump<2>|Branch_PC<5>   |    9.684|
+Condition_jump<2>|Branch_PC<6>   |   10.597|
+Condition_jump<2>|Branch_PC<7>   |    8.572|
+Condition_jump<2>|Branch_PC<8>   |    9.987|
+Condition_jump<2>|Branch_PC<9>   |    9.174|
+Condition_jump<2>|Branch_PC<10>  |    9.487|
+Condition_jump<2>|Branch_PC<11>  |    8.807|
+Condition_jump<2>|Branch_PC<12>  |    8.741|
+Condition_jump<2>|Branch_PC<13>  |    9.691|
+Condition_jump<2>|Branch_PC<14>  |   10.136|
+Condition_jump<2>|Branch_PC<15>  |    9.280|
+Condition_jump<2>|PC_src         |    7.905|
+Immediate<0>     |Branch_PC<0>   |   10.063|
+Immediate<0>     |Branch_PC<1>   |   10.810|
+Immediate<0>     |Branch_PC<2>   |   10.641|
+Immediate<0>     |Branch_PC<3>   |   11.244|
+Immediate<0>     |Branch_PC<4>   |   11.788|
+Immediate<0>     |Branch_PC<5>   |   10.798|
+Immediate<0>     |Branch_PC<6>   |   11.455|
+Immediate<0>     |Branch_PC<7>   |   10.348|
+Immediate<0>     |Branch_PC<8>   |   11.241|
+Immediate<0>     |Branch_PC<9>   |   11.563|
+Immediate<0>     |Branch_PC<10>  |   10.982|
+Immediate<0>     |Branch_PC<11>  |   10.644|
+Immediate<0>     |Branch_PC<12>  |   10.450|
+Immediate<0>     |Branch_PC<13>  |   11.773|
+Immediate<0>     |Branch_PC<14>  |   10.944|
+Immediate<0>     |Branch_PC<15>  |   10.561|
+Immediate<1>     |Branch_PC<1>   |   10.579|
+Immediate<1>     |Branch_PC<2>   |   10.659|
+Immediate<1>     |Branch_PC<3>   |   11.262|
+Immediate<1>     |Branch_PC<4>   |   11.806|
+Immediate<1>     |Branch_PC<5>   |   10.816|
+Immediate<1>     |Branch_PC<6>   |   11.473|
+Immediate<1>     |Branch_PC<7>   |   10.366|
+Immediate<1>     |Branch_PC<8>   |   11.259|
+Immediate<1>     |Branch_PC<9>   |   11.581|
+Immediate<1>     |Branch_PC<10>  |   11.000|
+Immediate<1>     |Branch_PC<11>  |   10.662|
+Immediate<1>     |Branch_PC<12>  |   10.468|
+Immediate<1>     |Branch_PC<13>  |   11.791|
+Immediate<1>     |Branch_PC<14>  |   10.962|
+Immediate<1>     |Branch_PC<15>  |   10.579|
+Immediate<2>     |Branch_PC<2>   |   10.250|
+Immediate<2>     |Branch_PC<3>   |   11.027|
+Immediate<2>     |Branch_PC<4>   |   11.843|
+Immediate<2>     |Branch_PC<5>   |   10.853|
+Immediate<2>     |Branch_PC<6>   |   11.510|
+Immediate<2>     |Branch_PC<7>   |   10.403|
+Immediate<2>     |Branch_PC<8>   |   11.296|
+Immediate<2>     |Branch_PC<9>   |   11.618|
+Immediate<2>     |Branch_PC<10>  |   11.037|
+Immediate<2>     |Branch_PC<11>  |   10.699|
+Immediate<2>     |Branch_PC<12>  |   10.505|
+Immediate<2>     |Branch_PC<13>  |   11.828|
+Immediate<2>     |Branch_PC<14>  |   10.999|
+Immediate<2>     |Branch_PC<15>  |   10.616|
+Immediate<3>     |Branch_PC<3>   |   10.431|
+Immediate<3>     |Branch_PC<4>   |   11.496|
+Immediate<3>     |Branch_PC<5>   |   10.506|
+Immediate<3>     |Branch_PC<6>   |   11.163|
+Immediate<3>     |Branch_PC<7>   |   10.056|
+Immediate<3>     |Branch_PC<8>   |   10.949|
+Immediate<3>     |Branch_PC<9>   |   11.271|
+Immediate<3>     |Branch_PC<10>  |   10.690|
+Immediate<3>     |Branch_PC<11>  |   10.352|
+Immediate<3>     |Branch_PC<12>  |   10.158|
+Immediate<3>     |Branch_PC<13>  |   11.481|
+Immediate<3>     |Branch_PC<14>  |   10.652|
+Immediate<3>     |Branch_PC<15>  |   10.269|
+Immediate<4>     |Branch_PC<4>   |   11.498|
+Immediate<4>     |Branch_PC<5>   |   10.682|
+Immediate<4>     |Branch_PC<6>   |   11.611|
+Immediate<4>     |Branch_PC<7>   |   10.504|
+Immediate<4>     |Branch_PC<8>   |   11.397|
+Immediate<4>     |Branch_PC<9>   |   11.719|
+Immediate<4>     |Branch_PC<10>  |   11.138|
+Immediate<4>     |Branch_PC<11>  |   10.800|
+Immediate<4>     |Branch_PC<12>  |   10.606|
+Immediate<4>     |Branch_PC<13>  |   11.929|
+Immediate<4>     |Branch_PC<14>  |   11.100|
+Immediate<4>     |Branch_PC<15>  |   10.717|
+Immediate<5>     |Branch_PC<5>   |   10.304|
+Immediate<5>     |Branch_PC<6>   |   11.482|
+Immediate<5>     |Branch_PC<7>   |   10.375|
+Immediate<5>     |Branch_PC<8>   |   11.268|
+Immediate<5>     |Branch_PC<9>   |   11.590|
+Immediate<5>     |Branch_PC<10>  |   11.009|
+Immediate<5>     |Branch_PC<11>  |   10.671|
+Immediate<5>     |Branch_PC<12>  |   10.477|
+Immediate<5>     |Branch_PC<13>  |   11.800|
+Immediate<5>     |Branch_PC<14>  |   10.971|
+Immediate<5>     |Branch_PC<15>  |   10.588|
+Immediate<6>     |Branch_PC<6>   |   11.174|
+Immediate<6>     |Branch_PC<7>   |   10.241|
+Immediate<6>     |Branch_PC<8>   |   11.406|
+Immediate<6>     |Branch_PC<9>   |   11.728|
+Immediate<6>     |Branch_PC<10>  |   11.147|
+Immediate<6>     |Branch_PC<11>  |   10.809|
+Immediate<6>     |Branch_PC<12>  |   10.615|
+Immediate<6>     |Branch_PC<13>  |   11.938|
+Immediate<6>     |Branch_PC<14>  |   11.109|
+Immediate<6>     |Branch_PC<15>  |   10.726|
+Immediate<7>     |Branch_PC<7>   |   10.024|
+Immediate<7>     |Branch_PC<8>   |   11.438|
+Immediate<7>     |Branch_PC<9>   |   11.760|
+Immediate<7>     |Branch_PC<10>  |   11.179|
+Immediate<7>     |Branch_PC<11>  |   10.841|
+Immediate<7>     |Branch_PC<12>  |   10.647|
+Immediate<7>     |Branch_PC<13>  |   11.970|
+Immediate<7>     |Branch_PC<14>  |   11.141|
+Immediate<7>     |Branch_PC<15>  |   10.758|
+Immediate<8>     |Branch_PC<8>   |   11.058|
+Immediate<8>     |Branch_PC<9>   |   11.554|
+Immediate<8>     |Branch_PC<10>  |   11.245|
+Immediate<8>     |Branch_PC<11>  |   10.907|
+Immediate<8>     |Branch_PC<12>  |   10.713|
+Immediate<8>     |Branch_PC<13>  |   12.036|
+Immediate<8>     |Branch_PC<14>  |   11.207|
+Immediate<8>     |Branch_PC<15>  |   10.824|
+Immediate<9>     |Branch_PC<9>   |   11.040|
+Immediate<9>     |Branch_PC<10>  |   10.980|
+Immediate<9>     |Branch_PC<11>  |   10.642|
+Immediate<9>     |Branch_PC<12>  |   10.448|
+Immediate<9>     |Branch_PC<13>  |   11.771|
+Immediate<9>     |Branch_PC<14>  |   10.942|
+Immediate<9>     |Branch_PC<15>  |   10.559|
+Immediate<10>    |Branch_PC<10>  |   10.490|
+Immediate<10>    |Branch_PC<11>  |   10.326|
+Immediate<10>    |Branch_PC<12>  |   10.404|
+Immediate<10>    |Branch_PC<13>  |   11.727|
+Immediate<10>    |Branch_PC<14>  |   10.898|
+Immediate<10>    |Branch_PC<15>  |   10.515|
+Immediate<11>    |Branch_PC<11>  |   10.033|
+Immediate<11>    |Branch_PC<12>  |   10.360|
+Immediate<11>    |Branch_PC<13>  |   11.683|
+Immediate<11>    |Branch_PC<14>  |   10.854|
+Immediate<11>    |Branch_PC<15>  |   10.471|
+Immediate<12>    |Branch_PC<12>  |   10.156|
+Immediate<12>    |Branch_PC<13>  |   11.653|
+Immediate<12>    |Branch_PC<14>  |   11.096|
+Immediate<12>    |Branch_PC<15>  |   10.713|
+Immediate<13>    |Branch_PC<13>  |   11.542|
+Immediate<13>    |Branch_PC<14>  |   11.234|
+Immediate<13>    |Branch_PC<15>  |   10.851|
+Immediate<14>    |Branch_PC<14>  |   10.761|
+Immediate<14>    |Branch_PC<15>  |   10.552|
+Immediate<15>    |Branch_PC<15>  |    9.665|
+PC<0>            |Branch_PC<0>   |   12.115|
+PC<0>            |Branch_PC<1>   |   12.862|
+PC<0>            |Branch_PC<2>   |   12.693|
+PC<0>            |Branch_PC<3>   |   13.296|
+PC<0>            |Branch_PC<4>   |   13.840|
+PC<0>            |Branch_PC<5>   |   12.850|
+PC<0>            |Branch_PC<6>   |   13.507|
+PC<0>            |Branch_PC<7>   |   12.400|
+PC<0>            |Branch_PC<8>   |   13.293|
+PC<0>            |Branch_PC<9>   |   13.615|
+PC<0>            |Branch_PC<10>  |   13.034|
+PC<0>            |Branch_PC<11>  |   12.696|
+PC<0>            |Branch_PC<12>  |   12.502|
+PC<0>            |Branch_PC<13>  |   13.825|
+PC<0>            |Branch_PC<14>  |   12.996|
+PC<0>            |Branch_PC<15>  |   12.613|
+PC<1>            |Branch_PC<1>   |   11.910|
+PC<1>            |Branch_PC<2>   |   11.990|
+PC<1>            |Branch_PC<3>   |   12.593|
+PC<1>            |Branch_PC<4>   |   13.137|
+PC<1>            |Branch_PC<5>   |   12.147|
+PC<1>            |Branch_PC<6>   |   12.804|
+PC<1>            |Branch_PC<7>   |   11.697|
+PC<1>            |Branch_PC<8>   |   12.590|
+PC<1>            |Branch_PC<9>   |   12.912|
+PC<1>            |Branch_PC<10>  |   12.331|
+PC<1>            |Branch_PC<11>  |   11.993|
+PC<1>            |Branch_PC<12>  |   11.799|
+PC<1>            |Branch_PC<13>  |   13.122|
+PC<1>            |Branch_PC<14>  |   12.293|
+PC<1>            |Branch_PC<15>  |   11.910|
+PC<2>            |Branch_PC<2>   |   11.932|
+PC<2>            |Branch_PC<3>   |   12.709|
+PC<2>            |Branch_PC<4>   |   13.525|
+PC<2>            |Branch_PC<5>   |   12.535|
+PC<2>            |Branch_PC<6>   |   13.192|
+PC<2>            |Branch_PC<7>   |   12.085|
+PC<2>            |Branch_PC<8>   |   12.978|
+PC<2>            |Branch_PC<9>   |   13.300|
+PC<2>            |Branch_PC<10>  |   12.719|
+PC<2>            |Branch_PC<11>  |   12.381|
+PC<2>            |Branch_PC<12>  |   12.187|
+PC<2>            |Branch_PC<13>  |   13.510|
+PC<2>            |Branch_PC<14>  |   12.681|
+PC<2>            |Branch_PC<15>  |   12.298|
+PC<3>            |Branch_PC<3>   |   10.846|
+PC<3>            |Branch_PC<4>   |   11.911|
+PC<3>            |Branch_PC<5>   |   10.921|
+PC<3>            |Branch_PC<6>   |   11.578|
+PC<3>            |Branch_PC<7>   |   10.471|
+PC<3>            |Branch_PC<8>   |   11.364|
+PC<3>            |Branch_PC<9>   |   11.686|
+PC<3>            |Branch_PC<10>  |   11.105|
+PC<3>            |Branch_PC<11>  |   10.767|
+PC<3>            |Branch_PC<12>  |   10.573|
+PC<3>            |Branch_PC<13>  |   11.896|
+PC<3>            |Branch_PC<14>  |   11.067|
+PC<3>            |Branch_PC<15>  |   10.684|
+PC<4>            |Branch_PC<4>   |   11.707|
+PC<4>            |Branch_PC<5>   |   10.891|
+PC<4>            |Branch_PC<6>   |   11.820|
+PC<4>            |Branch_PC<7>   |   10.713|
+PC<4>            |Branch_PC<8>   |   11.606|
+PC<4>            |Branch_PC<9>   |   11.928|
+PC<4>            |Branch_PC<10>  |   11.347|
+PC<4>            |Branch_PC<11>  |   11.009|
+PC<4>            |Branch_PC<12>  |   10.815|
+PC<4>            |Branch_PC<13>  |   12.138|
+PC<4>            |Branch_PC<14>  |   11.309|
+PC<4>            |Branch_PC<15>  |   10.926|
+PC<5>            |Branch_PC<5>   |   10.744|
+PC<5>            |Branch_PC<6>   |   11.922|
+PC<5>            |Branch_PC<7>   |   10.815|
+PC<5>            |Branch_PC<8>   |   11.708|
+PC<5>            |Branch_PC<9>   |   12.030|
+PC<5>            |Branch_PC<10>  |   11.449|
+PC<5>            |Branch_PC<11>  |   11.111|
+PC<5>            |Branch_PC<12>  |   10.917|
+PC<5>            |Branch_PC<13>  |   12.240|
+PC<5>            |Branch_PC<14>  |   11.411|
+PC<5>            |Branch_PC<15>  |   11.028|
+PC<6>            |Branch_PC<6>   |   10.967|
+PC<6>            |Branch_PC<7>   |   10.034|
+PC<6>            |Branch_PC<8>   |   11.199|
+PC<6>            |Branch_PC<9>   |   11.521|
+PC<6>            |Branch_PC<10>  |   10.940|
+PC<6>            |Branch_PC<11>  |   10.602|
+PC<6>            |Branch_PC<12>  |   10.408|
+PC<6>            |Branch_PC<13>  |   11.731|
+PC<6>            |Branch_PC<14>  |   10.902|
+PC<6>            |Branch_PC<15>  |   10.519|
+PC<7>            |Branch_PC<7>   |    9.827|
+PC<7>            |Branch_PC<8>   |   11.241|
+PC<7>            |Branch_PC<9>   |   11.563|
+PC<7>            |Branch_PC<10>  |   10.982|
+PC<7>            |Branch_PC<11>  |   10.644|
+PC<7>            |Branch_PC<12>  |   10.450|
+PC<7>            |Branch_PC<13>  |   11.773|
+PC<7>            |Branch_PC<14>  |   10.944|
+PC<7>            |Branch_PC<15>  |   10.561|
+PC<8>            |Branch_PC<8>   |   11.163|
+PC<8>            |Branch_PC<9>   |   11.659|
+PC<8>            |Branch_PC<10>  |   11.350|
+PC<8>            |Branch_PC<11>  |   11.012|
+PC<8>            |Branch_PC<12>  |   10.818|
+PC<8>            |Branch_PC<13>  |   12.141|
+PC<8>            |Branch_PC<14>  |   11.312|
+PC<8>            |Branch_PC<15>  |   10.929|
+PC<9>            |Branch_PC<9>   |   11.344|
+PC<9>            |Branch_PC<10>  |   11.284|
+PC<9>            |Branch_PC<11>  |   10.946|
+PC<9>            |Branch_PC<12>  |   10.752|
+PC<9>            |Branch_PC<13>  |   12.075|
+PC<9>            |Branch_PC<14>  |   11.246|
+PC<9>            |Branch_PC<15>  |   10.863|
+PC<10>           |Branch_PC<10>  |   10.565|
+PC<10>           |Branch_PC<11>  |   10.401|
+PC<10>           |Branch_PC<12>  |   10.479|
+PC<10>           |Branch_PC<13>  |   11.802|
+PC<10>           |Branch_PC<14>  |   10.973|
+PC<10>           |Branch_PC<15>  |   10.590|
+PC<11>           |Branch_PC<11>  |    9.398|
+PC<11>           |Branch_PC<12>  |    9.725|
+PC<11>           |Branch_PC<13>  |   11.048|
+PC<11>           |Branch_PC<14>  |   10.219|
+PC<11>           |Branch_PC<15>  |    9.836|
+PC<12>           |Branch_PC<12>  |    9.527|
+PC<12>           |Branch_PC<13>  |   11.024|
+PC<12>           |Branch_PC<14>  |   10.467|
+PC<12>           |Branch_PC<15>  |   10.084|
+PC<13>           |Branch_PC<13>  |   10.867|
+PC<13>           |Branch_PC<14>  |   10.559|
+PC<13>           |Branch_PC<15>  |   10.176|
+PC<14>           |Branch_PC<14>  |   10.254|
+PC<14>           |Branch_PC<15>  |   10.045|
+PC<15>           |Branch_PC<15>  |    9.262|
+Rx_data<0>       |Branch_PC<0>   |    8.536|
+Rx_data<0>       |PC_src         |   10.318|
+Rx_data<1>       |Branch_PC<1>   |    8.562|
+Rx_data<1>       |PC_src         |   10.600|
+Rx_data<2>       |Branch_PC<2>   |    8.914|
+Rx_data<2>       |PC_src         |   10.634|
+Rx_data<3>       |Branch_PC<3>   |    8.269|
+Rx_data<3>       |PC_src         |    9.212|
+Rx_data<4>       |Branch_PC<4>   |    8.373|
+Rx_data<4>       |PC_src         |    9.570|
+Rx_data<5>       |Branch_PC<5>   |    7.219|
+Rx_data<5>       |PC_src         |    9.651|
+Rx_data<6>       |Branch_PC<6>   |    7.648|
+Rx_data<6>       |PC_src         |    9.374|
+Rx_data<7>       |Branch_PC<7>   |    7.628|
+Rx_data<7>       |PC_src         |    9.531|
+Rx_data<8>       |Branch_PC<8>   |    9.365|
+Rx_data<8>       |PC_src         |    9.612|
+Rx_data<9>       |Branch_PC<9>   |    8.675|
+Rx_data<9>       |PC_src         |    9.535|
+Rx_data<10>      |Branch_PC<10>  |    8.637|
+Rx_data<10>      |PC_src         |    9.502|
+Rx_data<11>      |Branch_PC<11>  |    7.743|
+Rx_data<11>      |PC_src         |   10.578|
+Rx_data<12>      |Branch_PC<12>  |    7.946|
+Rx_data<12>      |PC_src         |    9.450|
+Rx_data<13>      |Branch_PC<13>  |    8.052|
+Rx_data<13>      |PC_src         |    9.081|
+Rx_data<14>      |Branch_PC<14>  |    8.275|
+Rx_data<14>      |PC_src         |    9.273|
+Rx_data<15>      |Branch_PC<15>  |    6.926|
+Rx_data<15>      |PC_src         |    8.469|
+-----------------+---------------+---------+
+
+
+Analysis completed Wed Dec 03 14:25:46 2014 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 174 MB
+
+
+
