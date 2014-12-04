@@ -54,9 +54,9 @@ begin
 		elsif (Clk2'event and Clk2 = '1') then
 			Inst_reg <= RAM2_data;
 		end if;
-		RAM2_addr (15 downto 0) <= PC;
-		RAM2_addr (17 downto 16) <= "00";
 	end process;
+	RAM2_addr (15 downto 0) <= PC;
+	RAM2_addr (17 downto 16) <= "00";
 	Inst <= Inst_reg;
 end RTL;
 

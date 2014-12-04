@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity PC_REG is
     Port ( Clk : in  STD_LOGIC;
 		   Rst : in  STD_LOGIC;
+		   Bubble : in  STD_LOGIC;
            PC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_q : out  STD_LOGIC_VECTOR (15 downto 0));
 end PC_REG;
@@ -39,13 +40,13 @@ end PC_REG;
 architecture RTL of PC_REG is
 	signal PC : STD_LOGIC_VECTOR (15 downto 0);
 begin
-	process (Clk, Rst, PC) begin
+	process (Clk, Rst, PC, Bubble) begin
 		if (Rst = '0') then
 			PC <= (others => '0');
-		elsif (Clk'event and Clk = '1') then
+		elsif (Clk'event and Clk = '1' and Bubble = '0') then
 			PC <= PC_d;
 		end if;
-		PC_q <= PC;
 	end process;
+	PC_q <= PC;
 end RTL;
 

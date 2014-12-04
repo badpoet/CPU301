@@ -34,6 +34,7 @@ entity STAGE_IF is
            Clk_x2 : in  STD_LOGIC;
            Clk_x4 : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Bubble : in  STD_LOGIC;
            PC_src : in  STD_LOGIC;
            RAM2_we : out  STD_LOGIC;
            RAM2_oe : out  STD_LOGIC;
@@ -49,6 +50,7 @@ architecture STRUCTRAL of STAGE_IF is
 component PC_REG is
 	port ( Clk : in  STD_LOGIC;
 		   Rst : in  STD_LOGIC;
+		   Bubble : in  STD_LOGIC;
            PC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_q : out  STD_LOGIC_VECTOR (15 downto 0));
 end component;
@@ -69,6 +71,7 @@ end component;
 component IF_ID_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Bubble : in  STD_LOGIC;
            NPC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Inst_d : in  STD_LOGIC_VECTOR (15 downto 0);
            NPC_q : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -96,6 +99,7 @@ begin
 
 	PC_reg_c : PC_REG port map ( 
 		Clk => Clk, 
+		Bubble => Bubble,
 		PC_d => PC_d, 
 		PC_q => PC_q, 
 		Rst => Rst );
@@ -112,6 +116,7 @@ begin
 		Rst => Rst );
 	IF_ID_regs_c : IF_ID_REGS port map ( 
 		Clk => Clk, 
+		Bubble => Bubble,
 		NPC_d => PC_next, 
 		NPC_q => NPC_ID, 
 		Inst_d => Inst_IF, 

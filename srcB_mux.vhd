@@ -31,21 +31,21 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity srcB_mux is
     Port ( id_ex : in  STD_LOGIC_VECTOR (15 downto 0);
-			  immediate : in  STD_LOGIC_VECTOR (15 downto 0);
+		   immediate : in  STD_LOGIC_VECTOR (15 downto 0);
            ex_mem : in  STD_LOGIC_VECTOR (15 downto 0);
            mem_wb : in  STD_LOGIC_VECTOR (15 downto 0);
            ALUsrcB : in  STD_LOGIC_VECTOR (3 downto 0);
            ex_mem_REGdes : in  STD_LOGIC_VECTOR (3 downto 0);
            mem_wb_REGdes : in  STD_LOGIC_VECTOR (3 downto 0);
            srcB : out  STD_LOGIC_VECTOR (15 downto 0));
-end srcA_mux;
+end srcB_mux;
 
 architecture RTL of srcB_mux is
 
 begin
 
-	process (ALUsrcA, ex_mem_REGdes, mem_wb_REGdes) begin
-		if (ALUsrcA = "0000") then
+	process (ALUsrcB, ex_mem_REGdes, mem_wb_REGdes) begin
+		if (ALUsrcB = "0000") then
 			srcB <= id_ex;
 		elsif (ALUsrcB = "0111") then
 			srcB <= immediate;

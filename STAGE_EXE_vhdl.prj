@@ -1,0 +1,5 @@
+vhdl work "C:\COA\cpu301\srcB_mux.vhd"
+vhdl work "C:\COA\cpu301\srcA_mux.vhd"
+vhdl work "C:\COA\cpu301\exememregs.vhd"
+vhdl work "C:\COA\cpu301\ALU.vhd"
+vhdl work "C:\COA\cpu301\stageexe.vhd"

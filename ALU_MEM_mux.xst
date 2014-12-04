@@ -1,0 +1,5 @@
+set -tmpdir "C:/COA/cpu301/xst/projnav.tmp"
+set -xsthdpdir "C:/COA/cpu301/xst"
+elaborate
+-ifn ALU_MEM_mux.prj
+-ifmt mixed

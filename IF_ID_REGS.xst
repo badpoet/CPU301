@@ -1,0 +1,5 @@
+set -tmpdir "C:/COA/cpu301/xst/projnav.tmp"
+set -xsthdpdir "C:/COA/cpu301/xst"
+elaborate
+-ifn IF_ID_REGS.prj
+-ifmt mixed
