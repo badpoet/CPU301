@@ -31,75 +31,292 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity DECODER is
     Port ( Inst : in  STD_LOGIC_VECTOR (15 downto 0);
-           PC_branch : out  STD_LOGIC_VECTOR (1 downto 0);
-		     PC_src : out  STD_LOGIC_VECTOR;
-           Rx : out  STD_LOGIC_VECTOR (3 downto 0);
-           Ry : out  STD_LOGIC_VECTOR (3 downto 0);
-           Rz : out  STD_LOGIC_VECTOR (3 downto 0);
+           PC_branch : out  STD_LOGIC_VECTOR (2 downto 0);
            Imm : out  STD_LOGIC_VECTOR (15 downto 0);
            MEM_op : out  STD_LOGIC_VECTOR (1 downto 0);
-           REG_write : out  STD_LOGIC;
-           REG_des : out  STD_LOGIC_VECTOR (2 downto 0);
-           ALU_src_a : out  STD_LOGIC_VECTOR (1 downto 0);
-           ALU_src_b : out  STD_LOGIC_VECTOR (2 downto 0);
+           REG_des : out  STD_LOGIC_VECTOR (3 downto 0);
+           ALU_src_a : out  STD_LOGIC_VECTOR (3 downto 0);
+           ALU_src_b : out  STD_LOGIC_VECTOR (3 downto 0);
+           REG_src_b : out  STD_LOGIC_VECTOR (3 downto 0);
            ALU_op : out  STD_LOGIC_VECTOR (3 downto 0));
 end DECODER;
 
 architecture RTL of DECODER is
-
+	signal rx, ry, rz : STD_LOGIC_VECTOR(2 downto 0);
+	signal immediate : STD_LOGIC_VECTOR(7 downto 0);
 begin
+	rx <= Inst(10 downto 8);
+	ry <= Inst(7 downto 5);
+	rz <= Inst(4 downto 2);
+	immediate <= Inst(7 downto 0);
 
 	process (Inst) begin
-		
-		-- PC_branch
-		-- PC_src
-		-- Mem_op
-		-- REG_src
-		-- REG_des
 		case Inst(15 downto 11) is
+			when "00010"=>
+				PC_branch <= "001";
+				Imm <= STD_LOGIC_VECTOR(SIGNED(rx&immediate));
+				MEM_op <= (others => '0');
+				REG_des <= (others => '0');
+				ALU_src_a <= (others => '0');
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
+			when "00100"=>
+				PC_branch <= "010";
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= (others => '0');
+				REG_des <= (others => '0');
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
+			when "00101"=>
+				PC_branch <= "011";
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= (others => '0');
+				REG_des <= (others => '0');
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
+			when "00110"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate(4 downto 2))));
+				MEM_op <= (others => '0');
+				REG_des <= "1"&rx;
+				ALU_src_a <= "1"&ry;
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0110" when immediate(1 downto 0) = "00"
+					 else "1000" when immediate(1 downto 0) = "11";
+			when "01000"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(3 downto 0))));
+				MEM_op <= (others => '0');
+				REG_des <= "1"&ry;
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0000";
 			when "01001"=>
-				PC_branch <=;
-				PC_src <=;
-				Rx <=;
-				Ry <=;
-				Rz <=;
-				Imm <=;
-				MEM_op <=;
-				REG_src <=;
-				REG_des <=;
-				REG_write <=;
-				REG_des <=;
-				ALU_src_a <=;
-				ALU_src_b <=;
-				ALU_op <=;
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
-			when "01001"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= (others => '0');
+				REG_des <= "1"&rx;
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0000";
+			when "01100"=>
+				case rx is
+					when "000"=>
+						PC_branch <= "010";
+						REG_des <= (others => '0');
+						ALU_src_a <= (others => '0');
+						ALU_src_b <= (others => '0');
+						REG_src_b <= (others => '0');
+						ALU_op <= (others => '0');
+					when "011"=>
+						PC_branch <= (others => '0');
+						REG_des <= "0001";
+						ALU_src_a <= "0001";
+						ALU_src_b <= "0111";
+						REG_src_b <= "0111";
+						ALU_op <= "0000";
+					when "100"=>
+						PC_branch <= (others => '0');
+						REG_des <= "0001";
+						ALU_src_a <= "1"&ry;
+						ALU_src_b <= (others => '0');
+						REG_src_b <= (others => '0');
+						ALU_op <= (others => '0');
+					when others=>
+						PC_branch <= (others => '0');
+						REG_des <= (others => '0');
+						ALU_src_a <= (others => '0');
+						ALU_src_b <= (others => '0');
+						REG_src_b <= (others => '0');
+						ALU_op <= (others => '0');
+				end case;
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= (others => '0');
+			when "01101"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate)));
+				MEM_op <= (others => '0');
+				REG_des <= "1"&rx;
+				ALU_src_a <= "0111";
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
+			when "01110"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= (others => '0');
+				REG_des <= "0010";
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0010";
+			when "10010"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= "10";
+				REG_des <= "1"&rx;
+				ALU_src_a <= "0001";
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0000";
+			when "10011"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= "10";
+				REG_des <= "1"&ry;
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "0111";
+				REG_src_b <= "0111";
+				ALU_op <= "0000";
+			when "11010"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				MEM_op <= "11";
+				REG_des <= (others => '0');
+				ALU_src_a <= "0001";
+				ALU_src_b <= "0111";
+				REG_src_b <= "1"&rx;
+				ALU_op <= "0000";
+			when "11011"=>
+				PC_branch <= (others => '0');
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(4 downto 0))));
+				MEM_op <= "11";
+				REG_des <= (others => '0');
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "0111";
+				REG_src_b <= "1"&ry;
+				ALU_op <= "0000";
+			when "11100"=>
+				PC_branch <= (others => '0');
+				Imm <= (others => '0');
+				MEM_op <= (others => '0');
+				REG_des <= "1"&rz;
+				ALU_src_a <= "1"&rx;
+				ALU_src_b <= "1"&ry;
+				REG_src_b <= "1"&ry;
+				ALU_op <= "0000" when immediate(1 downto 0) = "01"
+					 else "0011" when immediate(1 downto 0) = "11";
+			when "11101"=>
+				Imm <= (others => '0');
+				MEM_op <= (others => '0');
+				case immediate(4 downto 0) is
+					when "01100"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&rx;
+						ALU_src_a <= "1"&rx;
+						ALU_src_b <= "1"&ry;
+						REG_src_b <= "1"&ry;
+						ALU_op <= "0001";
+					when "01010"=>
+						PC_branch <= (others => '0');
+						REG_des <= "0010";
+						ALU_src_a <= "1"&rx;
+						ALU_src_b <= "1"&ry;
+						REG_src_b <= "1"&ry;
+						ALU_op <= "0010";
+					when "00000"=>
+						case ry is
+							when "000"=>
+								PC_branch <= "100";
+								REG_des <= (others => '0');
+								ALU_src_a <= (others => '0');
+								ALU_src_b <= (others => '0');
+								REG_src_b <= (others => '0');
+								ALU_op <= (others => '0');
+							when "010"=>
+								PC_branch <= (others => '0');
+								REG_des <= "1"&rx;
+								ALU_src_a <= "0101";
+								ALU_src_b <= (others => '0');
+								REG_src_b <= (others => '0');
+								ALU_op <= (others => '0');
+							when others=>
+								PC_branch <= (others => '0');
+								REG_des <= (others => '0');
+								ALU_src_a <= (others => '0');
+								ALU_src_b <= (others => '0');
+								REG_src_b <= (others => '0');
+								ALU_op <= (others => '0');
+						end case;
+					when "01011"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&rx;
+						ALU_src_a <= (others => '0');
+						ALU_src_b <= "1"&ry;
+						REG_src_b <= "1"&ry;
+						ALU_op <= "0011";
+					when "01111"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&rx;
+						ALU_src_a <= "1"&ry;
+						ALU_src_b <= (others => '0');
+						REG_src_b <= (others => '0');
+						ALU_op <= "0100";
+					when "01101"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&rx;
+						ALU_src_a <= "1"&rx;
+						ALU_src_b <= "1"&ry;
+						REG_src_b <= "1"&ry;
+						ALU_op <= "0101";
+					when "00100"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&ry;
+						ALU_src_a <= "1"&ry;
+						ALU_src_b <= "1"&rx;
+						REG_src_b <= "1"&rx;
+						ALU_op <= "0111";
+					when "00111"=>
+						PC_branch <= (others => '0');
+						REG_des <= "1"&ry;
+						ALU_src_a <= "1"&ry;
+						ALU_src_b <= "1"&rx;
+						REG_src_b <= "1"&rx;
+						ALU_op <= "1001";
+					when others=>
+						PC_branch <= (others => '0');
+						REG_des <= (others => '0');
+						ALU_src_a <= (others => '0');
+						ALU_src_b <= (others => '0');
+						REG_src_b <= (others => '0');
+						ALU_op <= (others => '0');
+				end case;
+			when "11110"=>
+				PC_branch <= (others => '0');
+				Imm <= (others => '0');
+				MEM_op <= (others => '0');
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
+				case immediate is
+					when "00000000"=>
+						REG_des <= "1"&rx;
+						ALU_src_a <= "0100";
+					when "00000001"=>
+						REG_des <= "0100";
+						ALU_src_a <= "1"&rx;
+					when others=>
+						REG_des <= (others => '0');
+						ALU_src_a <= (others => '0');
+				end case;
 			when others=>
+				PC_branch <= (others => '0');
+				Imm <= (others => '0');
+				MEM_op <= (others => '0');
+				REG_des <= (others => '0');
+				ALU_src_a <= (others => '0');
+				ALU_src_b <= (others => '0');
+				REG_src_b <= (others => '0');
+				ALU_op <= (others => '0');
 		end case;
-		
 	end process;
 
 end RTL;
-
