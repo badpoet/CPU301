@@ -30,14 +30,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 --use UNISIM.VComponents.all;
 
 entity DECODER is
-    Port ( Inst : in  STD_LOGIC_VECTOR (16 downto 0);
+    Port ( Inst : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_branch : out  STD_LOGIC_VECTOR (1 downto 0);
-		   PC_src : out  STD_LOGIC_VECTOR;
-           Rx : out  STD_LOGIC_VECTOR (1 downto 0);
-           Ry : out  STD_LOGIC_VECTOR (1 downto 0);
-           Rz : out  STD_LOGIC_VECTOR (1 downto 0);
+		     PC_src : out  STD_LOGIC_VECTOR;
+           Rx : out  STD_LOGIC_VECTOR (3 downto 0);
+           Ry : out  STD_LOGIC_VECTOR (3 downto 0);
+           Rz : out  STD_LOGIC_VECTOR (3 downto 0);
            Imm : out  STD_LOGIC_VECTOR (15 downto 0);
-           Mem_op : out  STD_LOGIC_VECTOR (1 downto 0);
+           MEM_op : out  STD_LOGIC_VECTOR (1 downto 0);
            REG_write : out  STD_LOGIC;
            REG_des : out  STD_LOGIC_VECTOR (2 downto 0);
            ALU_src_a : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -48,39 +48,58 @@ end DECODER;
 architecture RTL of DECODER is
 
 begin
+
 	process (Inst) begin
 		
 		-- PC_branch
-		case (Inst(15 downto 11)) is
-			when "00010" | "11101" => PC_branch <= "01";
-			when "00100" | "01100" => PC_branch <= "10";
-			when "00101" => PC_branch <= "11";
-			when others => PC_branch <= "00";
-		end case;
-		
 		-- PC_src
-		case (Inst(15 downto 11)) is
-			when "11101" => PC_src <= '1';
-			when others => PC_src <= '0';
-		end case;
-		
 		-- Mem_op
-		case (Inst(15 downto 11)) is
-			when "10010" | "10011" => Mem_op <= "10";
-			when "11011" | "11010" => Mem_op <= "01";
-			when others => Mem_op <= "00";
-		end case;
-		
 		-- REG_src
-		case (Inst(15 downto 11)) is
-			when "10011" | "10010" => REG_write <= '1';
-			when others => '0';
+		-- REG_des
+		case Inst(15 downto 11) is
+			when "01001"=>
+				PC_branch <=;
+				PC_src <=;
+				Rx <=;
+				Ry <=;
+				Rz <=;
+				Imm <=;
+				MEM_op <=;
+				REG_src <=;
+				REG_des <=;
+				REG_write <=;
+				REG_des <=;
+				ALU_src_a <=;
+				ALU_src_b <=;
+				ALU_op <=;
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when "01001"=>
+			when others=>
 		end case;
 		
-		-- REG_des
-		case (Inst(15 downto 11)) is
-			when "01001" | "01101" | "11110" | "11101" | 
-				"00110" | "10010" => REG_ds
+	end process;
 
 end RTL;
 
