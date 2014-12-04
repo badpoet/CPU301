@@ -22,7 +22,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -43,13 +43,13 @@ begin
 	process (op, srcB) begin
 		case op is
 			when "0000"=>
-				result <= srcA + srcB;
+				result <= std_logic_vector(unsigned(srcA) + unsigned(srcB));
 			when "0001"=>
 				result <= srcA and srcB;
 			when "0010"=>
-				result <= srcA /= srcB;
+				result <= srcA xor srcB; -- for /= get a boolean value
 			when "0011"=>
-				result <= srcA - srcB;
+				result <= std_logic_vector(unsigned(srcA) - unsigned(srcB));
 			when "0100"=>
 				result <= not srcA;
 			when "0101"=>
@@ -58,18 +58,18 @@ begin
 				if (srcB = "0000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sll 8);
 				else
-					result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
+					result <= to_stdlogicvector(to_bitvector(srcA) sll to_integer(unsigned(srcB)));
 				end if;
 			when "0111"=>
-				result <= to_stdlogicvector(to_bitvector(srcA) sll conv_integer(srcB));
+				result <= to_stdlogicvector(to_bitvector(srcA) sll to_integer(unsigned(srcB)));
 			when "1000"=>
 				if (srcB = "0000000000000000") then
 					result <= to_stdlogicvector(to_bitvector(srcA) sra 8);
 				else
-					result <= to_stdlogicvector(to_bitvector(srcA) sra conv_integer(srcB));
+					result <= to_stdlogicvector(to_bitvector(srcA) sra to_integer(unsigned(srcB)));
 				end if;
 			when "1001"=>
-				result <= to_stdlogicvector(to_bitvector(srcA) sra conv_integer(srcB));
+				result <= to_stdlogicvector(to_bitvector(srcA) sra to_integer(unsigned(srcB)));
 			when others=>
 				result <= (others => '0');
 		end case;

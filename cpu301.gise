@@ -22,6 +22,13 @@
   <sourceproject xmlns="http://www.xilinx.com/XMLSchema" xil_pn:fileType="FILE_XISE" xil_pn:name="cpu301.xise"/>
 
   <files xmlns="http://www.xilinx.com/XMLSchema">
+    <file xil_pn:fileType="FILE_LSO" xil_pn:name=".lso"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ALU.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="ALU.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="ALU.xst"/>
+    <file xil_pn:fileType="FILE_XST_PROJECT" xil_pn:name="ALU_MEM_mux.prj"/>
+    <file xil_pn:fileType="FILE_XST_STX" xil_pn:name="ALU_MEM_mux.stx"/>
+    <file xil_pn:fileType="FILE_XST" xil_pn:name="ALU_MEM_mux.xst"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_NGDBUILD_LOG" xil_pn:name="Branch_calc.bld"/>
     <file xil_pn:fileType="FILE_CMD_LOG" xil_pn:name="Branch_calc.cmd_log"/>
     <file xil_pn:branch="Implementation" xil_pn:fileType="FILE_LSO" xil_pn:name="Branch_calc.lso"/>
@@ -153,22 +160,9 @@
       <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="branchcalc.vhd"/>
-      <outfile xil_pn:name="clkbase.vhd"/>
-      <outfile xil_pn:name="clkgen.vhd"/>
-      <outfile xil_pn:name="cputop.vhd"/>
-      <outfile xil_pn:name="ifetcher.vhd"/>
-      <outfile xil_pn:name="ifidregs.vhd"/>
-      <outfile xil_pn:name="pcinc.vhd"/>
-      <outfile xil_pn:name="pcmux.vhd"/>
-      <outfile xil_pn:name="pcreg.vhd"/>
-      <outfile xil_pn:name="regheap.vhd"/>
-      <outfile xil_pn:name="ssd.vhd"/>
-      <outfile xil_pn:name="stageif.vhd"/>
-      <outfile xil_pn:name="test_clkgen.vhd"/>
-      <outfile xil_pn:name="test_regheap.vhd"/>
-      <outfile xil_pn:name="test_top.vhd"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588528" xil_pn:name="TRAN_schematicsToHdl" xil_pn:prop_ck="-5400013630108973899" xil_pn:start_ts="1417588528">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -198,20 +192,11 @@
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputAdded"/>
       <status xil_pn:value="InputChanged"/>
-      <outfile xil_pn:name="REG_HEAP.lso"/>
-      <outfile xil_pn:name="REG_HEAP.ngc"/>
-      <outfile xil_pn:name="REG_HEAP.ngr"/>
-      <outfile xil_pn:name="REG_HEAP.prj"/>
-      <outfile xil_pn:name="REG_HEAP.stx"/>
-      <outfile xil_pn:name="REG_HEAP.syr"/>
-      <outfile xil_pn:name="REG_HEAP.xst"/>
-      <outfile xil_pn:name="REG_HEAP_vhdl.prj"/>
-      <outfile xil_pn:name="REG_HEAP_xst.xrpt"/>
-      <outfile xil_pn:name="_xmsgs/xst.xmsgs"/>
-      <outfile xil_pn:name="webtalk_pn.xml"/>
-      <outfile xil_pn:name="xst"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588536" xil_pn:in_ck="106452415921170630" xil_pn:name="TRAN_compileBCD2" xil_pn:prop_ck="-4878420693660825464" xil_pn:start_ts="1417588536">
       <status xil_pn:value="SuccessfullyRun"/>
@@ -222,93 +207,77 @@
       <status xil_pn:value="ReadyToRun"/>
       <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
       <status xil_pn:value="InputChanged"/>
-      <outfile xil_pn:name="REG_HEAP.bld"/>
-      <outfile xil_pn:name="REG_HEAP.ngd"/>
-      <outfile xil_pn:name="REG_HEAP_ngdbuild.xrpt"/>
-      <outfile xil_pn:name="_ngo"/>
-      <outfile xil_pn:name="_xmsgs/ngdbuild.xmsgs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588545" xil_pn:in_ck="3037955719260088866" xil_pn:name="TRANEXT_map_spartan3" xil_pn:prop_ck="3188416950630775481" xil_pn:start_ts="1417588541">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="REG_HEAP.pcf"/>
-      <outfile xil_pn:name="REG_HEAP_map.map"/>
-      <outfile xil_pn:name="REG_HEAP_map.mrp"/>
-      <outfile xil_pn:name="REG_HEAP_map.ncd"/>
-      <outfile xil_pn:name="REG_HEAP_map.ngm"/>
-      <outfile xil_pn:name="REG_HEAP_map.xrpt"/>
-      <outfile xil_pn:name="REG_HEAP_summary.xml"/>
-      <outfile xil_pn:name="REG_HEAP_usage.xml"/>
-      <outfile xil_pn:name="_xmsgs/map.xmsgs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588560" xil_pn:in_ck="-5437806015231728115" xil_pn:name="TRANEXT_par_spartan3" xil_pn:prop_ck="6268780068511726196" xil_pn:start_ts="1417588545">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="REG_HEAP.ncd"/>
-      <outfile xil_pn:name="REG_HEAP.pad"/>
-      <outfile xil_pn:name="REG_HEAP.par"/>
-      <outfile xil_pn:name="REG_HEAP.ptwx"/>
-      <outfile xil_pn:name="REG_HEAP.unroutes"/>
-      <outfile xil_pn:name="REG_HEAP.xpi"/>
-      <outfile xil_pn:name="REG_HEAP_pad.csv"/>
-      <outfile xil_pn:name="REG_HEAP_pad.txt"/>
-      <outfile xil_pn:name="REG_HEAP_par.xrpt"/>
-      <outfile xil_pn:name="_xmsgs/par.xmsgs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588565" xil_pn:in_ck="3707217469381491888" xil_pn:name="TRAN_postParSimModel" xil_pn:prop_ck="742315170373939768" xil_pn:start_ts="1417588560">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="netgen"/>
-      <outfile xil_pn:name="netgen/par/REG_HEAP_timesim.nlf"/>
-      <outfile xil_pn:name="netgen/par/REG_HEAP_timesim.sdf"/>
-      <outfile xil_pn:name="netgen/par/REG_HEAP_timesim.vhd"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417589067" xil_pn:in_ck="8233359865219308211" xil_pn:name="TRAN_copyPost-ParAbstractToPreSimulation" xil_pn:start_ts="1417589067">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="netgen/par/REG_HEAP_timesim.sdf"/>
-      <outfile xil_pn:name="netgen/par/REG_HEAP_timesim.vhd"/>
-      <outfile xil_pn:name="test_clkgen.vhd"/>
-      <outfile xil_pn:name="test_regheap.vhd"/>
-      <outfile xil_pn:name="test_top.vhd"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417589074" xil_pn:in_ck="2937912214545042868" xil_pn:name="TRAN_ISimulatePostPlace&amp;RouteModelRunFuse" xil_pn:prop_ck="4152448188043872388" xil_pn:start_ts="1417589067">
       <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="fuse.log"/>
-      <outfile xil_pn:name="isim"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="test_regheap_isim_par.exe"/>
-      <outfile xil_pn:name="test_regheap_par.prj"/>
-      <outfile xil_pn:name="xilinxsim.ini"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417589082" xil_pn:in_ck="-5436341491999399746" xil_pn:name="TRAN_ISimulatePostPlace&amp;RouteModel" xil_pn:prop_ck="8319243427845579774" xil_pn:start_ts="1417589074">
       <status xil_pn:value="SuccessfullyRun"/>
-      <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="NotReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForProperties"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
       <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
       <status xil_pn:value="OutputChanged"/>
-      <outfile xil_pn:name="isim.cmd"/>
-      <outfile xil_pn:name="isim.log"/>
-      <outfile xil_pn:name="test_regheap_isim_par.wdb"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
     <transform xil_pn:end_ts="1417588560" xil_pn:in_ck="4301051544993341974" xil_pn:name="TRAN_postRouteTrce" xil_pn:prop_ck="445577401284416186" xil_pn:start_ts="1417588556">
       <status xil_pn:value="SuccessfullyRun"/>
       <status xil_pn:value="ReadyToRun"/>
+      <status xil_pn:value="OutOfDateForInputs"/>
       <status xil_pn:value="OutOfDateForPredecessor"/>
-      <outfile xil_pn:name="REG_HEAP.twr"/>
-      <outfile xil_pn:name="REG_HEAP.twx"/>
-      <outfile xil_pn:name="_xmsgs/trce.xmsgs"/>
+      <status xil_pn:value="OutOfDateForOutputs"/>
+      <status xil_pn:value="InputRemoved"/>
+      <status xil_pn:value="OutputRemoved"/>
     </transform>
   </transforms>
 
