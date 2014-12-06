@@ -1,2 +1,1 @@
-vhdl work "netgen/par/REG_HEAP_timesim.vhd"
 vhdl work "test_regheap.vhd"

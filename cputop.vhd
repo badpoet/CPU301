@@ -95,8 +95,6 @@ component PC_branch_calc is
            Equal_zero : in  STD_LOGIC);
 end component;
 
-
-
 -- WIRES
 
 -- 16 bit integer passed to seven segment displays
@@ -148,7 +146,7 @@ begin
 		NPC_ID => NPC_ID, 
 		Inst_ID => Inst_ID,
 		PC_src => '0' );
-	
+		
 	RAM1_data <= (others => 'Z');
 	RAM1_addr <= (others => '0');
 	RAM1_oe <= '1';

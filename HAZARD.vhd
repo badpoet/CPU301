@@ -34,6 +34,7 @@ entity HAZARD is
            REG_des : in  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_a : in  STD_LOGIC_VECTOR (3 downto 0);
            REG_src_b : in  STD_LOGIC_VECTOR (3 downto 0);
+		   Bubble_in_branch : in  STD_LOGIC;
            bubble : out  STD_LOGIC);
 end HAZARD;
 
@@ -41,7 +42,7 @@ architecture RTL of HAZARD is
 
 begin
 
-	bubble <= '1' when MEM_op = "10" and (REG_des = ALU_src_a or REG_des = REG_src_b)
+	bubble <= '1' when (MEM_op = "10" and (REG_des = ALU_src_a or REG_des = REG_src_b)) or Bubble_in_branch = '1'
 		  else '0';
 
 end RTL;

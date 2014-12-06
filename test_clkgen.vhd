@@ -60,15 +60,15 @@ ARCHITECTURE behavior OF test_clkgen IS
    signal Clk_x4 : std_logic;
 
    -- Clock period definitions
-   constant Clk_base_period : time := 20 ns;
+   constant Clk_base_period : time := 40 ns;
  
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
    uut: CLK_GEN PORT MAP (
           Clk_base => Clk_base,
-          Clk => Clk,
 		  Rst => Rst,
+          Clk => Clk,
           Clk_x2 => Clk_x2,
           Clk_x4 => Clk_x4
         );

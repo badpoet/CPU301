@@ -37,6 +37,7 @@ entity REG_HEAP is
            Rw : in  STD_LOGIC_VECTOR (3 downto 0);
            Rw_data : in  STD_LOGIC_VECTOR (15 downto 0);
 		   PC : in  STD_LOGIC_VECTOR (15 downto 0);
+		   T_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Rx_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Ry_q : out  STD_LOGIC_VECTOR (15 downto 0));
 end REG_HEAP;
@@ -81,5 +82,8 @@ begin
 			Ry_q <= Reg(TO_INTEGER(unsigned(Ry)));
 		end if;
 	end process;
+	
+	T_q <= Reg(2);
+	
 end RTL;
 

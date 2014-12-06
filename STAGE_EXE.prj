@@ -1,5 +1,0 @@
-vhdl work "srcB_mux.vhd"
-vhdl work "srcA_mux.vhd"
-vhdl work "exememregs.vhd"
-vhdl work "ALU.vhd"
-vhdl work "stageexe.vhd"

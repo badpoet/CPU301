@@ -39,6 +39,7 @@ entity STAGE_EXE is
            Reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
            Rx : in  STD_LOGIC_VECTOR (15 downto 0);
            Ry : in  STD_LOGIC_VECTOR (15 downto 0);
+		   R2_data : out  STD_LOGIC_VECTOR (15 downto 0);
            ALU_out_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Mem_data_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Mem_op_q : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -46,7 +47,7 @@ entity STAGE_EXE is
            Exe_mem_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
            Exe_mem_alu_out : in  STD_LOGIC_VECTOR (15 downto 0);
            Mem_wb_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
-           Mem_wb_alu_out : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mem_WB_res : in  STD_LOGIC_VECTOR (15 downto 0);
            Immediate : in  STD_LOGIC_VECTOR (15 downto 0));
 end STAGE_EXE;
 
@@ -71,6 +72,16 @@ component srcB_mux is
            ex_mem_REGdes : in  STD_LOGIC_VECTOR (3 downto 0);
            mem_wb_REGdes : in  STD_LOGIC_VECTOR (3 downto 0);
            srcB : out  STD_LOGIC_VECTOR (15 downto 0));
+end component;
+
+component R2_mux is
+	Port ( ID_Exe_r2_data : in  STD_LOGIC_VECTOR (15 downto 0);
+           R2 : in  STD_LOGIC_VECTOR (3 downto 0);
+           Exe_mem_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
+           Exe_mem_alu_out : in  STD_LOGIC_VECTOR (15 downto 0);
+           Mem_WB_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
+           Mem_WB_res : in  STD_LOGIC_VECTOR (15 downto 0);
+           R2_data : out  STD_LOGIC_VECTOR (15 downto 0));
 end component;
 
 component ALU is
@@ -100,7 +111,7 @@ begin
 	Src_a_mux_c : srcA_mux port map (
 		id_ex => Rx,
 		ex_mem => Exe_mem_alu_out,
-		mem_wb => Mem_WB_alu_out,
+		mem_wb => Mem_WB_res,
 		ALUsrcA => ALU_src_a,
 		ex_mem_REGdes => Exe_mem_reg_des,
 		mem_wb_REGdes => Mem_WB_reg_des,
@@ -110,11 +121,20 @@ begin
 		id_ex => Ry,
 		immediate => Immediate,
 		ex_mem => Exe_mem_alu_out,
-		mem_wb => Mem_WB_alu_out,
+		mem_wb => Mem_WB_res,
 		ALUsrcB => ALU_src_b,
 		ex_mem_REGdes => Exe_mem_reg_des,
 		mem_wb_REGdes => Mem_WB_reg_des,
 		srcB => Op_b);
+		
+	R2_mux_c : R2_mux port map (
+		ID_Exe_r2_data => Ry,
+		R2 => Reg_src_b,
+		Exe_mem_reg_des => Exe_mem_reg_des,
+		Exe_mem_alu_out => Exe_mem_alu_out,
+		Mem_WB_reg_des => Mem_WB_reg_des,
+		Mem_WB_res => Mem_WB_res,
+		R2_data => R2_data);
 	
 	ALU_c : ALU port map (
 		srcA => Op_a,
@@ -127,7 +147,7 @@ begin
 		Rst => Rst,
 		ALU_out_d => ALU_res,
 		ALU_out_q => ALU_out_q,
-		Mem_data_d => Ry,
+		Mem_data_d => R2_data,
 		Mem_data_q => Mem_data_q,
 		Reg_des_d => Reg_des,
 		Reg_des_q => Reg_des_q,

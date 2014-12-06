@@ -22,7 +22,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if instantiating
 -- any Xilinx primitives in this code.
@@ -63,7 +63,7 @@ begin
 				ALU_op <= (others => '0');
 			when "00100"=>
 				PC_branch <= "010";
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= (others => '0');
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
@@ -72,7 +72,7 @@ begin
 				ALU_op <= (others => '0');
 			when "00101"=>
 				PC_branch <= "011";
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= (others => '0');
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
@@ -81,17 +81,17 @@ begin
 				ALU_op <= (others => '0');
 			when "00110"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate(4 downto 2))));
+				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate(4 downto 2)));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "1"&ry;
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
-				ALU_op <= "0110" when immediate(1 downto 0) = "00"
-					 else "1000" when immediate(1 downto 0) = "11";
+				ALU_op <= "0110" when immediate(1 downto 0) = "00" else "1000";
+					 --else "1000" when immediate(1 downto 0) = "11";
 			when "01000"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(3 downto 0))));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(3 downto 0)));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&ry;
 				ALU_src_a <= "1"&rx;
@@ -100,7 +100,7 @@ begin
 				ALU_op <= "0000";
 			when "01001"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "1"&rx;
@@ -138,11 +138,11 @@ begin
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
 				end case;
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= (others => '0');
 			when "01101"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "0111";
@@ -151,7 +151,7 @@ begin
 				ALU_op <= (others => '0');
 			when "01110"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= (others => '0');
 				REG_des <= "0010";
 				ALU_src_a <= "1"&rx;
@@ -160,7 +160,7 @@ begin
 				ALU_op <= "0010";
 			when "10010"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= "10";
 				REG_des <= "1"&rx;
 				ALU_src_a <= "0001";
@@ -169,7 +169,7 @@ begin
 				ALU_op <= "0000";
 			when "10011"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= "10";
 				REG_des <= "1"&ry;
 				ALU_src_a <= "1"&rx;
@@ -178,7 +178,7 @@ begin
 				ALU_op <= "0000";
 			when "11010"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate)));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
 				MEM_op <= "11";
 				REG_des <= (others => '0');
 				ALU_src_a <= "0001";
@@ -187,7 +187,7 @@ begin
 				ALU_op <= "0000";
 			when "11011"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(4 downto 0))));
+				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(4 downto 0)));
 				MEM_op <= "11";
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
@@ -202,8 +202,11 @@ begin
 				ALU_src_a <= "1"&rx;
 				ALU_src_b <= "1"&ry;
 				REG_src_b <= "1"&ry;
-				ALU_op <= "0000" when immediate(1 downto 0) = "01"
-					 else "0011" when immediate(1 downto 0) = "11";
+				case immediate(1 downto 0) is
+					when "01" => ALU_op <= "0000";
+					when "11" => ALU_op <= "0011";
+					when others => ALU_op <= "0000";
+				end case;
 			when "11101"=>
 				Imm <= (others => '0');
 				MEM_op <= (others => '0');

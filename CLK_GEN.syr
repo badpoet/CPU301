@@ -105,7 +105,8 @@ Slice Utilization Ratio Delta      : 5
 *                          HDL Compilation                              *
 =========================================================================
 Compiling vhdl file "C:/COA/cpu301/clkgen.vhd" in Library work.
-Architecture rtl of Entity clk_gen is up to date.
+Entity <clk_gen> compiled.
+Entity <clk_gen> (Architecture <rtl>) compiled.
 
 =========================================================================
 *                     Design Hierarchy Analysis                         *
@@ -117,8 +118,6 @@ Analyzing hierarchy for entity <CLK_GEN> in library <work> (architecture <rtl>).
 *                            HDL Analysis                               *
 =========================================================================
 Analyzing Entity <CLK_GEN> in library <work> (Architecture <rtl>).
-WARNING:Xst:819 - "C:/COA/cpu301/clkgen.vhd" line 45: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <Clk_x2_s>, <Clk_s>
 Entity <CLK_GEN> analyzed. Unit <CLK_GEN> generated.
 
 
@@ -359,13 +358,13 @@ Delay:               4.937ns (Levels of Logic = 2)
 
 
 Total REAL time to Xst completion: 4.00 secs
-Total CPU time to Xst completion: 4.32 secs
+Total CPU time to Xst completion: 4.12 secs
  
 --> 
 
-Total memory usage is 257176 kilobytes
+Total memory usage is 257304 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :    1 (   0 filtered)
+Number of warnings :    0 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

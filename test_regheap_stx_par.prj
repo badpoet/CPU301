@@ -1,2 +1,0 @@
-vhdl isim_temp "netgen/par/REG_HEAP_timesim.vhd"
-vhdl isim_temp "test_regheap.vhd"

@@ -31,15 +31,17 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity MEMORY is
     Port ( Clk : in  STD_LOGIC;
-		     Rst : in  STD_LOGIC;
+		   Rst : in  STD_LOGIC;
            RAM1_we : out  STD_LOGIC;
            RAM1_oe : out  STD_LOGIC;
            RAM1_en : out  STD_LOGIC;
            MEMop : in  STD_LOGIC_VECTOR (1 downto 0);
-			  addr : in  STD_LOGIC_VECTOR (15 downto 0);
-			  data : in  STD_LOGIC_VECTOR (15 downto 0);
+		   addr : in  STD_LOGIC_VECTOR (15 downto 0);
+		   data : in  STD_LOGIC_VECTOR (15 downto 0);
            memout : out  STD_LOGIC_VECTOR (15 downto 0);
            Clk2 : in  STD_LOGIC;
+		   COM_rdn : out  STD_LOGIC;
+	       COM_wrn : out  STD_LOGIC;
            RAM1_addr : out  STD_LOGIC_VECTOR (17 downto 0);
            RAM1_data : inout  STD_LOGIC_VECTOR (15 downto 0));
 end MEMORY;
@@ -48,6 +50,8 @@ architecture RTL of MEMORY is
 	signal step: std_logic := '0';
 begin
 
+	COM_rdn <= '1';
+	COM_wrn <= '1';
 	RAM1_en <= '0';
 	RAM1_oe <= '0';
 	RAM1_addr <= "00" & addr;
