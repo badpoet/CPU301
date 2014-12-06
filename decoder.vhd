@@ -52,7 +52,7 @@ begin
 
 	process (Inst) begin
 		case Inst(15 downto 11) is
-			when "00010"=>
+			when "00010"=>	--B
 				PC_branch <= "001";
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(rx&immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -61,7 +61,7 @@ begin
 				ALU_src_b <= (others => '0');
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
-			when "00100"=>
+			when "00100"=>	--BEQZ
 				PC_branch <= "010";
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -70,7 +70,7 @@ begin
 				ALU_src_b <= (others => '0');
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
-			when "00101"=>
+			when "00101"=>	--BNEZ
 				PC_branch <= "011";
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -79,22 +79,23 @@ begin
 				ALU_src_b <= (others => '0');
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
-			when "00110"=>
+			when "00110"=>	--SLL SRA
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(immediate(4 downto 2)), Imm'length));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(rz), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "1"&ry;
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
-				if (immediate(1 downto 0) = "00") then
-					ALU_op <= "0110";
-				else
-					ALU_op <= "1000";
-				end if;
-				-- ALU_op <= "0110" when (immediate(1 downto 0) = "00") else "1000";
-					 --else "1000" when immediate(1 downto 0) = "11";
-			when "01000"=>
+				case immediate(1 downto 0) is
+					when "00"=>	--SLL
+						ALU_op <= "0110";
+					when "11"=>	--SRA
+						ALU_op <= "1000";
+					when others=>
+						ALU_op <= (others => '0');
+				end case;
+			when "01000"=>	--ADDIU3
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(3 downto 0)), Imm'length));
 				MEM_op <= (others => '0');
@@ -103,7 +104,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0000";
-			when "01001"=>
+			when "01001"=>	--ADDIU
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -112,23 +113,25 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0000";
-			when "01100"=>
+			when "01100"=>	--ADDSP BTEQZ MTSP
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
+				MEM_op <= (others => '0');
 				case rx is
-					when "000"=>
+					when "000"=>	--BTEQZ
 						PC_branch <= "010";
 						REG_des <= (others => '0');
 						ALU_src_a <= (others => '0');
 						ALU_src_b <= (others => '0');
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
-					when "011"=>
+					when "011"=>	--ADDSP
 						PC_branch <= (others => '0');
 						REG_des <= "0001";
 						ALU_src_a <= "0001";
 						ALU_src_b <= "0111";
 						REG_src_b <= "0111";
 						ALU_op <= "0000";
-					when "100"=>
+					when "100"=>	--MTSP
 						PC_branch <= (others => '0');
 						REG_des <= "0001";
 						ALU_src_a <= "1"&ry;
@@ -143,9 +146,7 @@ begin
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
 				end case;
-				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
-				MEM_op <= (others => '0');
-			when "01101"=>
+			when "01101"=>	--LI
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -154,7 +155,7 @@ begin
 				ALU_src_b <= (others => '0');
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
-			when "01110"=>
+			when "01110"=>	--CMPI
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
@@ -163,7 +164,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0010";
-			when "10010"=>
+			when "10010"=>	--LW_SP
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "10";
@@ -172,16 +173,16 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0000";
-			when "10011"=>
+			when "10011"=>	--LW
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(4 downto 0)), Imm'length));
 				MEM_op <= "10";
 				REG_des <= "1"&ry;
 				ALU_src_a <= "1"&rx;
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0000";
-			when "11010"=>
+			when "11010"=>	--SW_SP
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "11";
@@ -190,7 +191,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "1"&rx;
 				ALU_op <= "0000";
-			when "11011"=>
+			when "11011"=>	--SW
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(4 downto 0)), Imm'length));
 				MEM_op <= "11";
@@ -199,7 +200,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "1"&ry;
 				ALU_op <= "0000";
-			when "11100"=>
+			when "11100"=>	--ADDU SUBU
 				PC_branch <= (others => '0');
 				Imm <= (others => '0');
 				MEM_op <= (others => '0');
@@ -208,38 +209,41 @@ begin
 				ALU_src_b <= "1"&ry;
 				REG_src_b <= "1"&ry;
 				case immediate(1 downto 0) is
-					when "01" => ALU_op <= "0000";
-					when "11" => ALU_op <= "0011";
-					when others => ALU_op <= "0000";
+					when "01"=>	--ADDU
+						ALU_op <= "0000";
+					when "11"=>	--SUBU
+						ALU_op <= "0011";
+					when others=>
+						ALU_op <= (others => '0');
 				end case;
-			when "11101"=>
+			when "11101"=>	--AND CMP JR MFPC NEG NOT OR SLLV SRAV
 				Imm <= (others => '0');
 				MEM_op <= (others => '0');
 				case immediate(4 downto 0) is
-					when "01100"=>
+					when "01100"=>	--AND
 						PC_branch <= (others => '0');
 						REG_des <= "1"&rx;
 						ALU_src_a <= "1"&rx;
 						ALU_src_b <= "1"&ry;
 						REG_src_b <= "1"&ry;
 						ALU_op <= "0001";
-					when "01010"=>
+					when "01010"=>	--CMP
 						PC_branch <= (others => '0');
 						REG_des <= "0010";
 						ALU_src_a <= "1"&rx;
 						ALU_src_b <= "1"&ry;
 						REG_src_b <= "1"&ry;
 						ALU_op <= "0010";
-					when "00000"=>
+					when "00000"=>	--JR MFPC
 						case ry is
-							when "000"=>
+							when "000"=>	--JR
 								PC_branch <= "100";
 								REG_des <= (others => '0');
 								ALU_src_a <= (others => '0');
 								ALU_src_b <= (others => '0');
 								REG_src_b <= (others => '0');
 								ALU_op <= (others => '0');
-							when "010"=>
+							when "010"=>	--MFPC
 								PC_branch <= (others => '0');
 								REG_des <= "1"&rx;
 								ALU_src_a <= "0101";
@@ -254,35 +258,35 @@ begin
 								REG_src_b <= (others => '0');
 								ALU_op <= (others => '0');
 						end case;
-					when "01011"=>
+					when "01011"=>	--NEG
 						PC_branch <= (others => '0');
 						REG_des <= "1"&rx;
 						ALU_src_a <= (others => '0');
 						ALU_src_b <= "1"&ry;
 						REG_src_b <= "1"&ry;
 						ALU_op <= "0011";
-					when "01111"=>
+					when "01111"=>	--NOT
 						PC_branch <= (others => '0');
 						REG_des <= "1"&rx;
 						ALU_src_a <= "1"&ry;
 						ALU_src_b <= (others => '0');
 						REG_src_b <= (others => '0');
 						ALU_op <= "0100";
-					when "01101"=>
+					when "01101"=>	--OR
 						PC_branch <= (others => '0');
 						REG_des <= "1"&rx;
 						ALU_src_a <= "1"&rx;
 						ALU_src_b <= "1"&ry;
 						REG_src_b <= "1"&ry;
 						ALU_op <= "0101";
-					when "00100"=>
+					when "00100"=>	--SLLV
 						PC_branch <= (others => '0');
 						REG_des <= "1"&ry;
 						ALU_src_a <= "1"&ry;
 						ALU_src_b <= "1"&rx;
 						REG_src_b <= "1"&rx;
 						ALU_op <= "0111";
-					when "00111"=>
+					when "00111"=>	--SRAV
 						PC_branch <= (others => '0');
 						REG_des <= "1"&ry;
 						ALU_src_a <= "1"&ry;
@@ -297,7 +301,7 @@ begin
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
 				end case;
-			when "11110"=>
+			when "11110"=>	--MFIH MTIH
 				PC_branch <= (others => '0');
 				Imm <= (others => '0');
 				MEM_op <= (others => '0');
@@ -305,10 +309,10 @@ begin
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
 				case immediate is
-					when "00000000"=>
+					when "00000000"=>	--MFIH
 						REG_des <= "1"&rx;
 						ALU_src_a <= "0100";
-					when "00000001"=>
+					when "00000001"=>	--MTIH
 						REG_des <= "0100";
 						ALU_src_a <= "1"&rx;
 					when others=>
