@@ -46,6 +46,7 @@ begin
 		if (Rst = '0') then
 			Clk_x2_s <= '0';
 			Clk_s <= '0';
+			Cnt <= 0;
 		elsif (Clk_base'event and Clk_base = '1') then
 			if (Cnt = 1) then
 				Clk_x2_s <= NOT(Clk_x2_s);

@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity STAGE_ID is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Bubble_to_PC : out std_logic;
 		   Branch_PC : out  STD_LOGIC_VECTOR (15 downto 0);
 		   PC_src : out  STD_LOGIC;
            NPC : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -88,6 +89,7 @@ END COMPONENT;
 COMPONENT ID_EXE_REGS PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
+	Bubble : IN std_logic;
 	ALU_src_a_d : IN std_logic_vector(3 downto 0);
 	ALU_src_b_d : IN std_logic_vector(3 downto 0);
 	Reg_src_b_d : IN std_logic_vector(3 downto 0);
@@ -139,8 +141,9 @@ END COMPONENT;
 	
 signal PC_branch : STD_LOGIC_VECTOR (2 downto 0);
 signal Immediate, T, Rx_data, Ry_data : STD_LOGIC_VECTOR (15 downto 0);
-signal Mem_op : STD_LOGIC_VECTOR (1 downto 0);
+signal Mem_op, Mem_op_q_back : STD_LOGIC_VECTOR (1 downto 0);
 signal ALU_op, ALU_src_a, ALU_src_b, Reg_src_b, Reg_des : STD_LOGIC_VECTOR (3 downto 0);
+signal Reg_des_q_back : STD_LOGIC_VECTOR (3 downto 0);
 signal Bubble, Bubble_in_branch : STD_LOGIC;
 
 begin
@@ -172,6 +175,7 @@ begin
 
 	ID_exe_regs_c: ID_EXE_REGS PORT MAP(
 		Clk => Clk,
+		Bubble => Bubble,
 		Rst => Rst,
 		ALU_src_a_d => ALU_src_a,
 		ALU_src_b_d => ALU_src_b,
@@ -189,9 +193,10 @@ begin
 		Rx_q => Rx_q,
 		Ry_q => Ry_q,
 		Immediate_q => Immediate_q,
-		Mem_op_q => Mem_op_q,
-		Reg_des_q => Reg_des_q 
+		Mem_op_q => Mem_op_q_back,
+		Reg_des_q => Reg_des_q_back
 	);
+	
 	
 	Branch_calc_c : BRANCH_CALC PORT MAP(
 		PC => NPC,
@@ -210,14 +215,19 @@ begin
 		PC_src => PC_src
 	);
 	
+	Mem_op_q <= Mem_op_q_back;
+	Reg_des_q <= Reg_des_q_back;
+	
 	Hazard_c : HAZARD PORT MAP(
-		MEM_op => Mem_op,
-		REG_des => Reg_des,
+		MEM_op => Mem_op_q_back,
+		REG_des => Reg_des_q_back,
 		ALU_src_a => ALU_src_a,
 		REG_src_b => REG_src_b,
 		Bubble_in_branch => Bubble_in_branch,
 		bubble => Bubble
 	);
+
+	Bubble_to_PC <= Bubble;
 
 end STRUCTRAL;
 

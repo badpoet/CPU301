@@ -44,7 +44,7 @@ begin
 		if (Rst = '0') then
 			Tmp <= '0';
 		elsif (Clk_in'event and Clk_in = '1') then
-			if (Cnt < 25000000) then
+			if (Cnt < 12500000) then
 				Cnt <= Cnt + 1;
 			else 
 				Cnt <= 0;

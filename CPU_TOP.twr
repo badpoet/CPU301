@@ -40,40 +40,82 @@ Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
-Setup/Hold to clock Clk_in
-------------+------------+------------+------------------+--------+
-            |Max Setup to|Max Hold to |                  | Clock  |
-Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
-------------+------------+------------+------------------+--------+
-Rst         |    4.778(R)|   -1.380(R)|Clk_in_BUFGP      |   0.000|
-------------+------------+------------+------------------+--------+
-
-Clock Clk_in to Pad
-------------+------------+------------------+--------+
-            | clk (edge) |                  | Clock  |
-Destination |   to PAD   |Internal Clock(s) | Phase  |
-------------+------------+------------------+--------+
-LED<12>     |    9.236(R)|Clk_in_BUFGP      |   0.000|
-LED<13>     |    9.805(R)|Clk_in_BUFGP      |   0.000|
-------------+------------+------------------+--------+
+Clock Rst to Pad
+-------------+------------+---------------------------------------------+--------+
+             | clk (edge) |                                             | Clock  |
+Destination  |   to PAD   |Internal Clock(s)                            | Phase  |
+-------------+------------+---------------------------------------------+--------+
+RAM1_data<0> |   10.687(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<1> |   10.687(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<2> |   10.680(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<3> |   10.680(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<4> |   10.666(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<5> |   10.666(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<6> |   10.672(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<7> |   10.672(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<8> |   10.660(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<9> |   10.660(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<10>|   10.854(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<11>|   10.854(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<12>|   10.679(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<13>|   10.679(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<14>|   10.848(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<15>|   10.848(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+-------------+------------+---------------------------------------------+--------+
 
 Clock to Setup on destination clock Clk_in
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-Clk_in         |    8.534|         |         |         |
+Clk_in         |    8.344|         |         |         |
+Rst            |    4.024|    4.024|         |         |
 ---------------+---------+---------+---------+---------+
 
+Clock to Setup on destination clock Rst
+---------------+---------+---------+---------+---------+
+               | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------+---------+---------+---------+---------+
+Rst            |         |         |    3.136|    3.136|
+---------------+---------+---------+---------+---------+
 
-Analysis completed Sat Dec 06 17:22:06 2014 
+Pad to Pad
+---------------+---------------+---------+
+Source Pad     |Destination Pad|  Delay  |
+---------------+---------------+---------+
+Rst            |COM_rdn        |   12.798|
+Rst            |COM_wrn        |   15.236|
+Rst            |RAM1_addr<0>   |   12.985|
+Rst            |RAM1_addr<1>   |   12.251|
+Rst            |RAM1_addr<2>   |   13.130|
+Rst            |RAM1_addr<3>   |   12.188|
+Rst            |RAM1_addr<4>   |   11.656|
+Rst            |RAM1_addr<5>   |   12.416|
+Rst            |RAM1_addr<6>   |   11.328|
+Rst            |RAM1_addr<7>   |   11.812|
+Rst            |RAM1_addr<8>   |    9.622|
+Rst            |RAM1_addr<9>   |    9.336|
+Rst            |RAM1_addr<10>  |   13.308|
+Rst            |RAM1_addr<11>  |   10.689|
+Rst            |RAM1_addr<12>  |    9.060|
+Rst            |RAM1_addr<13>  |    9.060|
+Rst            |RAM1_addr<14>  |   11.472|
+Rst            |RAM1_addr<15>  |    9.691|
+Rst            |RAM1_en        |    9.490|
+Rst            |RAM1_oe        |   10.031|
+Rst            |RAM1_we        |   10.540|
+---------------+---------------+---------+
+
+
+Analysis completed Sun Dec 07 03:03:26 2014 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 195 MB
+Peak Memory Usage: 198 MB
 
 
 

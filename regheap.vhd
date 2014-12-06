@@ -63,21 +63,25 @@ begin
 		end if;
 	end process;
 	
-	process (Rx) begin
-		if (Rx = "0000") then 
+	process (Rx, Rw, Rw_data) begin
+		if (Rx = "0000" or Rx = "0111") then 
 			Rx_q <= (others => '0');
 		elsif (Rx = "0101") then
 			Rx_q <= PC;
+		elsif (Rx = Rw) then
+			Rx_q <= Rw_data;
 		else
 			Rx_q <= Reg(TO_INTEGER(unsigned(Rx)));
 		end if;
 	end process;
 	
-	process (Ry) begin
-		if (Ry = "0000") then
+	process (Ry, Rw, Rw_data) begin
+		if (Ry = "0000" or Ry = "0111") then
 			Ry_q <= (others => '0');
 		elsif (Ry = "0101") then
 			Ry_q <= PC;
+		elsif (Ry = Rw) then
+			Ry_q <= Rw_data;
 		else
 			Ry_q <= Reg(TO_INTEGER(unsigned(Ry)));
 		end if;
