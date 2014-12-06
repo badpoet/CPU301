@@ -379,3 +379,7 @@ NET "SSD_l[3]" LOC = F9;
 NET "SSD_l[2]" LOC = G9;
 NET "SSD_l[1]" LOC = A10;
 NET "SSD_l[0]" LOC = B10;
+
+
+NET "COM_wrn" LOC = U5;
+NET "COM_rdn" LOC = C14;

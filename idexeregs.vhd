@@ -36,25 +36,28 @@ entity ID_EXE_REGS is
            ALU_src_a_d : in  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_b_d : in  STD_LOGIC_VECTOR (3 downto 0);
            Reg_src_b_d : in  STD_LOGIC_VECTOR (3 downto 0);
+		   ALU_op_d : in  STD_LOGIC_VECTOR (3 downto 0);
+		   ALU_op_q : out  STD_LOGIC_VECTOR (3 downto 0);
            Rx_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Ry_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Immediate_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Mem_op_d : in  STD_LOGIC_VECTOR (1 downto 0);
            Reg_des_d : in  STD_LOGIC_VECTOR (3 downto 0);
-           ALU_src_a_q : in  STD_LOGIC_VECTOR (3 downto 0);
-           ALU_src_b_q : in  STD_LOGIC_VECTOR (3 downto 0);
-           Reg_src_b_q : in  STD_LOGIC_VECTOR (3 downto 0);
-           Rx_q : in  STD_LOGIC_VECTOR (15 downto 0);
-           Ry_q : in  STD_LOGIC_VECTOR (15 downto 0);
-           Immediate_q : in  STD_LOGIC_VECTOR (15 downto 0);
-           Mem_op_q : in  STD_LOGIC_VECTOR (1 downto 0);
-           Reg_des_q : in  STD_LOGIC_VECTOR (3 downto 0));
+           ALU_src_a_q : out  STD_LOGIC_VECTOR (3 downto 0);
+           ALU_src_b_q : out  STD_LOGIC_VECTOR (3 downto 0);
+           Reg_src_b_q : out  STD_LOGIC_VECTOR (3 downto 0);
+           Rx_q : out  STD_LOGIC_VECTOR (15 downto 0);
+           Ry_q : out  STD_LOGIC_VECTOR (15 downto 0);
+           Immediate_q : out  STD_LOGIC_VECTOR (15 downto 0);
+           Mem_op_q : out  STD_LOGIC_VECTOR (1 downto 0);
+           Reg_des_q : out  STD_LOGIC_VECTOR (3 downto 0));
 end ID_EXE_REGS;
 
 architecture RTL of ID_EXE_REGS is
 		signal ALU_src_a : STD_LOGIC_VECTOR (3 downto 0);
 		signal ALU_src_b : STD_LOGIC_VECTOR (3 downto 0);
 		signal Reg_src_b : STD_LOGIC_VECTOR (3 downto 0);
+		signal ALU_op : STD_LOGIC_VECTOR (3 downto 0);
 		signal Rx : STD_LOGIC_VECTOR (15 downto 0);
 		signal Ry : STD_LOGIC_VECTOR (15 downto 0);
 		signal Immediate : STD_LOGIC_VECTOR (15 downto 0);
@@ -66,6 +69,7 @@ begin
 			ALU_src_a <= (others => '0');
 			ALU_src_b <= (others => '0');
 			Reg_src_b <= (others => '0');
+			ALU_op <= (others => '0');
 			Rx <= (others => '0');
 			Ry <= (others => '0');
 			Immediate <= (others => '0');
@@ -76,6 +80,7 @@ begin
 				ALU_src_a <= (others => '0');
 				ALU_src_b <= (others => '0');
 				Reg_src_b <= (others => '0');
+				ALU_op <= (others => '0');
 				Rx <= (others => '0');
 				Ry <= (others => '0');
 				Immediate <= (others => '0');
@@ -84,6 +89,7 @@ begin
 			else
 				ALU_src_a <= ALU_src_a_d;
 				ALU_src_b <= ALU_src_b_d;
+				ALU_op <= ALU_op_d;
 				Reg_src_b <= Reg_src_b_d;
 				Rx <= Rx_d;
 				Ry <= Ry_d;
@@ -96,6 +102,7 @@ begin
 	ALU_src_a_q <= ALU_src_a;
 	ALU_src_b_q <= ALU_src_b;
 	Reg_src_b_q <= Reg_src_b;
+	ALU_op_q <= ALU_op;
 	Rx_q <= Rx;
 	Ry_q <= Ry;
 	Immediate_q <= Immediate;

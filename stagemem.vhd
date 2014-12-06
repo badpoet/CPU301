@@ -41,8 +41,8 @@ entity STAGE_MEM is
            Mem_op_q : out  STD_LOGIC_VECTOR (1 downto 0);
            Mem_out_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
-           Reg_des_q : out  STD_LOGIC_VECTOR (15 downto 0);
-		   RAM1_addr : out  STD_LOGIC_VECTOR (15 downto 0);
+           Reg_des_q : out  STD_LOGIC_VECTOR (3 downto 0);
+		   RAM1_addr : out  STD_LOGIC_VECTOR (17 downto 0);
 		   RAM1_data : inout  STD_LOGIC_VECTOR (15 downto 0);
 		   RAM1_en : out  STD_LOGIC;
 		   RAM1_oe : out  STD_LOGIC;
@@ -105,7 +105,6 @@ begin
 		RAM1_addr => RAM1_addr,
 		RAM1_data => RAM1_data
 	);
-
 	Inst_MEM_WB_REGS: MEM_WB_REGS PORT MAP(
 		Clk => Clk,
 		Rst => Rst,

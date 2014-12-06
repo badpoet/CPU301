@@ -40,6 +40,6 @@ end PC_MUX;
 architecture RTL of PC_MUX is
 
 begin
-	NPC <= Branch_PC when PC_src else NPC;
+	NPC <= Branch_PC when PC_src = '1' else PC_next;
 end RTL;
 

@@ -3,10 +3,11 @@ Release 14.7 Trace  (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
 C:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -intstyle ise -v 3 -s 4
--n 3 -fastpaths -xml CLK_GEN.twx CLK_GEN.ncd -o CLK_GEN.twr CLK_GEN.pcf
+-n 3 -fastpaths -xml CPU_TOP.twx CPU_TOP.ncd -o CPU_TOP.twr CPU_TOP.pcf -ucf
+CPU_TOP.ucf
 
-Design file:              CLK_GEN.ncd
-Physical constraint file: CLK_GEN.pcf
+Design file:              CPU_TOP.ncd
+Physical constraint file: CPU_TOP.pcf
 Device,package,speed:     xc3s1200e,fg320,-4 (PRODUCTION 1.27 2013-10-13)
 Report level:             verbose report
 
@@ -39,47 +40,40 @@ Data Sheet report:
 -----------------
 All values displayed in nanoseconds (ns)
 
-Setup/Hold to clock Clk_base
+Setup/Hold to clock Clk_in
 ------------+------------+------------+------------------+--------+
             |Max Setup to|Max Hold to |                  | Clock  |
 Source      | clk (edge) | clk (edge) |Internal Clock(s) | Phase  |
 ------------+------------+------------+------------------+--------+
-Rst         |    0.386(R)|    1.176(R)|Clk_x4_OBUF       |   0.000|
+Rst         |    4.778(R)|   -1.380(R)|Clk_in_BUFGP      |   0.000|
 ------------+------------+------------+------------------+--------+
 
-Clock Clk_base to Pad
+Clock Clk_in to Pad
 ------------+------------+------------------+--------+
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-Clk         |    7.691(R)|Clk_x4_OBUF       |   0.000|
-Clk_x2      |    7.426(R)|Clk_x4_OBUF       |   0.000|
+LED<12>     |    9.236(R)|Clk_in_BUFGP      |   0.000|
+LED<13>     |    9.805(R)|Clk_in_BUFGP      |   0.000|
 ------------+------------+------------------+--------+
 
-Clock to Setup on destination clock Clk_base
+Clock to Setup on destination clock Clk_in
 ---------------+---------+---------+---------+---------+
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-Clk_base       |    1.802|         |         |         |
+Clk_in         |    8.534|         |         |         |
 ---------------+---------+---------+---------+---------+
 
-Pad to Pad
----------------+---------------+---------+
-Source Pad     |Destination Pad|  Delay  |
----------------+---------------+---------+
-Clk_base       |Clk_x4         |    5.449|
----------------+---------------+---------+
 
-
-Analysis completed Sat Dec 06 17:05:34 2014 
+Analysis completed Sat Dec 06 17:22:06 2014 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 174 MB
+Peak Memory Usage: 195 MB
 
 
 

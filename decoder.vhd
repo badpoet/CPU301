@@ -87,7 +87,12 @@ begin
 				ALU_src_a <= "1"&ry;
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
-				ALU_op <= "0110" when immediate(1 downto 0) = "00" else "1000";
+				if (immediate(1 downto 0) = "00") then
+					ALU_op <= "0110";
+				else
+					ALU_op <= "1000";
+				end if;
+				-- ALU_op <= "0110" when (immediate(1 downto 0) = "00") else "1000";
 					 --else "1000" when immediate(1 downto 0) = "11";
 			when "01000"=>
 				PC_branch <= (others => '0');

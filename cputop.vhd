@@ -42,6 +42,8 @@ entity CPU_TOP is
            RAM2_en : out  STD_LOGIC;
            RAM2_addr : out  STD_LOGIC_VECTOR (17 downto 0);
            RAM2_data : inout  STD_LOGIC_VECTOR (15 downto 0);
+		   COM_rdn : out  STD_LOGIC;
+		   COM_wrn : out  STD_LOGIC;
 		   LED : out  STD_LOGIC_VECTOR (15 downto 0);
 		   SSD_h : out  STD_LOGIC_VECTOR (6 downto 0);
 		   SSD_l : out  STD_LOGIC_VECTOR (6 downto 0));
@@ -86,6 +88,34 @@ component STAGE_IF is
            NPC_ID : out  STD_LOGIC_VECTOR (15 downto 0));
 end component;
 
+COMPONENT STAGE_ID is
+	PORT(
+		Clk : IN std_logic;
+		Rst : IN std_logic;
+		NPC : IN std_logic_vector(15 downto 0);
+		Inst : IN std_logic_vector(15 downto 0);
+		ID_exe_reg_des : IN std_logic_vector(3 downto 0);
+		Exe_mem_reg_des : IN std_logic_vector(3 downto 0);
+		Exe_mem_alu_out : IN std_logic_vector(15 downto 0);
+		Exe_mem_mem_op : IN std_logic_vector(1 downto 0);
+		Mem_WB_reg_des : IN std_logic_vector(3 downto 0);
+		Mem_WB_res : IN std_logic_vector(15 downto 0);
+		Rw : IN std_logic_vector(3 downto 0);
+		Rw_data : IN std_logic_vector(15 downto 0);          
+		Branch_PC : OUT std_logic_vector(15 downto 0);
+		PC_src : OUT std_logic;
+		ALU_op_q : OUT std_Logic_vector (3 downto 0);
+		ALU_src_a_q : OUT std_logic_vector(3 downto 0);
+		ALU_src_b_q : OUT std_logic_vector(3 downto 0);
+		Reg_src_b_q : OUT std_logic_vector(3 downto 0);
+		Immediate_q : OUT std_logic_vector(15 downto 0);
+		Mem_op_q : OUT std_logic_vector(1 downto 0);
+		Rx_q : OUT std_logic_vector(15 downto 0);
+		Ry_q : OUT std_logic_vector(15 downto 0);
+		Reg_des_q : OUT std_logic_vector(3 downto 0)
+		);
+END COMPONENT;
+
 component PC_branch_calc is
     Port ( PC : in  STD_LOGIC_VECTOR (15 downto 0);
            Immediate : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -94,6 +124,62 @@ component PC_branch_calc is
            Branch_PC : out  STD_LOGIC_VECTOR (15 downto 0);
            Equal_zero : in  STD_LOGIC);
 end component;
+
+COMPONENT STAGE_EXE is
+	PORT(
+		Clk : IN std_logic;
+		Rst : IN std_logic;
+		ALU_src_a : IN std_logic_vector(3 downto 0);
+		ALU_src_b : IN std_logic_vector(3 downto 0);
+		Reg_src_b : IN std_logic_vector(3 downto 0);
+		ALU_op : IN std_logic_vector(3 downto 0);
+		Mem_op : IN std_logic_vector(1 downto 0);
+		Reg_des : IN std_logic_vector(3 downto 0);
+		Rx : IN std_logic_vector(15 downto 0);
+		Ry : IN std_logic_vector(15 downto 0);
+		Exe_mem_reg_des : IN std_logic_vector(3 downto 0);
+		Exe_mem_alu_out : IN std_logic_vector(15 downto 0);
+		Mem_wb_reg_des : IN std_logic_vector(3 downto 0);
+		Mem_WB_res : IN std_logic_vector(15 downto 0);
+		Immediate : IN std_logic_vector(15 downto 0);    
+		ALU_out_q : OUT std_logic_vector(15 downto 0);
+		Mem_data_q : OUT std_logic_vector(15 downto 0);
+		Mem_op_q : OUT std_logic_vector(1 downto 0);
+		Reg_des_q : OUT std_logic_vector(3 downto 0)
+		);
+END COMPONENT;
+
+COMPONENT STAGE_MEM PORT(
+	Clk : IN std_logic;
+	Rst : IN std_logic;
+	Clk_x2 : IN std_logic;
+	Clk_x4 : IN std_logic;
+	ALU_out : IN std_logic_vector(15 downto 0);
+	R2_data : IN std_logic_vector(15 downto 0);
+	Mem_op : IN std_logic_vector(1 downto 0);
+	Reg_des : IN std_logic_vector(3 downto 0);    
+	RAM1_data : INOUT std_logic_vector(15 downto 0);      
+	ALU_out_q : OUT std_logic_vector(15 downto 0);
+	Mem_op_q : OUT std_logic_vector(1 downto 0);
+	Mem_out_q : OUT std_logic_vector(15 downto 0);
+	Reg_des_q : OUT std_logic_vector(3 downto 0);
+	RAM1_addr : OUT std_logic_vector(17 downto 0);
+	RAM1_en : OUT std_logic;
+	RAM1_oe : OUT std_logic;
+	RAM1_we : OUT std_logic;
+	COM_wrn : OUT std_logic;
+	COM_rdn : OUT std_logic
+	);
+END COMPONENT;
+
+COMPONENT WB_MUX
+PORT(
+	ALU_out : IN std_logic_vector(15 downto 0);
+	Mem_out : IN std_logic_vector(15 downto 0);
+	Mem_op : IN std_logic_vector(1 downto 0);          
+	WB_data : OUT std_logic_vector(15 downto 0)
+	);
+END COMPONENT;
 
 -- WIRES
 
@@ -104,9 +190,16 @@ signal Clk_base : STD_LOGIC;
 signal Clk : STD_LOGIC;
 signal Clk_x2 : STD_LOGIC;
 signal Clk_x4 : STD_LOGIC;
+signal PC_src : STD_LOGIC;
 
-signal NPC_ID : STD_LOGIC_VECTOR (15 downto 0);
-signal Inst_ID : STD_LOGIC_VECTOR (15 downto 0);
+signal NPC_ID, Inst_ID, Branch_PC : STD_LOGIC_VECTOR (15 downto 0);
+signal ID_exe_reg_des, Exe_mem_reg_des, Mem_WB_reg_des : STD_LOGIC_VECTOR (3 downto 0);
+signal ID_exe_ALU_src_a, ID_exe_ALU_src_b, ID_exe_reg_src_b : STD_LOGIC_VECTOR (3 downto 0);
+signal ID_exe_ALU_op : STD_LOGIC_VECTOR (3 downto 0);
+signal ID_exe_immediate, ID_exe_rx, ID_exe_ry : STD_LOGIC_VECTOR (15 downto 0);
+signal Exe_mem_alu_out, Mem_WB_res, Rw_data, Exe_mem_mem_data, Mem_WB_alu_out : STD_LOGIC_VECTOR (15 downto 0);
+signal Mem_WB_mem_data : STD_LOGIC_VECTOR (15 downto 0);
+signal Exe_mem_mem_op, ID_exe_mem_op, Mem_WB_mem_op : STD_LOGIC_VECTOR (1 downto 0);
 
 begin
 	
@@ -145,13 +238,86 @@ begin
 		RAM2_en => RAM2_en, 
 		NPC_ID => NPC_ID, 
 		Inst_ID => Inst_ID,
-		PC_src => '0' );
+		PC_src => PC_src );
 		
-	RAM1_data <= (others => 'Z');
-	RAM1_addr <= (others => '0');
-	RAM1_oe <= '1';
-	RAM1_we <= '1';
-	RAM1_en <= '1';
+	Stage_ID_c : STAGE_ID PORT MAP(
+		Clk => Clk,
+		Rst => Rst,
+		Branch_PC => Branch_PC,
+		PC_src => PC_src,
+		NPC => NPC_ID,
+		Inst => Inst_ID,
+		ID_exe_reg_des => ID_exe_reg_des,
+		Exe_mem_reg_des => Exe_mem_reg_des,
+		Exe_mem_alu_out => Exe_mem_alu_out,
+		Exe_mem_mem_op => Exe_mem_mem_op,
+		Mem_WB_reg_des => Mem_WB_reg_des,
+		Mem_WB_res => Mem_WB_res,
+		ALU_src_a_q => ID_exe_ALU_src_a,
+		ALU_src_b_q => ID_exe_ALU_src_b,
+		ALU_op_q => ID_exe_ALU_op,
+		Reg_src_b_q => ID_exe_Reg_src_b,
+		Immediate_q => ID_exe_Immediate,
+		Mem_op_q => ID_exe_mem_op,
+		Rx_q => ID_exe_rx,
+		Ry_q => ID_exe_ry,
+		Rw => Mem_WB_reg_des,
+		Rw_data => Rw_data,
+		Reg_des_q => ID_exe_reg_des
+	);
+	
+	Stage_exe_c: STAGE_EXE PORT MAP(
+		Clk => Clk,
+		Rst => Rst,
+		ALU_src_a => ID_exe_ALU_src_a,
+		ALU_src_b => ID_exe_ALU_src_b,
+		Reg_src_b => ID_exe_Reg_src_b,
+		ALU_op => ID_exe_ALU_op,
+		Mem_op => ID_exe_Mem_op,
+		Reg_des => ID_exe_reg_des,
+		Rx => ID_exe_rx,
+		Ry => ID_exe_ry,
+		ALU_out_q => Exe_mem_alu_out,
+		Mem_data_q => Exe_mem_mem_data,
+		Mem_op_q => Exe_mem_mem_op,
+		Reg_des_q => Exe_mem_reg_des,
+		Exe_mem_reg_des => Exe_mem_reg_des,
+		Exe_mem_alu_out => Exe_mem_alu_out,
+		Mem_wb_reg_des => Mem_WB_reg_des,
+		Mem_WB_res => Mem_WB_res,
+		Immediate => ID_exe_Immediate
+	);
+	
+	Stage_mem_c : STAGE_MEM PORT MAP(
+		Clk => Clk,
+		Rst => Rst,
+		Clk_x2 => Clk_x2,
+		Clk_x4 => CLk_x4,
+		R2_data => Exe_mem_mem_data,
+		ALU_out => Exe_mem_alu_out,
+		ALU_out_q => Mem_WB_alu_out,
+		Mem_op => Exe_mem_mem_op,
+		Mem_op_q => Mem_WB_mem_op,
+		Mem_out_q => Mem_WB_mem_data,
+		Reg_des => Exe_mem_reg_des,
+		Reg_des_q => Mem_WB_reg_des,
+		RAM1_addr => RAM1_addr,
+		RAM1_data => RAM1_data,
+		RAM1_en => RAM1_en,
+		RAM1_oe => RAM1_oe,
+		RAM1_we => RAM1_we,
+		COM_wrn => COM_wrn,
+		COM_rdn => COM_rdn
+	);
+	
+	WB_mux_c : WB_MUX PORT MAP(
+		ALU_out => Mem_WB_alu_out,
+		Mem_out => Mem_WB_mem_data,
+		Mem_op => Mem_WB_mem_op,
+		WB_data => Rw_data
+	);
+
+	
 
 end STRUCTRUAL;
 

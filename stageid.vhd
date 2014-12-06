@@ -42,6 +42,7 @@ entity STAGE_ID is
 		   Exe_mem_mem_op : in  STD_LOGIC_VECTOR (1 downto 0);
 		   Mem_WB_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
 		   Mem_WB_res : in  STD_LOGIC_VECTOR (15 downto 0);
+		   ALU_op_q : out STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_a_q : out  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_b_q : out  STD_LOGIC_VECTOR (3 downto 0);
            Reg_src_b_q : out  STD_LOGIC_VECTOR (3 downto 0);
@@ -50,7 +51,7 @@ entity STAGE_ID is
            Rx_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Ry_q : out  STD_LOGIC_VECTOR (15 downto 0);
 		   Rw : in  STD_LOGIC_VECTOR (3 downto 0);
-		   Rw_data : in  STD_LOGIC_VECTOR (3 downto 0);
+		   Rw_data : in  STD_LOGIC_VECTOR (15 downto 0);
            Reg_des_q : out  STD_LOGIC_VECTOR (3 downto 0));
 end STAGE_ID;
 
@@ -95,14 +96,16 @@ COMPONENT ID_EXE_REGS PORT(
 	Immediate_d : IN std_logic_vector(15 downto 0);
 	Mem_op_d : IN std_logic_vector(1 downto 0);
 	Reg_des_d : IN std_logic_vector(3 downto 0);
-	ALU_src_a_q : IN std_logic_vector(3 downto 0);
-	ALU_src_b_q : IN std_logic_vector(3 downto 0);
-	Reg_src_b_q : IN std_logic_vector(3 downto 0);
-	Rx_q : IN std_logic_vector(15 downto 0);
-	Ry_q : IN std_logic_vector(15 downto 0);
-	Immediate_q : IN std_logic_vector(15 downto 0);
-	Mem_op_q : IN std_logic_vector(1 downto 0);
-	Reg_des_q : IN std_logic_vector(3 downto 0));
+	ALU_op_d : in STD_LOGIC_VECTOR (3 downto 0);
+	ALU_op_q : out STD_LOGIC_VECTOR (3 downto 0);
+	ALU_src_a_q : out std_logic_vector(3 downto 0);
+	ALU_src_b_q : out std_logic_vector(3 downto 0);
+	Reg_src_b_q : out std_logic_vector(3 downto 0);
+	Rx_q : out std_logic_vector(15 downto 0);
+	Ry_q : out std_logic_vector(15 downto 0);
+	Immediate_q : out std_logic_vector(15 downto 0);
+	Mem_op_q : out std_logic_vector(1 downto 0);
+	Reg_des_q : out std_logic_vector(3 downto 0));
 END COMPONENT;
 
 COMPONENT BRANCH_CALC PORT(
@@ -178,6 +181,8 @@ begin
 		Immediate_d => Immediate,
 		Mem_op_d => Mem_op,
 		Reg_des_d => Reg_des,
+		ALU_op_d => ALU_op,
+		ALU_op_q => ALU_op_q,
 		ALU_src_a_q => ALU_src_a_q,
 		ALU_src_b_q => ALU_src_b_q,
 		Reg_src_b_q => Reg_src_b_q,

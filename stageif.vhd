@@ -36,6 +36,7 @@ entity STAGE_IF is
            Rst : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
            PC_src : in  STD_LOGIC;
+		   Branch_PC : in  STD_LOGIC_VECTOR (15 downto 0);
            RAM2_we : out  STD_LOGIC;
            RAM2_oe : out  STD_LOGIC;
            RAM2_en : out  STD_LOGIC;
@@ -127,7 +128,7 @@ begin
 		PC_next => PC_next );
 	PC_mux_c : PC_MUX port map ( 
 		NPC => PC_d, 
-		Branch_PC => PC_q, 
+		Branch_PC => Branch_PC, 
 		PC_next => PC_next,
 		PC_src => PC_src );	
 

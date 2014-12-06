@@ -34,12 +34,12 @@ entity STAGE_EXE is
            Rst : in  STD_LOGIC;
            ALU_src_a : in  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_b : in  STD_LOGIC_VECTOR (3 downto 0);
+		   Reg_src_b : in  STD_LOGIC_VECTOR (3 downto 0);
 		   ALU_op : in  STD_LOGIC_VECTOR (3 downto 0);
            Mem_op : in  STD_LOGIC_VECTOR (1 downto 0);
            Reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
            Rx : in  STD_LOGIC_VECTOR (15 downto 0);
            Ry : in  STD_LOGIC_VECTOR (15 downto 0);
-		   R2_data : out  STD_LOGIC_VECTOR (15 downto 0);
            ALU_out_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Mem_data_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Mem_op_q : out  STD_LOGIC_VECTOR (1 downto 0);
@@ -104,7 +104,7 @@ component EXE_MEM_REGS is
            Mem_op_q : out  STD_LOGIC_VECTOR (1 downto 0));
 end component;
 
-signal Op_a, Op_b, ALU_res : STD_LOGIC_VECTOR (15 downto 0);
+signal Op_a, Op_b, ALU_res, R2_data : STD_LOGIC_VECTOR (15 downto 0);
 
 begin
 
