@@ -197,18 +197,15 @@ signal ID_exe_reg_des, Exe_mem_reg_des, Mem_WB_reg_des : STD_LOGIC_VECTOR (3 dow
 signal ID_exe_ALU_src_a, ID_exe_ALU_src_b, ID_exe_reg_src_b : STD_LOGIC_VECTOR (3 downto 0);
 signal ID_exe_ALU_op : STD_LOGIC_VECTOR (3 downto 0);
 signal ID_exe_immediate, ID_exe_rx, ID_exe_ry : STD_LOGIC_VECTOR (15 downto 0);
-signal Exe_mem_alu_out, Mem_WB_res, Rw_data, Exe_mem_mem_data, Mem_WB_alu_out : STD_LOGIC_VECTOR (15 downto 0);
+signal Exe_mem_alu_out, Mem_WB_res, Exe_mem_mem_data, Mem_WB_alu_out : STD_LOGIC_VECTOR (15 downto 0);
 signal Mem_WB_mem_data : STD_LOGIC_VECTOR (15 downto 0);
 signal Exe_mem_mem_op, ID_exe_mem_op, Mem_WB_mem_op : STD_LOGIC_VECTOR (1 downto 0);
 
 begin
 	
-	LED(11 downto 0) <= NPC_ID(11 downto 0);
+	LED(14 downto 0) <= Inst_ID(14 downto 0);
 	LED(15) <= Clk;
-	LED(14) <= Clk_x2;
-	LED(13) <= Clk_x4;
-	LED(12) <= Clk_base;
-	SSD_data <= Inst_ID(7 downto 0);
+	SSD_data <= Mem_WB_res(7 downto 0);
 	
 	Seven_seg_display_c : SEVEN_SEG_DISPLAY port map ( 
 		Data => SSD_data,
@@ -262,7 +259,7 @@ begin
 		Rx_q => ID_exe_rx,
 		Ry_q => ID_exe_ry,
 		Rw => Mem_WB_reg_des,
-		Rw_data => Rw_data,
+		Rw_data => Mem_WB_res,
 		Reg_des_q => ID_exe_reg_des
 	);
 	
@@ -314,7 +311,7 @@ begin
 		ALU_out => Mem_WB_alu_out,
 		Mem_out => Mem_WB_mem_data,
 		Mem_op => Mem_WB_mem_op,
-		WB_data => Rw_data
+		WB_data => Mem_WB_res
 	);
 
 	

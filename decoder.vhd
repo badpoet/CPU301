@@ -145,13 +145,13 @@ begin
 				end case;
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
-			when "01101"=>
+			when "01101"=> -- LI
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
-				ALU_src_a <= "0111";
-				ALU_src_b <= (others => '0');
+				ALU_src_a <= "0000";
+				ALU_src_b <= "0111";
 				REG_src_b <= (others => '0');
 				ALU_op <= (others => '0');
 			when "01110"=>
@@ -172,7 +172,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "0111";
 				ALU_op <= "0000";
-			when "10011"=>
+			when "10011"=> -- LW
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "10";
@@ -190,7 +190,7 @@ begin
 				ALU_src_b <= "0111";
 				REG_src_b <= "1"&rx;
 				ALU_op <= "0000";
-			when "11011"=>
+			when "11011"=> -- SW
 				PC_branch <= (others => '0');
 				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(4 downto 0)), Imm'length));
 				MEM_op <= "11";

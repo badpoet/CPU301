@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Sat Dec 06 17:21:34 2014
+// Written by: Map P.20131013 on Sat Dec 06 21:04:21 2014
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -103,6 +103,8 @@ COMP "LED<12>" LOCATE = SITE "B13" LEVEL 1;
 COMP "LED<13>" LOCATE = SITE "D13" LEVEL 1;
 COMP "LED<14>" LOCATE = SITE "E13" LEVEL 1;
 COMP "LED<15>" LOCATE = SITE "A14" LEVEL 1;
+COMP "COM_rdn" LOCATE = SITE "C14" LEVEL 1;
+COMP "COM_wrn" LOCATE = SITE "U5" LEVEL 1;
 COMP "RAM1_en" LOCATE = SITE "M15" LEVEL 1;
 COMP "RAM2_en" LOCATE = SITE "N10" LEVEL 1;
 COMP "RAM1_oe" LOCATE = SITE "M16" LEVEL 1;
