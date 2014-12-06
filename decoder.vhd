@@ -54,7 +54,7 @@ begin
 		case Inst(15 downto 11) is
 			when "00010"=>
 				PC_branch <= "001";
-				Imm <= STD_LOGIC_VECTOR(SIGNED(rx&immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(rx&immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= (others => '0');
 				ALU_src_a <= (others => '0');
@@ -63,7 +63,7 @@ begin
 				ALU_op <= (others => '0');
 			when "00100"=>
 				PC_branch <= "010";
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
@@ -72,7 +72,7 @@ begin
 				ALU_op <= (others => '0');
 			when "00101"=>
 				PC_branch <= "011";
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
@@ -81,7 +81,7 @@ begin
 				ALU_op <= (others => '0');
 			when "00110"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate(4 downto 2)));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(immediate(4 downto 2)), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "1"&ry;
@@ -91,7 +91,7 @@ begin
 					 --else "1000" when immediate(1 downto 0) = "11";
 			when "01000"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(3 downto 0)));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(3 downto 0)), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&ry;
 				ALU_src_a <= "1"&rx;
@@ -100,7 +100,7 @@ begin
 				ALU_op <= "0000";
 			when "01001"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "1"&rx;
@@ -138,11 +138,11 @@ begin
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
 				end case;
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 			when "01101"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(UNSIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(UNSIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "1"&rx;
 				ALU_src_a <= "0111";
@@ -151,7 +151,7 @@ begin
 				ALU_op <= (others => '0');
 			when "01110"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= (others => '0');
 				REG_des <= "0010";
 				ALU_src_a <= "1"&rx;
@@ -160,7 +160,7 @@ begin
 				ALU_op <= "0010";
 			when "10010"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "10";
 				REG_des <= "1"&rx;
 				ALU_src_a <= "0001";
@@ -169,7 +169,7 @@ begin
 				ALU_op <= "0000";
 			when "10011"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "10";
 				REG_des <= "1"&ry;
 				ALU_src_a <= "1"&rx;
@@ -178,7 +178,7 @@ begin
 				ALU_op <= "0000";
 			when "11010"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate), Imm'length));
 				MEM_op <= "11";
 				REG_des <= (others => '0');
 				ALU_src_a <= "0001";
@@ -187,7 +187,7 @@ begin
 				ALU_op <= "0000";
 			when "11011"=>
 				PC_branch <= (others => '0');
-				Imm <= STD_LOGIC_VECTOR(SIGNED(immediate(4 downto 0)));
+				Imm <= STD_LOGIC_VECTOR(RESIZE(SIGNED(immediate(4 downto 0)), Imm'length));
 				MEM_op <= "11";
 				REG_des <= (others => '0');
 				ALU_src_a <= "1"&rx;
