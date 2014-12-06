@@ -76,7 +76,7 @@ begin
 	end process;
 	
 	process (Ry, Rw, Rw_data) begin
-		if (Ry = "0000" or Rx = "0111") then
+		if (Ry = "0000" or Ry = "0111") then
 			Ry_q <= (others => '0');
 		elsif (Ry = "0101") then
 			Ry_q <= PC;

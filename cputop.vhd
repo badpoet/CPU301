@@ -44,6 +44,9 @@ entity CPU_TOP is
            RAM2_data : inout  STD_LOGIC_VECTOR (15 downto 0);
 		   COM_rdn : out  STD_LOGIC;
 		   COM_wrn : out  STD_LOGIC;
+		   COM_tsre: in  STD_LOGIC;
+		   COM_tbre: in  STD_LOGIC;
+	   	   COM_data_ready: in  STD_LOGIC;
 		   LED : out  STD_LOGIC_VECTOR (15 downto 0);
 		   SSD_h : out  STD_LOGIC_VECTOR (6 downto 0);
 		   SSD_l : out  STD_LOGIC_VECTOR (6 downto 0));
@@ -79,6 +82,8 @@ component STAGE_IF is
            Clk_x4 : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
            PC_src : in  STD_LOGIC;
+		   Branch_PC : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Bubble : in  STD_LOGIC;
            RAM2_we : out  STD_LOGIC;
            RAM2_oe : out  STD_LOGIC;
            RAM2_en : out  STD_LOGIC;
@@ -101,7 +106,8 @@ COMPONENT STAGE_ID is
 		Mem_WB_reg_des : IN std_logic_vector(3 downto 0);
 		Mem_WB_res : IN std_logic_vector(15 downto 0);
 		Rw : IN std_logic_vector(3 downto 0);
-		Rw_data : IN std_logic_vector(15 downto 0);          
+		Rw_data : IN std_logic_vector(15 downto 0);   
+		Bubble_to_PC : out  STD_LOGIC;       
 		Branch_PC : OUT std_logic_vector(15 downto 0);
 		PC_src : OUT std_logic;
 		ALU_op_q : OUT std_Logic_vector (3 downto 0);
@@ -154,6 +160,7 @@ COMPONENT STAGE_MEM PORT(
 	Rst : IN std_logic;
 	Clk_x2 : IN std_logic;
 	Clk_x4 : IN std_logic;
+	Step_out_msg : OUT std_logic;
 	ALU_out : IN std_logic_vector(15 downto 0);
 	R2_data : IN std_logic_vector(15 downto 0);
 	Mem_op : IN std_logic_vector(1 downto 0);
@@ -167,6 +174,9 @@ COMPONENT STAGE_MEM PORT(
 	RAM1_en : OUT std_logic;
 	RAM1_oe : OUT std_logic;
 	RAM1_we : OUT std_logic;
+    COM_tsre: in  STD_LOGIC;
+    COM_tbre: in  STD_LOGIC;
+    COM_data_ready: in  STD_LOGIC;
 	COM_wrn : OUT std_logic;
 	COM_rdn : OUT std_logic
 	);
@@ -192,6 +202,7 @@ signal Clk_x2 : STD_LOGIC;
 signal Clk_x4 : STD_LOGIC;
 signal PC_src : STD_LOGIC;
 
+signal Step_out_msg, Bubble: STD_LOGIC;
 signal NPC_ID, Inst_ID, Branch_PC : STD_LOGIC_VECTOR (15 downto 0);
 signal ID_exe_reg_des, Exe_mem_reg_des, Mem_WB_reg_des : STD_LOGIC_VECTOR (3 downto 0);
 signal ID_exe_ALU_src_a, ID_exe_ALU_src_b, ID_exe_reg_src_b : STD_LOGIC_VECTOR (3 downto 0);
@@ -203,8 +214,12 @@ signal Exe_mem_mem_op, ID_exe_mem_op, Mem_WB_mem_op : STD_LOGIC_VECTOR (1 downto
 
 begin
 	
-	LED(14 downto 0) <= Inst_ID(14 downto 0);
+	LED(9 downto 0) <= Inst_ID(9 downto 0);
 	LED(15) <= Clk;
+	LED(14) <= Clk_x2;
+	LED(13) <= Step_out_msg;
+	LED(12) <= Bubble;
+	LED(11 downto 10) <= Exe_mem_mem_op;
 	SSD_data <= Mem_WB_res(7 downto 0);
 	
 	Seven_seg_display_c : SEVEN_SEG_DISPLAY port map ( 
@@ -228,6 +243,8 @@ begin
 		Clk_x2 => Clk_x2, 
 		Clk_x4 => Clk_x4,
 		Rst => Rst, 
+		Branch_PC => Branch_PC,
+		Bubble => Bubble,
 		RAM2_we => RAM2_we, 
 		RAM2_oe => RAM2_oe, 
 		RAM2_data => RAM2_data,
@@ -241,6 +258,7 @@ begin
 		Clk => Clk,
 		Rst => Rst,
 		Branch_PC => Branch_PC,
+		Bubble_to_PC => Bubble,
 		PC_src => PC_src,
 		NPC => NPC_ID,
 		Inst => Inst_ID,
@@ -290,6 +308,7 @@ begin
 		Rst => Rst,
 		Clk_x2 => Clk_x2,
 		Clk_x4 => CLk_x4,
+		Step_out_msg => Step_out_msg,
 		R2_data => Exe_mem_mem_data,
 		ALU_out => Exe_mem_alu_out,
 		ALU_out_q => Mem_WB_alu_out,
@@ -303,6 +322,9 @@ begin
 		RAM1_en => RAM1_en,
 		RAM1_oe => RAM1_oe,
 		RAM1_we => RAM1_we,
+		COM_tsre => COM_tsre,
+		COM_tbre => COM_tbre,
+		COM_data_ready => COM_data_ready,
 		COM_wrn => COM_wrn,
 		COM_rdn => COM_rdn
 	);

@@ -363,7 +363,6 @@ NET "RAM1_oe" IOSTANDARD = LVCMOS25;
 NET "RAM1_oe" DRIVE = 12;
 NET "RAM1_oe" SLEW = SLOW;
 
-# PlanAhead Generated physical constraints 
 
 NET "SSD_h[6]" LOC = C7;
 NET "SSD_h[5]" LOC = D7;
@@ -383,3 +382,9 @@ NET "SSD_l[0]" LOC = B10;
 
 NET "COM_wrn" LOC = U5;
 NET "COM_rdn" LOC = C14;
+
+# PlanAhead Generated physical constraints 
+
+NET "COM_data_ready" LOC = A16;
+NET "COM_tbre" LOC = D14;
+NET "COM_tsre" LOC = N9;

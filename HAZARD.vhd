@@ -42,7 +42,12 @@ architecture RTL of HAZARD is
 
 begin
 
-	bubble <= '1' when (MEM_op = "10" and (REG_des = ALU_src_a or REG_des = REG_src_b)) or Bubble_in_branch = '1'
-		  else '0';
+	process (MEM_op, Reg_des, ALU_src_a, REG_src_b, Bubble_in_branch) begin
+		if (MEM_op = "10" and (REG_des = ALU_src_a or REG_des = REG_src_b)) or Bubble_in_branch = '1' then
+			bubble <= '1';
+		else
+			bubble <= '0';
+		end if;
+	end process;
 
 end RTL;

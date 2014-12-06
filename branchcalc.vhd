@@ -54,23 +54,31 @@ begin
 	process (Condition_jump, ID_exe_reg_des, Rx, Rx_data, Exe_mem_reg_des, 
 		Exe_mem_alu_out, Exe_mem_mem_op, Mem_WB_reg_des, Mem_WB_res) begin
 		
-		if (ID_exe_reg_des = Rx) then
-			Bubble_in_branch <= '1';
-			R_data <= (others => '0');
-		elsif (Exe_mem_reg_des = Rx) then
-			if (Exe_mem_mem_op = "10") then
+		if (Condition_jump = "001" or Condition_jump = "010" or Condition_jump = "011" or Condition_jump = "100") then
+			if (Rx = "0000") then
+				Bubble_in_branch <= '0';
+				R_data <= (others => '0');
+			elsif (ID_exe_reg_des = Rx) then
 				Bubble_in_branch <= '1';
 				R_data <= (others => '0');
+			elsif (Exe_mem_reg_des = Rx) then
+				if (Exe_mem_mem_op = "10") then
+					Bubble_in_branch <= '1';
+					R_data <= (others => '0');
+				else
+					Bubble_in_branch <= '0';
+					R_data <= Exe_mem_alu_out;
+				end if;
+			elsif (Mem_WB_reg_des = Rx) then
+				Bubble_in_branch <= '0';
+				R_data <= Mem_WB_res;
 			else
 				Bubble_in_branch <= '0';
-				R_data <= Exe_mem_alu_out;
+				R_data <= Rx_data;
 			end if;
-		elsif (Mem_WB_reg_des = Rx) then
-			Bubble_in_branch <= '0';
-			R_data <= Mem_WB_res;
 		else
 			Bubble_in_branch <= '0';
-			R_data <= Rx_data;
+			R_data <= (others => '0');
 		end if;
 	end process;
 	

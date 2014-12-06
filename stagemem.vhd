@@ -46,6 +46,10 @@ entity STAGE_MEM is
 		   RAM1_data : inout  STD_LOGIC_VECTOR (15 downto 0);
 		   RAM1_en : out  STD_LOGIC;
 		   RAM1_oe : out  STD_LOGIC;
+		   Step_out_msg : out  STD_LOGIC;
+           COM_tsre: in  STD_LOGIC;
+           COM_tbre: in  STD_LOGIC;
+           COM_data_ready: in  STD_LOGIC;
 		   RAM1_we : out  STD_LOGIC;
 		   COM_wrn : out  STD_LOGIC;
 		   COM_rdn : out  STD_LOGIC);
@@ -67,6 +71,10 @@ COMPONENT MEMORY PORT(
 	memout : OUT std_logic_vector(15 downto 0);
 	COM_rdn : OUT std_logic;
 	COM_wrn : OUT std_logic;
+    COM_tsre: in  STD_LOGIC;
+    COM_tbre: in  STD_LOGIC;
+    COM_data_ready: in  STD_LOGIC;
+	Step_out_msg : out  STD_LOGIC;
 	RAM1_addr : OUT std_logic_vector(17 downto 0)
 	);
 END COMPONENT;
@@ -100,8 +108,12 @@ begin
 		data => R2_data,
 		memout => Mem_out,
 		Clk2 => Clk_x2,
+		COM_tsre => COM_tsre,
+		COM_tbre => COM_tbre,
+		COM_data_ready => COM_data_ready,
 		COM_rdn => COM_rdn,
 		COM_wrn => COM_wrn,
+		Step_out_msg => Step_out_msg,
 		RAM1_addr => RAM1_addr,
 		RAM1_data => RAM1_data
 	);
