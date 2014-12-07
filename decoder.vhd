@@ -120,7 +120,7 @@ begin
 					when "000"=>	--BTEQZ
 						PC_branch <= "010";
 						REG_des <= (others => '0');
-						ALU_src_a <= (others => '0');
+						ALU_src_a <= "0010";
 						ALU_src_b <= (others => '0');
 						REG_src_b <= (others => '0');
 						ALU_op <= (others => '0');
