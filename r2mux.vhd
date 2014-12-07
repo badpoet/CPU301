@@ -46,10 +46,10 @@ begin
 	process (R2, Exe_mem_reg_des, Mem_WB_reg_des) begin
 		if R2 = "0000" then
 			R2_data <= (others => '0');
-		elsif Mem_WB_reg_des = R2 then
-			R2_data <= Mem_WB_res;
 		elsif Exe_mem_reg_des = R2 then
 			R2_data <= Exe_mem_alu_out;
+		elsif Mem_WB_reg_des = R2 then
+			R2_data <= Mem_WB_res;
 		else
 			R2_data <= ID_Exe_r2_data;
 		end if;
