@@ -239,7 +239,7 @@ begin
 							when "000"=>	--JR
 								PC_branch <= "100";
 								REG_des <= (others => '0');
-								ALU_src_a <= (others => '0');
+								ALU_src_a <= "1"&rx;
 								ALU_src_b <= (others => '0');
 								REG_src_b <= (others => '0');
 								ALU_op <= (others => '0');
