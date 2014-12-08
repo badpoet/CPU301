@@ -96,7 +96,7 @@ begin
 		if (Rst = '0') then
 			Freeze_reg <= '0';
 		elsif (Clk'event and Clk = '1') then
-			if memop(1) = '1' and addr(15 downto 14) = "01" then -- to RAM2
+			if (memop(1) = '1' and addr(15 downto 14) = "01") or (memop = "11" and addr = "1011111100000000") then -- to RAM2
 				Freeze_reg <= NOT(Freeze_reg);
 			elsif Freeze_reg = '1' then
 				Freeze_reg <= '0';
@@ -105,7 +105,7 @@ begin
 	end process;
 	
 	process (Freeze_reg, addr, memop) begin
-		if (Freeze_reg = '0') and (memop(1) = '1' and addr(15 downto 14) = "01") then
+		if (Freeze_reg = '0') and ((memop(1) = '1' and addr(15 downto 14) = "01") or (memop = "11" and addr = "1011111100000000")) then
 			Freeze <= '1';
 		else
 			Freeze <= '0';
@@ -130,6 +130,7 @@ begin
 				RAM1_we <= '1';
 				COM_rdn <= '1';
 				COM_wrn <= '1';
+				RAM1_data <= (others => '0');
 			else
 				Data_to_RAM2 <= (others => '0');
 				Addr_to_RAM2 <= (others => '0');
@@ -151,7 +152,7 @@ begin
 								when "11"=>
 									COM_rdn <= '1';
 									RAM1_data <= data;
-									if (step = '0') then
+									if (Freeze_reg = '0') then
 										COM_wrn <= '1';
 									else
 										COM_wrn <= '0';
