@@ -50,14 +50,6 @@ architecture RTL of Boot_loader is
 	signal state : STD_LOGIC;
 begin
 	
-	flash_addr <= "0000000"&addr;
-	flash_rw <= "11";
-	ram_addr <= "00"&addr;
-	ram_en <= '0';
-	ram_oe <= '1';
-	com_wrn <= '1';
-	com_rdn <= '1';
-
 	process (flash_judge) begin
 		if flash_judge = '0' then
 			data <= flash_data;
@@ -78,14 +70,33 @@ begin
 		end if;
 	end process;
 
-	process (state) begin
-		case state is
-			when '0' =>
-				ram_we <= '1';
-				ram_data <= data;
-			when '1' =>
-				ram_we <= '0';
-		end case;
+	process (rst, state) begin
+        if (rst = '0') then
+	        flash_addr <= (others => 'Z');
+	        flash_rw <= (others => 'Z');
+	        ram_addr <= (others => 'Z');
+			ram_data <= (others => 'Z');
+	        ram_en <= 'Z';
+            ram_we <= 'Z';
+	        ram_oe <= 'Z';
+	        com_wrn <= 'Z';
+	        com_rdn <= 'Z';
+        else
+	        flash_addr <= "0000000"&addr;
+	        flash_rw <= "11";
+	        ram_addr <= "00"&addr;
+			ram_data <= data;
+	        ram_en <= '0';
+            ram_we <= '1';
+	        ram_oe <= '1';
+	        com_wrn <= '1';
+		    case state is
+			    when '0' =>
+				    ram_we <= '1';
+			    when '1' =>
+				    ram_we <= '0';
+		    end case;
+        end if;
 	end process;
 
 end RTL;
