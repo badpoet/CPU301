@@ -194,6 +194,21 @@ PORT(
 	);
 END COMPONENT;
 
+COMPONENT Boot_loader is
+    Port ( clk : in  STD_LOGIC;
+           rst : in  STD_LOGIC;
+           flash_addr : out STD_LOGIC_VECTOR(22 downto 0);
+           flash_data : in STD_LOGIC_VECTOR(15 downto 0);
+           flash_rw : in STD_LOGIC;
+           flash_judge : in STD_LOGIC;
+           ram_addr : in STD_LOGIC_VECTOR(15 downto 0);
+           ram_data : out STD_LOGIC_VECTOR(15 downto 0);
+           ram_en : in STD_LOGIC;
+           ram_oe : in STD_LOGIC;
+           com_wrn : in STD_LOGIC;
+           com_rdn : in STD_LOGIC);
+end COMPONENT;
+
 -- WIRES
 
 -- 16 bit integer passed to seven segment displays

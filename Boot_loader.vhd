@@ -41,7 +41,7 @@ entity Boot_loader is
            ram_en : in STD_LOGIC;
            ram_oe : in STD_LOGIC;
            com_wrn : in STD_LOGIC;
-           com_rdn : in STD_LOGIC;);
+           com_rdn : in STD_LOGIC);
 end Boot_loader;
 
 architecture RTL of Boot_loader is
@@ -63,7 +63,7 @@ begin
 		elsif rising_edge(clk) then
 			if (addr < "0000001000000000000000") then
 				state <= not state;
-				if (state = '1')
+				if (state = '1') then
 					addr <= addr + 1;
 				end if;
 			end if;
