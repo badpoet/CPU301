@@ -45,11 +45,11 @@ Clock Clk_in to Pad
             | clk (edge) |                  | Clock  |
 Destination |   to PAD   |Internal Clock(s) | Phase  |
 ------------+------------+------------------+--------+
-COM_rdn     |   14.007(R)|Clk_base          |   0.000|
-LED<13>     |   11.605(R)|Clk_base          |   0.000|
-LED<15>     |    9.810(R)|Clk_base          |   0.000|
-RAM1_we     |   15.548(R)|Clk_base          |   0.000|
-RAM2_we     |   12.940(R)|Clk_base          |   0.000|
+COM_rdn     |   14.908(R)|Clk_base          |   0.000|
+LED<13>     |   11.909(R)|Clk_base          |   0.000|
+LED<15>     |   12.369(R)|Clk_base          |   0.000|
+RAM1_we     |   16.245(R)|Clk_base          |   0.000|
+RAM2_we     |   14.391(R)|Clk_base          |   0.000|
 ------------+------------+------------------+--------+
 
 Clock Rst to Pad
@@ -57,42 +57,42 @@ Clock Rst to Pad
              | clk (edge) |                                             | Clock  |
 Destination  |   to PAD   |Internal Clock(s)                            | Phase  |
 -------------+------------+---------------------------------------------+--------+
-COM_rdn      |   16.441(R)|Clk_base                                     |   0.000|
-LED<13>      |   14.039(R)|Clk_base                                     |   0.000|
-LED<15>      |   12.244(R)|Clk_base                                     |   0.000|
-RAM1_data<0> |   13.800(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<1> |   13.800(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<2> |   13.453(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<3> |   13.453(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<4> |   13.445(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<5> |   13.445(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<6> |   13.424(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<7> |   13.424(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<8> |   13.425(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<9> |   13.425(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<10>|   13.444(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<11>|   13.444(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<12>|   13.437(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<13>|   13.437(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<14>|   13.569(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_data<15>|   13.569(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
-RAM1_we      |   17.982(R)|Clk_base                                     |   0.000|
-RAM2_addr<0> |   10.642(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<1> |    9.729(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<2> |   10.099(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<3> |    9.258(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<4> |   10.240(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<5> |   10.135(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<6> |    8.993(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<7> |    9.398(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<8> |    9.973(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<9> |   10.790(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<10>|    9.475(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<11>|    9.712(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<12>|    9.484(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<13>|    9.271(F)|Rst_IBUF                                     |   0.000|
-RAM2_addr<14>|   10.012(F)|Rst_IBUF                                     |   0.000|
-RAM2_we      |   15.374(R)|Clk_base                                     |   0.000|
+COM_rdn      |   20.956(R)|Clk_base                                     |   0.000|
+LED<13>      |   17.957(R)|Clk_base                                     |   0.000|
+LED<15>      |   18.417(R)|Clk_base                                     |   0.000|
+RAM1_data<0> |   13.934(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<1> |   13.934(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<2> |   13.586(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<3> |   13.586(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<4> |   13.578(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<5> |   13.578(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<6> |   13.558(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<7> |   13.558(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<8> |   13.559(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<9> |   13.559(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<10>|   13.578(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<11>|   13.578(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<12>|   13.571(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<13>|   13.571(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<14>|   13.703(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_data<15>|   13.703(F)|Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001|   0.000|
+RAM1_we      |   22.293(R)|Clk_base                                     |   0.000|
+RAM2_addr<0> |   10.538(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<1> |   10.645(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<2> |   10.632(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<3> |   10.271(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<4> |   11.174(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<5> |   10.327(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<6> |   10.114(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<7> |   10.846(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<8> |   11.568(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<9> |   11.343(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<10>|   11.212(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<11>|   11.516(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<12>|   10.666(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<13>|   10.831(F)|Rst_IBUF                                     |   0.000|
+RAM2_addr<14>|   11.734(F)|Rst_IBUF                                     |   0.000|
+RAM2_we      |   20.439(R)|Clk_base                                     |   0.000|
 -------------+------------+---------------------------------------------+--------+
 
 Clock to Setup on destination clock Clk_in
@@ -100,8 +100,8 @@ Clock to Setup on destination clock Clk_in
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-Clk_in         |    1.563|         |         |         |
-Rst            |    1.563|         |         |         |
+Clk_in         |    1.612|         |         |         |
+Rst            |    1.612|         |         |         |
 ---------------+---------+---------+---------+---------+
 
 Clock to Setup on destination clock Rst
@@ -109,48 +109,48 @@ Clock to Setup on destination clock Rst
                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
 Source Clock   |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
 ---------------+---------+---------+---------+---------+
-Clk_in         |    1.563|         |    6.721|         |
-Rst            |    1.563|         |    6.721|    5.115|
+Clk_in         |    1.612|         |    9.366|         |
+Rst            |    1.612|         |    9.366|    3.789|
 ---------------+---------+---------+---------+---------+
 
 Pad to Pad
 ---------------+---------------+---------+
 Source Pad     |Destination Pad|  Delay  |
 ---------------+---------------+---------+
-Clk_in         |LED<14>        |    7.837|
-Rst            |COM_rdn        |   12.242|
-Rst            |COM_wrn        |   12.900|
-Rst            |LED<14>        |   10.271|
-Rst            |RAM1_addr<0>   |   12.111|
-Rst            |RAM1_addr<1>   |   10.428|
-Rst            |RAM1_addr<2>   |   11.959|
-Rst            |RAM1_addr<3>   |   10.692|
-Rst            |RAM1_addr<4>   |   11.118|
-Rst            |RAM1_addr<5>   |   11.064|
-Rst            |RAM1_addr<6>   |   11.053|
-Rst            |RAM1_addr<7>   |   11.921|
-Rst            |RAM1_addr<8>   |   11.084|
-Rst            |RAM1_addr<9>   |   10.653|
-Rst            |RAM1_addr<10>  |   11.130|
-Rst            |RAM1_addr<11>  |   11.320|
-Rst            |RAM1_addr<12>  |   10.380|
-Rst            |RAM1_addr<13>  |   10.629|
-Rst            |RAM1_addr<14>  |   11.705|
-Rst            |RAM1_addr<15>  |   12.667|
-Rst            |RAM1_en        |   12.320|
-Rst            |RAM1_oe        |   12.829|
-Rst            |RAM1_we        |   11.545|
+Clk_in         |LED<14>        |    9.950|
+Rst            |COM_rdn        |   15.115|
+Rst            |COM_wrn        |   15.140|
+Rst            |LED<14>        |   15.998|
+Rst            |RAM1_addr<0>   |   14.020|
+Rst            |RAM1_addr<1>   |   15.545|
+Rst            |RAM1_addr<2>   |   14.452|
+Rst            |RAM1_addr<3>   |   14.198|
+Rst            |RAM1_addr<4>   |   14.416|
+Rst            |RAM1_addr<5>   |   14.733|
+Rst            |RAM1_addr<6>   |   14.051|
+Rst            |RAM1_addr<7>   |   13.445|
+Rst            |RAM1_addr<8>   |   14.102|
+Rst            |RAM1_addr<9>   |   13.691|
+Rst            |RAM1_addr<10>  |   13.862|
+Rst            |RAM1_addr<11>  |   14.653|
+Rst            |RAM1_addr<12>  |   13.945|
+Rst            |RAM1_addr<13>  |   13.900|
+Rst            |RAM1_addr<14>  |   14.237|
+Rst            |RAM1_addr<15>  |   13.403|
+Rst            |RAM1_en        |   13.681|
+Rst            |RAM1_oe        |   14.373|
+Rst            |RAM1_we        |   12.057|
 ---------------+---------------+---------+
 
 
-Analysis completed Mon Dec 08 10:40:44 2014 
+Analysis completed Mon Dec 08 18:07:01 2014 
 --------------------------------------------------------------------------------
 
 Trace Settings:
 -------------------------
 Trace Settings 
 
-Peak Memory Usage: 199 MB
+Peak Memory Usage: 201 MB
 
 
 

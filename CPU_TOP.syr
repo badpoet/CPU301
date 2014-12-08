@@ -105,8 +105,7 @@ Slice Utilization Ratio Delta      : 5
 *                          HDL Compilation                              *
 =========================================================================
 Compiling vhdl file "C:/COA/cpu301/memory.vhd" in Library work.
-Entity <memory> compiled.
-Entity <memory> (Architecture <rtl>) compiled.
+Architecture rtl of Entity memory is up to date.
 Compiling vhdl file "C:/COA/cpu301/memwbregs.vhd" in Library work.
 Architecture rtl of Entity mem_wb_regs is up to date.
 Compiling vhdl file "C:/COA/cpu301/srcA_mux.vhd" in Library work.
@@ -139,10 +138,14 @@ Compiling vhdl file "C:/COA/cpu301/pcinc.vhd" in Library work.
 Architecture rtl of Entity pc_inc is up to date.
 Compiling vhdl file "C:/COA/cpu301/pcmux.vhd" in Library work.
 Architecture rtl of Entity pc_mux is up to date.
+Compiling vhdl file "C:/COA/cpu301/booter.vhd" in Library work.
+Entity <booter> compiled.
+Entity <booter> (Architecture <rtl>) compiled.
 Compiling vhdl file "C:/COA/cpu301/ssd.vhd" in Library work.
 Architecture rtl of Entity seven_seg_display is up to date.
 Compiling vhdl file "C:/COA/cpu301/clkbase.vhd" in Library work.
-Architecture rtl of Entity clk_base_gen is up to date.
+Entity <clk_base_gen> compiled.
+Entity <clk_base_gen> (Architecture <rtl>) compiled.
 Compiling vhdl file "C:/COA/cpu301/clkgen.vhd" in Library work.
 Architecture rtl of Entity clk_gen is up to date.
 Compiling vhdl file "C:/COA/cpu301/stageif.vhd" in Library work.
@@ -162,6 +165,8 @@ Architecture structrual of Entity cpu_top is up to date.
 *                     Design Hierarchy Analysis                         *
 =========================================================================
 Analyzing hierarchy for entity <CPU_TOP> in library <work> (architecture <structrual>).
+
+Analyzing hierarchy for entity <BOOTER> in library <work> (architecture <rtl>).
 
 Analyzing hierarchy for entity <SEVEN_SEG_DISPLAY> in library <work> (architecture <rtl>).
 
@@ -218,7 +223,14 @@ Analyzing hierarchy for entity <MEM_WB_REGS> in library <work> (architecture <rt
 *                            HDL Analysis                               *
 =========================================================================
 Analyzing Entity <CPU_TOP> in library <work> (Architecture <structrual>).
+WARNING:Xst:819 - "C:/COA/cpu301/cputop.vhd" line 314: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <Data_to_RAM2_b>, <Addr_to_RAM2_b>, <B_op>, <Freeze_t>, <Data_to_RAM2_t>, <Addr_to_RAM2_t>, <RAM2_op_t>
 Entity <CPU_TOP> analyzed. Unit <CPU_TOP> generated.
+
+Analyzing Entity <BOOTER> in library <work> (Architecture <rtl>).
+INFO:Xst:2679 - Register <Data> in unit <BOOTER> has a constant value of 0000000000000000 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <Flash_addr<0>> in unit <BOOTER> has a constant value of 0 during circuit operation. The register is replaced by logic.
+Entity <BOOTER> analyzed. Unit <BOOTER> generated.
 
 Analyzing Entity <SEVEN_SEG_DISPLAY> in library <work> (Architecture <rtl>).
 INFO:Xst:1561 - "C:/COA/cpu301/ssd.vhd" line 58: Mux is complete : default of case is discarded
@@ -323,6 +335,43 @@ Entity <WB_MUX> analyzed. Unit <WB_MUX> generated.
 =========================================================================
 
 Performing bidirectional port resolution...
+
+Synthesizing Unit <BOOTER>.
+    Related source file is "C:/COA/cpu301/booter.vhd".
+WARNING:Xst:646 - Signal <Data> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+    Found finite state machine <FSM_0> for signal <State>.
+    -----------------------------------------------------------------------
+    | States             | 7                                              |
+    | Transitions        | 8                                              |
+    | Inputs             | 1                                              |
+    | Outputs            | 8                                              |
+    | Clock              | Clk_slow                  (rising_edge)        |
+    | Reset              | Reload                    (negative)           |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | s_init1                                        |
+    | Power Up State     | s_init1                                        |
+    | Encoding           | automatic                                      |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 16-bit tristate buffer for signal <Flash_data>.
+    Found 1-bit register for signal <Flash_we>.
+    Found 16-bit register for signal <Flash_addr<16:1>>.
+    Found 1-bit register for signal <Op>.
+    Found 16-bit register for signal <Data_to_RAM2>.
+    Found 16-bit register for signal <Addr_to_RAM2>.
+    Found 1-bit register for signal <Flash_oe>.
+    Found 16-bit up counter for signal <Addr>.
+    Found 1-bit register for signal <Clk_slow>.
+    Found 8-bit up counter for signal <Cnt>.
+    Found 16-bit register for signal <Mtridata_Flash_data> created at line 88.
+    Found 1-bit register for signal <Mtrien_Flash_data> created at line 88.
+    Summary:
+	inferred   1 Finite State Machine(s).
+	inferred   2 Counter(s).
+	inferred  69 D-type flip-flop(s).
+	inferred  16 Tristate(s).
+Unit <BOOTER> synthesized.
+
 
 Synthesizing Unit <SEVEN_SEG_DISPLAY>.
     Related source file is "C:/COA/cpu301/ssd.vhd".
@@ -572,9 +621,12 @@ Macro Statistics
 # Adders/Subtractors                                   : 3
  16-bit adder                                          : 2
  16-bit addsub                                         : 1
-# Registers                                            : 40
- 1-bit register                                        : 4
- 16-bit register                                       : 26
+# Counters                                             : 2
+ 16-bit up counter                                     : 1
+ 8-bit up counter                                      : 1
+# Registers                                            : 64
+ 1-bit register                                        : 25
+ 16-bit register                                       : 29
  2-bit register                                        : 3
  4-bit register                                        : 7
 # Latches                                              : 6
@@ -587,8 +639,8 @@ Macro Statistics
 # Logic shifters                                       : 2
  16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
-# Tristates                                            : 2
- 16-bit tristate buffer                                : 2
+# Tristates                                            : 3
+ 16-bit tristate buffer                                : 3
 # Xors                                                 : 1
  16-bit xor2                                           : 1
 
@@ -598,18 +650,54 @@ Macro Statistics
 *                       Advanced HDL Synthesis                          *
 =========================================================================
 
+Analyzing FSM <FSM_0> for best encoding.
+Optimizing FSM <Inst_BOOTER/State/FSM> on signal <State[1:7]> with one-hot encoding.
+---------------------
+ State   | Encoding
+---------------------
+ s_init1 | 0000001
+ s_init2 | 0000010
+ s_load  | 0010000
+ s_init3 | 0000100
+ s_init4 | 0001000
+ s_write | 0100000
+ s_over  | 1000000
+---------------------
+INFO:Xst:2261 - The FF/Latch <Mtridata_Flash_data_0> in Unit <Inst_BOOTER> is equivalent to the following 7 FFs/Latches, which will be removed : <Mtridata_Flash_data_1> <Mtridata_Flash_data_2> <Mtridata_Flash_data_3> <Mtridata_Flash_data_4> <Mtridata_Flash_data_5> <Mtridata_Flash_data_6> <Mtridata_Flash_data_7> 
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<1> Mtridata_Flash_data<1> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<2> Mtridata_Flash_data<2> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<3> Mtridata_Flash_data<3> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<4> Mtridata_Flash_data<4> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<5> Mtridata_Flash_data<5> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<6> Mtridata_Flash_data<6> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<7> Mtridata_Flash_data<7> signal will be lost.
+INFO:Xst:2261 - The FF/Latch <Mtridata_Flash_data_8> in Unit <Inst_BOOTER> is equivalent to the following 7 FFs/Latches, which will be removed : <Mtridata_Flash_data_9> <Mtridata_Flash_data_10> <Mtridata_Flash_data_11> <Mtridata_Flash_data_12> <Mtridata_Flash_data_13> <Mtridata_Flash_data_14> <Mtridata_Flash_data_15> 
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<8> and Mtridata_Flash_data<9> Mtridata_Flash_data<9> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<8> and Mtridata_Flash_data<10> Mtridata_Flash_data<10> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<10> and Mtridata_Flash_data<11> Mtridata_Flash_data<11> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<10> and Mtridata_Flash_data<12> Mtridata_Flash_data<12> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<10> and Mtridata_Flash_data<13> Mtridata_Flash_data<13> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<10> and Mtridata_Flash_data<14> Mtridata_Flash_data<14> signal will be lost.
+WARNING:Xst:638 - in unit Inst_BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<10> and Mtridata_Flash_data<15> Mtridata_Flash_data<15> signal will be lost.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_0> (without init value) has a constant value of 1 in block <Inst_BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_8> (without init value) has a constant value of 0 in block <Inst_BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:2404 -  FFs/Latches <Mtridata_Flash_data<15:8>> (without init value) have a constant value of 0 in block <BOOTER>.
 
 =========================================================================
 Advanced HDL Synthesis Report
 
 Macro Statistics
+# FSMs                                                 : 1
 # ROMs                                                 : 2
  16x7-bit ROM                                          : 2
 # Adders/Subtractors                                   : 3
  16-bit adder                                          : 2
  16-bit addsub                                         : 1
-# Registers                                            : 454
- Flip-Flops                                            : 454
+# Counters                                             : 2
+ 16-bit up counter                                     : 1
+ 8-bit up counter                                      : 1
+# Registers                                            : 515
+ Flip-Flops                                            : 515
 # Latches                                              : 6
  1-bit latch                                           : 2
  16-bit latch                                          : 4
@@ -628,6 +716,21 @@ Macro Statistics
 =========================================================================
 *                         Low Level Synthesis                           *
 =========================================================================
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_0> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_1> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_2> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_3> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_4> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_5> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_6> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <Mtridata_Flash_data_7> (without init value) has a constant value of 1 in block <BOOTER>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<1> Mtridata_Flash_data<1> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<2> Mtridata_Flash_data<2> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<3> Mtridata_Flash_data<3> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<4> Mtridata_Flash_data<4> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<5> Mtridata_Flash_data<5> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<6> Mtridata_Flash_data<6> signal will be lost.
+WARNING:Xst:638 - in unit BOOTER Conflict on KEEP property on signal Mtridata_Flash_data<0> and Mtridata_Flash_data<7> Mtridata_Flash_data<7> signal will be lost.
 WARNING:Xst:2170 - Unit ALU : the following signal(s) form a combinatorial loop: result_shift0001<15>.
 
 Optimizing unit <CPU_TOP> ...
@@ -658,8 +761,9 @@ INFO:Xst:2261 - The FF/Latch <Stage_ID_c/ID_exe_regs_c/Immediate_15> in Unit <CP
 Found area constraint ratio of 100 (+ 5) on block CPU_TOP, actual ratio is 9.
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_0 has been replicated 1 time(s)
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_12 has been replicated 1 time(s)
+FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_13 has been replicated 1 time(s)
+FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_14 has been replicated 1 time(s)
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_15 has been replicated 1 time(s)
-FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_2 has been replicated 1 time(s)
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_3 has been replicated 1 time(s)
 Latch Stage_mem_c/Memory_c/Mtrien_RAM1_data has been replicated 15 time(s) to handle iob=true attribute.
 Latch Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data has been replicated 15 time(s) to handle iob=true attribute.
@@ -670,8 +774,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 454
- Flip-Flops                                            : 454
+# Registers                                            : 539
+ Flip-Flops                                            : 539
 
 =========================================================================
 
@@ -697,39 +801,41 @@ Optimization Goal                  : Speed
 Keep Hierarchy                     : No
 
 Design Statistics
-# IOs                              : 111
+# IOs                              : 157
 
 Cell Usage :
-# BELS                             : 1713
+# BELS                             : 1840
 #      GND                         : 1
-#      INV                         : 5
-#      LUT1                        : 15
-#      LUT2                        : 113
-#      LUT2_D                      : 5
-#      LUT2_L                      : 5
-#      LUT3                        : 507
-#      LUT3_D                      : 31
-#      LUT3_L                      : 9
-#      LUT4                        : 487
-#      LUT4_D                      : 51
-#      LUT4_L                      : 88
-#      MUXCY                       : 53
-#      MUXF5                       : 198
+#      INV                         : 10
+#      LUT1                        : 37
+#      LUT2                        : 102
+#      LUT2_D                      : 6
+#      LUT2_L                      : 4
+#      LUT3                        : 415
+#      LUT3_D                      : 14
+#      LUT3_L                      : 8
+#      LUT4                        : 637
+#      LUT4_D                      : 61
+#      LUT4_L                      : 87
+#      MUXCY                       : 75
+#      MUXF5                       : 214
 #      MUXF6                       : 64
 #      MUXF7                       : 32
 #      VCC                         : 1
-#      XORCY                       : 48
-# FlipFlops/Latches                : 549
-#      FDC                         : 3
-#      FDCE                        : 451
+#      XORCY                       : 72
+# FlipFlops/Latches                : 634
+#      FDC                         : 17
+#      FDCE                        : 468
+#      FDE                         : 53
+#      FDP                         : 1
 #      LD                          : 79
 #      LDCP_1                      : 16
-# Clock Buffers                    : 2
-#      BUFG                        : 2
-# IO Buffers                       : 111
-#      IBUF                        : 5
-#      IOBUF                       : 32
-#      OBUF                        : 74
+# Clock Buffers                    : 3
+#      BUFG                        : 3
+# IO Buffers                       : 157
+#      IBUF                        : 6
+#      IOBUF                       : 48
+#      OBUF                        : 103
 =========================================================================
 
 Device utilization summary:
@@ -737,13 +843,13 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      716  out of   8672     8%  
- Number of Slice Flip Flops:            485  out of  17344     2%  
- Number of 4 input LUTs:               1316  out of  17344     7%  
- Number of IOs:                         111
- Number of bonded IOBs:                 111  out of    250    44%  
-    IOB Flip Flops:                      64
- Number of GCLKs:                         2  out of     24     8%  
+ Number of Slices:                      774  out of   8672     8%  
+ Number of Slice Flip Flops:            554  out of  17344     3%  
+ Number of 4 input LUTs:               1381  out of  17344     7%  
+ Number of IOs:                         157
+ Number of bonded IOBs:                 157  out of    250    62%  
+    IOB Flip Flops:                      80
+ Number of GCLKs:                         3  out of     24    12%  
 
 ---------------------------
 Partition Resource Summary:
@@ -767,10 +873,11 @@ Clock Information:
 Clock Signal                                                                                             | Clock buffer(FF name)                                | Load  |
 ---------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
 Clk_base(Clk_base_gen_c/Tmp1:O)                                                                          | NONE(*)(Clk_gen_c/Clk_x2_s)                          | 3     |
+Inst_BOOTER/Clk_slow1                                                                                    | BUFG                                                 | 75    |
+Clk_gen_c/Clk_x2_s1                                                                                      | BUFG                                                 | 461   |
 Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not0001(Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not00011:O)| NONE(*)(Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data)  | 16    |
 Rst                                                                                                      | IBUF+BUFG                                            | 31    |
 Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001(Stage_mem_c/Memory_c/Mtrien_RAM1_data_not00011:O)          | NONE(*)(Stage_mem_c/Memory_c/Mtridata_RAM1_data_15)  | 32    |
-Clk_gen_c/Clk_x2_s1                                                                                      | BUFG                                                 | 451   |
 N1                                                                                                       | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15)| 16    |
 ---------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
 (*) These 3 clock signal(s) are generated by combinatorial logic,
@@ -783,7 +890,8 @@ Asynchronous Control Signals Information:
 ---------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
 Control Signal                                                                                                       | Buffer(FF name)                                      | Load  |
 ---------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
-Clk_gen_c/Rst_inv(Stage_mem_c/Inst_MEM_WB_REGS/Rst_inv1_INV_0:O)                                                     | NONE(Clk_gen_c/Clk_x2_s)                             | 454   |
+Clk_gen_c/Rst_inv(Stage_mem_c/Inst_MEM_WB_REGS/Rst_inv1_INV_0:O)                                                     | NONE(Clk_gen_c/Clk_x2_s)                             | 455   |
+Inst_BOOTER/Reload_inv(Inst_BOOTER/Reload_inv1_INV_0:O)                                                              | NONE(Inst_BOOTER/Addr_0)                             | 31    |
 Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0) | 1     |
 Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0) | 1     |
 Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10)| 1     |
@@ -822,10 +930,10 @@ Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 19.420ns (Maximum Frequency: 51.492MHz)
-   Minimum input arrival time before clock: 6.617ns
-   Maximum output required time after clock: 17.627ns
-   Maximum combinational path delay: 8.244ns
+   Minimum period: 19.349ns (Maximum Frequency: 51.682MHz)
+   Minimum input arrival time before clock: 6.744ns
+   Maximum output required time after clock: 17.467ns
+   Maximum combinational path delay: 8.200ns
 
 Timing Detail:
 --------------
@@ -854,30 +962,54 @@ Delay:               2.692ns (Levels of Logic = 1)
                                        (59.5% logic, 40.5% route)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_x2_s1'
-  Clock period: 19.420ns (frequency: 51.492MHz)
-  Total number of paths / destination ports: 1596921 / 881
+Timing constraint: Default period analysis for Clock 'Inst_BOOTER/Clk_slow1'
+  Clock period: 4.894ns (frequency: 204.332MHz)
+  Total number of paths / destination ports: 314 / 108
 -------------------------------------------------------------------------
-Delay:               19.420ns (Levels of Logic = 21)
-  Source:            Stage_IF_c/IF_ID_regs_c/Inst_13 (FF)
+Delay:               4.894ns (Levels of Logic = 3)
+  Source:            Inst_BOOTER/Addr_7 (FF)
+  Destination:       Inst_BOOTER/State_FSM_FFd7 (FF)
+  Source Clock:      Inst_BOOTER/Clk_slow1 rising
+  Destination Clock: Inst_BOOTER/Clk_slow1 rising
+
+  Data Path: Inst_BOOTER/Addr_7 to Inst_BOOTER/State_FSM_FFd7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q             4   0.591   0.762  Inst_BOOTER/Addr_7 (Inst_BOOTER/Addr_7)
+     LUT4:I0->O            1   0.704   0.595  Inst_BOOTER/State_cmp_eq00004 (Inst_BOOTER/State_cmp_eq00004)
+     LUT4:I0->O            2   0.704   0.526  Inst_BOOTER/State_cmp_eq000041 (Inst_BOOTER/State_cmp_eq0000)
+     LUT2:I1->O            1   0.704   0.000  Inst_BOOTER/State_FSM_FFd7-In1 (Inst_BOOTER/State_FSM_FFd7-In)
+     FDP:D                     0.308          Inst_BOOTER/State_FSM_FFd7
+    ----------------------------------------
+    Total                      4.894ns (3.011ns logic, 1.883ns route)
+                                       (61.5% logic, 38.5% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_x2_s1'
+  Clock period: 19.349ns (frequency: 51.682MHz)
+  Total number of paths / destination ports: 1568390 / 892
+-------------------------------------------------------------------------
+Delay:               19.349ns (Levels of Logic = 21)
+  Source:            Stage_IF_c/IF_ID_regs_c/Inst_11 (FF)
   Destination:       Stage_IF_c/PC_reg_c/PC_15 (FF)
   Source Clock:      Clk_gen_c/Clk_x2_s1 rising
   Destination Clock: Clk_gen_c/Clk_x2_s1 rising
 
-  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_13 to Stage_IF_c/PC_reg_c/PC_15
+  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_11 to Stage_IF_c/PC_reg_c/PC_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q            29   0.591   1.340  Stage_IF_c/IF_ID_regs_c/Inst_13 (Stage_IF_c/IF_ID_regs_c/Inst_13)
-     LUT4_D:I1->O          3   0.704   0.566  Stage_ID_c/Decoder_c/PC_branch_cmp_eq000111 (Stage_ID_c/Decoder_c/N251)
-     LUT4:I2->O            1   0.704   0.424  Stage_ID_c/Decoder_c/ALU_src_a_or000024 (Stage_ID_c/Decoder_c/ALU_src_a_or000024)
-     LUT4_D:I3->LO         1   0.704   0.104  Stage_ID_c/Decoder_c/ALU_src_a_or000040 (N758)
-     LUT4:I3->O            2   0.704   0.482  Stage_ID_c/Decoder_c/ALU_src_a<3>2 (Stage_ID_c/Decoder_c/N171)
-     LUT4:I2->O           72   0.704   1.354  Stage_ID_c/Decoder_c/ALU_src_a<1>30 (Stage_ID_c/ALU_src_a<1>)
-     LUT2:I1->O            1   0.704   0.424  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004435 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004435)
-     LUT4:I3->O           32   0.704   1.262  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004)
+     FDCE:C->Q            19   0.591   1.120  Stage_IF_c/IF_ID_regs_c/Inst_11 (Stage_IF_c/IF_ID_regs_c/Inst_11)
+     LUT3_D:I2->O         11   0.704   0.937  Stage_ID_c/Decoder_c/ALU_op<1>21 (Stage_ID_c/Decoder_c/N19)
+     LUT4:I3->O            1   0.704   0.424  Stage_ID_c/Decoder_c/ALU_src_a<0>111_SW1 (N433)
+     LUT4_D:I3->O          1   0.704   0.455  Stage_ID_c/Decoder_c/ALU_src_a<0>111 (Stage_ID_c/Decoder_c/N2)
+     LUT4:I2->O            2   0.704   0.451  Stage_ID_c/Decoder_c/ALU_src_a<2>29_SW0_SW0 (N417)
+     LUT4:I3->O           17   0.704   1.086  Stage_ID_c/Decoder_c/ALU_src_a<2>29_1 (Stage_ID_c/Decoder_c/ALU_src_a<2>29)
+     LUT4:I2->O            2   0.704   0.451  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456_SW0_SW0 (N419)
+     LUT4:I3->O           12   0.704   0.961  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456_1 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456)
      MUXF5:S->O            2   0.739   0.482  Stage_ID_c/Reg_heap_c/Rx_q<7>14 (Stage_ID_c/Rx_data<7>)
-     LUT3:I2->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/R_data<7>116_F (N468)
+     LUT3:I2->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/R_data<7>116_F (N511)
      MUXF5:I0->O           2   0.321   0.526  Stage_ID_c/Branch_calc_c/R_data<7>116 (Stage_ID_c/Branch_calc_c/N8)
      LUT3:I1->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_lut<0> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_lut<0>)
      MUXCY:S->O            1   0.464   0.000  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<0> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<0>)
@@ -892,14 +1024,56 @@ Delay:               19.420ns (Levels of Logic = 21)
      LUT3:I2->O            1   0.704   0.000  Stage_IF_c/PC_mux_c/NPC<8>66 (Stage_IF_c/PC_d<8>)
      FDCE:D                    0.308          Stage_IF_c/PC_reg_c/PC_8
     ----------------------------------------
-    Total                     19.420ns (10.980ns logic, 8.440ns route)
-                                       (56.5% logic, 43.5% route)
+    Total                     19.349ns (10.980ns logic, 8.369ns route)
+                                       (56.7% logic, 43.3% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'Inst_BOOTER/Clk_slow1'
+  Total number of paths / destination ports: 68 / 68
+-------------------------------------------------------------------------
+Offset:              5.116ns (Levels of Logic = 2)
+  Source:            Reload (PAD)
+  Destination:       Inst_BOOTER/Data_to_RAM2_15 (FF)
+  Destination Clock: Inst_BOOTER/Clk_slow1 rising
+
+  Data Path: Reload to Inst_BOOTER/Data_to_RAM2_15
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            23   1.218   1.377  Reload_IBUF (Reload_IBUF)
+     LUT2:I0->O           32   0.704   1.262  Inst_BOOTER/Addr_to_RAM2_and00001 (Inst_BOOTER/Addr_to_RAM2_and0000)
+     FDE:CE                    0.555          Inst_BOOTER/Addr_to_RAM2_0
+    ----------------------------------------
+    Total                      5.116ns (2.477ns logic, 2.639ns route)
+                                       (48.4% logic, 51.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_gen_c/Clk_x2_s1'
+  Total number of paths / destination ports: 59 / 39
+-------------------------------------------------------------------------
+Offset:              5.658ns (Levels of Logic = 4)
+  Source:            Reload (PAD)
+  Destination:       Inst_BOOTER/Clk_slow (FF)
+  Destination Clock: Clk_gen_c/Clk_x2_s1 rising
+
+  Data Path: Reload to Inst_BOOTER/Clk_slow
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O            23   1.218   1.202  Reload_IBUF (Reload_IBUF)
+     MUXF5:S->O            1   0.739   0.499  Inst_BOOTER/Clk_slow_and000016_f5 (Inst_BOOTER/Clk_slow_and000016)
+     LUT4:I1->O            1   0.704   0.000  Inst_BOOTER/Clk_slow_and0000321 (Inst_BOOTER/Clk_slow_and000032)
+     MUXF5:I0->O           1   0.321   0.420  Inst_BOOTER/Clk_slow_and000032_f5 (Inst_BOOTER/Clk_slow_and0000)
+     FDE:CE                    0.555          Inst_BOOTER/Clk_slow
+    ----------------------------------------
+    Total                      5.658ns (3.537ns logic, 2.121ns route)
+                                       (62.5% logic, 37.5% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001'
   Total number of paths / destination ports: 32 / 32
 -------------------------------------------------------------------------
-Offset:              6.617ns (Levels of Logic = 4)
+Offset:              6.744ns (Levels of Logic = 4)
   Source:            Rst (PAD)
   Destination:       Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (LATCH)
   Destination Clock: Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001 falling
@@ -908,84 +1082,84 @@ Offset:              6.617ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            24   1.218   1.331  Rst_IBUF (Rst_IBUF1)
-     LUT2:I1->O            3   0.704   0.535  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>211 (N36)
-     LUT4:I3->O           16   0.704   1.113  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>22 (N4)
+     IBUF:I->O            24   1.218   1.427  Rst_IBUF (Rst_IBUF1)
+     LUT2:I0->O            3   0.704   0.566  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>211 (N38)
+     LUT4:I2->O           16   0.704   1.113  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>22 (N5)
      LUT2:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<9>1 (Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<9>)
      LD:D                      0.308          Stage_mem_c/Memory_c/Mtridata_RAM1_data_9
     ----------------------------------------
-    Total                      6.617ns (3.638ns logic, 2.979ns route)
-                                       (55.0% logic, 45.0% route)
-
-=========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_gen_c/Clk_x2_s1'
-  Total number of paths / destination ports: 57 / 37
--------------------------------------------------------------------------
-Offset:              4.055ns (Levels of Logic = 3)
-  Source:            RAM2_data<0> (PAD)
-  Destination:       Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0 (FF)
-  Destination Clock: Clk_gen_c/Clk_x2_s1 rising
-
-  Data Path: RAM2_data<0> to Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IOBUF:IO->O           4   1.218   0.622  RAM2_data_0_IOBUF (N297)
-     LUT3:I2->O            1   0.704   0.499  Stage_mem_c/Memory_c/memout<0>_SW0 (N86)
-     LUT4:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/memout<0> (Stage_mem_c/Mem_out<0>)
-     FDCE:D                    0.308          Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
-    ----------------------------------------
-    Total                      4.055ns (2.934ns logic, 1.121ns route)
-                                       (72.4% logic, 27.6% route)
+    Total                      6.744ns (3.638ns logic, 3.106ns route)
+                                       (53.9% logic, 46.1% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_x2_s1'
-  Total number of paths / destination ports: 2649 / 65
+  Total number of paths / destination ports: 2747 / 41
 -------------------------------------------------------------------------
-Offset:              17.627ns (Levels of Logic = 10)
-  Source:            Stage_IF_c/IF_ID_regs_c/Inst_13 (FF)
+Offset:              17.467ns (Levels of Logic = 10)
+  Source:            Stage_IF_c/IF_ID_regs_c/Inst_11 (FF)
   Destination:       LED<12> (PAD)
   Source Clock:      Clk_gen_c/Clk_x2_s1 rising
 
-  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_13 to LED<12>
+  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_11 to LED<12>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q            29   0.591   1.296  Stage_IF_c/IF_ID_regs_c/Inst_13 (Stage_IF_c/IF_ID_regs_c/Inst_13)
-     LUT3_D:I2->O         11   0.704   0.968  Stage_ID_c/Decoder_c/ALU_op<1>21 (Stage_ID_c/Decoder_c/N19)
-     LUT3_D:I2->O          1   0.704   0.424  Stage_ID_c/Decoder_c/REG_src_b_cmp_eq00021 (Stage_ID_c/Decoder_c/REG_src_b_cmp_eq0002)
-     LUT4:I3->O            1   0.704   0.424  Stage_ID_c/Decoder_c/REG_src_b_or0000_SW0 (N205)
-     LUT4:I3->O            3   0.704   0.706  Stage_ID_c/Decoder_c/REG_src_b_or0000 (Stage_ID_c/Decoder_c/REG_src_b_or0000)
-     LUT4:I0->O           37   0.704   1.299  Stage_ID_c/Decoder_c/REG_src_b<2> (Stage_ID_c/Reg_src_b<2>)
-     LUT4:I2->O            1   0.704   0.455  Stage_ID_c/Hazard_c/bubble_or0001161 (Stage_ID_c/Hazard_c/bubble_or0001161)
-     LUT4_L:I2->LO         1   0.704   0.135  Stage_ID_c/Hazard_c/bubble_or0001191_SW0 (N578)
-     LUT3:I2->O            1   0.704   0.455  Stage_ID_c/Hazard_c/bubble_or0001191 (Stage_ID_c/Hazard_c/bubble_or0001191)
-     LUT4:I2->O           43   0.704   1.266  Stage_ID_c/Hazard_c/bubble_or0001202 (LED_12_OBUF)
+     FDCE:C->Q            19   0.591   1.120  Stage_IF_c/IF_ID_regs_c/Inst_11 (Stage_IF_c/IF_ID_regs_c/Inst_11)
+     LUT3_D:I2->O         11   0.704   0.937  Stage_ID_c/Decoder_c/ALU_op<1>21 (Stage_ID_c/Decoder_c/N19)
+     LUT4:I3->O            1   0.704   0.424  Stage_ID_c/Decoder_c/ALU_src_a<0>111_SW1 (N433)
+     LUT4_D:I3->LO         1   0.704   0.104  Stage_ID_c/Decoder_c/ALU_src_a<0>111 (N777)
+     LUT4:I3->O            1   0.704   0.455  Stage_ID_c/Decoder_c/ALU_src_a<0>21 (Stage_ID_c/Decoder_c/ALU_src_a<0>21)
+     LUT4:I2->O          137   0.704   1.330  Stage_ID_c/Decoder_c/ALU_src_a<0>34 (Stage_ID_c/ALU_src_a<0>)
+     LUT4:I2->O            1   0.704   0.424  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0002456_SW0_SW0 (N415)
+     LUT4:I3->O           18   0.704   1.103  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0002456 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0002)
+     LUT3_L:I2->LO         1   0.704   0.104  Stage_ID_c/Hazard_c/bubble_or00015 (Stage_ID_c/Hazard_c/bubble_or00015)
+     LUT4:I3->O           47   0.704   1.267  Stage_ID_c/Hazard_c/bubble_or0001202 (LED_12_OBUF)
      OBUF:I->O                 3.272          LED_12_OBUF (LED<12>)
     ----------------------------------------
-    Total                     17.627ns (10.199ns logic, 7.428ns route)
-                                       (57.9% logic, 42.1% route)
+    Total                     17.467ns (10.199ns logic, 7.268ns route)
+                                       (58.4% logic, 41.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_base'
   Total number of paths / destination ports: 5 / 5
 -------------------------------------------------------------------------
-Offset:              6.959ns (Levels of Logic = 3)
+Offset:              7.034ns (Levels of Logic = 3)
   Source:            Stage_mem_c/Memory_c/step (FF)
-  Destination:       COM_rdn (PAD)
+  Destination:       RAM1_we (PAD)
   Source Clock:      Clk_base rising
 
-  Data Path: Stage_mem_c/Memory_c/step to COM_rdn
+  Data Path: Stage_mem_c/Memory_c/step to RAM1_we
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              6   0.591   0.673  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
-     LUT4:I3->O            1   0.704   0.595  Stage_mem_c/Memory_c/COM_rdn_SW1 (N596)
-     LUT4:I0->O            1   0.704   0.420  Stage_mem_c/Memory_c/COM_rdn (COM_rdn_OBUF)
-     OBUF:I->O                 3.272          COM_rdn_OBUF (COM_rdn)
+     FDC:C->Q              6   0.591   0.748  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
+     LUT3:I1->O            1   0.704   0.595  Stage_mem_c/Memory_c/RAM1_we_SW0 (N4)
+     LUT4:I0->O            1   0.704   0.420  Stage_mem_c/Memory_c/RAM1_we (RAM1_we_OBUF)
+     OBUF:I->O                 3.272          RAM1_we_OBUF (RAM1_we)
     ----------------------------------------
-    Total                      6.959ns (5.271ns logic, 1.688ns route)
-                                       (75.7% logic, 24.3% route)
+    Total                      7.034ns (5.271ns logic, 1.763ns route)
+                                       (74.9% logic, 25.1% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Inst_BOOTER/Clk_slow1'
+  Total number of paths / destination ports: 167 / 77
+-------------------------------------------------------------------------
+Offset:              8.590ns (Levels of Logic = 3)
+  Source:            Inst_BOOTER/State_FSM_FFd1 (FF)
+  Destination:       RAM2_we (PAD)
+  Source Clock:      Inst_BOOTER/Clk_slow1 rising
+
+  Data Path: Inst_BOOTER/State_FSM_FFd1 to RAM2_we
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q            106   0.591   1.461  Inst_BOOTER/State_FSM_FFd1 (Inst_BOOTER/State_FSM_FFd1)
+     LUT4:I0->O           35   0.704   1.438  Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_and00001 (Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_and0000)
+     LUT2:I0->O            1   0.704   0.420  Stage_IF_c/Inst_fetcher_c/RAM2_we1 (RAM2_we_OBUF)
+     OBUF:I->O                 3.272          RAM2_we_OBUF (RAM2_we)
+    ----------------------------------------
+    Total                      8.590ns (5.271ns logic, 3.319ns route)
+                                       (61.4% logic, 38.6% route)
 
 =========================================================================
 Timing constraint: Default OFFSET OUT AFTER for Clock 'Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001'
@@ -1057,18 +1231,18 @@ Offset:              5.527ns (Levels of Logic = 2)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     LD:G->Q               1   0.676   0.455  Stage_mem_c/Memory_c/Addr_to_RAM2_14 (Stage_mem_c/Memory_c/Addr_to_RAM2_14)
-     LUT3:I2->O            1   0.704   0.420  Stage_IF_c/Inst_fetcher_c/RAM2_addr_14_mux00001 (RAM2_addr_14_OBUF)
+     LD:G->Q               1   0.676   0.420  Stage_mem_c/Memory_c/Addr_to_RAM2_14 (Stage_mem_c/Memory_c/Addr_to_RAM2_14)
+     MUXF5:S->O            1   0.739   0.420  Stage_IF_c/Inst_fetcher_c/RAM2_addr_14_mux0000_f5 (RAM2_addr_14_OBUF)
      OBUF:I->O                 3.272          RAM2_addr_14_OBUF (RAM2_addr<14>)
     ----------------------------------------
-    Total                      5.527ns (4.652ns logic, 0.875ns route)
-                                       (84.2% logic, 15.8% route)
+    Total                      5.527ns (4.687ns logic, 0.840ns route)
+                                       (84.8% logic, 15.2% route)
 
 =========================================================================
 Timing constraint: Default path analysis
   Total number of paths / destination ports: 23 / 22
 -------------------------------------------------------------------------
-Delay:               8.244ns (Levels of Logic = 4)
+Delay:               8.200ns (Levels of Logic = 4)
   Source:            Rst (PAD)
   Destination:       RAM1_we (PAD)
 
@@ -1076,25 +1250,25 @@ Delay:               8.244ns (Levels of Logic = 4)
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            24   1.218   1.427  Rst_IBUF (Rst_IBUF1)
-     LUT3:I0->O            1   0.704   0.499  Stage_mem_c/Memory_c/RAM1_we_SW0 (N41)
-     LUT4:I1->O            1   0.704   0.420  Stage_mem_c/Memory_c/RAM1_we (RAM1_we_OBUF)
+     IBUF:I->O            24   1.218   1.287  Rst_IBUF (Rst_IBUF1)
+     LUT3:I2->O            1   0.704   0.595  Stage_mem_c/Memory_c/RAM1_we_SW0 (N4)
+     LUT4:I0->O            1   0.704   0.420  Stage_mem_c/Memory_c/RAM1_we (RAM1_we_OBUF)
      OBUF:I->O                 3.272          RAM1_we_OBUF (RAM1_we)
     ----------------------------------------
-    Total                      8.244ns (5.898ns logic, 2.346ns route)
-                                       (71.5% logic, 28.5% route)
+    Total                      8.200ns (5.898ns logic, 2.302ns route)
+                                       (71.9% logic, 28.1% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 15.00 secs
-Total CPU time to Xst completion: 14.77 secs
+Total REAL time to Xst completion: 16.00 secs
+Total CPU time to Xst completion: 16.56 secs
  
 --> 
 
-Total memory usage is 301848 kilobytes
+Total memory usage is 306328 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   22 (   0 filtered)
-Number of infos    :   11 (   0 filtered)
+Number of warnings :   56 (   0 filtered)
+Number of infos    :   15 (   0 filtered)
 

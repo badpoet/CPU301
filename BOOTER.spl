@@ -1,0 +1,16 @@
+[Inputs]
+Clk
+Reload
+[Outputs]
+Flash_byte
+Flash_vpen
+Flash_ce
+Flash_oe
+Flash_we
+Flash_rp
+Boot_state
+=Flash_addr[22:0]=
+=Data_to_RAM2[15:0]=
+=Addr_to_RAM2[15:0]=
+[BiDir]
+=Flash_data[15:0]=

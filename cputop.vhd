@@ -46,7 +46,16 @@ entity CPU_TOP is
 		   COM_wrn : out  STD_LOGIC;
 		   COM_tsre: in  STD_LOGIC;
 		   COM_tbre: in  STD_LOGIC;
-	   	   COM_data_ready: in  STD_LOGIC;
+	   	   COM_data_ready: in  STD_LOGIC; 
+		   Flash_byte : out  STD_LOGIC;
+           Flash_vpen : out  STD_LOGIC;
+           Flash_ce : out  STD_LOGIC;
+           Flash_oe : out  STD_LOGIC;
+           Flash_we : out  STD_LOGIC;
+           Flash_rp : out  STD_LOGIC;
+           Flash_addr : out  STD_LOGIC_VECTOR (22 downto 0);
+           Flash_data : inout  STD_LOGIC_VECTOR (15 downto 0);
+           Reload : in  STD_LOGIC;
 		   LED : out  STD_LOGIC_VECTOR (15 downto 0);
 		   SSD_h : out  STD_LOGIC_VECTOR (6 downto 0);
 		   SSD_l : out  STD_LOGIC_VECTOR (6 downto 0));
@@ -55,6 +64,26 @@ end CPU_TOP;
 architecture STRUCTRUAL of CPU_TOP is
 
 -- COMPONENTS
+
+COMPONENT BOOTER
+	PORT(
+		Clk : IN std_logic;
+		Reload : IN std_logic;    
+		Flash_data : INOUT std_logic_vector(15 downto 0);      
+		Flash_byte : OUT std_logic;
+		Flash_vpen : OUT std_logic;
+		Flash_ce : OUT std_logic;
+		Flash_oe : OUT std_logic;
+		Flash_we : OUT std_logic;
+		Flash_rp : OUT std_logic;
+		Op : OUT std_logic;
+		Flash_addr : OUT std_logic_vector(22 downto 0);
+		Data_to_RAM2 : OUT std_logic_vector(15 downto 0);
+		Addr_to_RAM2 : OUT std_logic_vector(15 downto 0);
+		Boot_state : OUT std_logic
+		);
+	END COMPONENT;
+
 
 component SEVEN_SEG_DISPLAY is
     Port ( Data : in  STD_LOGIC_VECTOR (7 downto 0);
@@ -230,20 +259,41 @@ signal Exe_mem_alu_out, Mem_WB_res, Exe_mem_mem_data, Mem_WB_alu_out : STD_LOGIC
 signal Mem_WB_mem_data : STD_LOGIC_VECTOR (15 downto 0);
 signal Exe_mem_mem_op, ID_exe_mem_op, Mem_WB_mem_op : STD_LOGIC_VECTOR (1 downto 0);
 
-signal Freeze, RAM2_op : STD_LOGIC;
+signal Freeze, Freeze_t, RAM2_op, RAM2_op_t : STD_LOGIC;
 signal Data_to_RAM2, Addr_to_RAM2, Data_from_RAM2 : STD_LOGIC_VECTOR (15 downto 0);
+signal Data_to_RAM2_t, Data_to_RAM2_b, Addr_to_RAM2_t, Addr_to_RAM2_b : STD_LOGIC_VECTOR (15 downto 0);
+signal Boot_state, B_op : STD_LOGIC;
 
 begin
 	
 	--LED(9 downto 0) <= NPC_ID(9 downto 0);
-	LED(9 downto 0) <= Inst_ID(9 downto 0);
+	--LED(9 downto 0) <= Inst_ID(9 downto 0);
+	LED(9 downto 0) <= Data_to_RAM2_b(9 downto 0);
 	LED(15) <= Clk;
 	LED(14) <= Clk_x2;
 	LED(13) <= Step_out_msg;
 	LED(12) <= Bubble;
 	LED(11) <= Freeze;
 	LED(10) <= RAM2_op;
-	SSD_data <= Mem_WB_res(7 downto 0);
+	--SSD_data <= Mem_WB_res(7 downto 0);
+	SSD_data <= Addr_to_RAM2_b(7 downto 0);
+	
+	Inst_BOOTER: BOOTER PORT MAP(
+		Flash_byte => Flash_byte,
+		Flash_vpen => Flash_vpen,
+		Flash_ce => Flash_ce,
+		Flash_oe => Flash_oe,
+		Flash_we => Flash_we,
+		Flash_rp => Flash_rp,
+		Flash_addr => Flash_addr,
+		Flash_data => Flash_data,
+		Op => B_op,
+		Clk => Clk,
+		Reload => Reload,
+		Data_to_RAM2 => Data_to_RAM2_b,
+		Addr_to_RAM2 => Addr_to_RAM2_b,
+		Boot_state => Boot_state
+	);
 	
 	Seven_seg_display_c : SEVEN_SEG_DISPLAY port map ( 
 		Data => SSD_data,
@@ -260,6 +310,20 @@ begin
 		Clk_x2 => Clk_x2, 
 		Clk_x4 => Clk_x4, 
 		Rst => Rst );
+		
+	process (Boot_state) begin
+		if Boot_state = '0' then
+			Freeze <= '1';
+			Data_to_RAM2 <= Data_to_RAM2_b;
+			Addr_to_RAM2 <= Addr_to_RAM2_b;
+			RAM2_op <= B_op;
+		else
+			Freeze <= Freeze_t;
+			Data_to_RAM2 <= Data_to_RAM2_t;
+			Addr_to_RAM2 <= Addr_to_RAM2_t;
+			RAM2_op <= RAM2_op_t;
+		end if;
+	end process;
 	
 	Stage_IF_c : STAGE_IF port map ( 
 		Clk => Clk, 
@@ -336,11 +400,11 @@ begin
 	Stage_mem_c : STAGE_MEM PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
-		Freeze => Freeze,
-		Data_to_RAM2 => Data_to_RAM2,
+		Freeze => Freeze_t,
+		Data_to_RAM2 => Data_to_RAM2_t,
 		Data_from_RAM2 => Data_from_RAM2,
-		Addr_to_RAM2 => Addr_to_RAM2,
-		RAM2_op => RAM2_op,
+		Addr_to_RAM2 => Addr_to_RAM2_t,
+		RAM2_op => RAM2_op_t,
 		Clk_x2 => Clk_x2,
 		Clk_x4 => CLk_x4,
 		Step_out_msg => Step_out_msg,
