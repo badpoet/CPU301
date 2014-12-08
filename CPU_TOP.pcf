@@ -1,5 +1,5 @@
 //! **************************************************************************
-// Written by: Map P.20131013 on Sun Dec 07 03:02:56 2014
+// Written by: Map P.20131013 on Mon Dec 08 08:49:35 2014
 //! **************************************************************************
 
 SCHEMATIC START;
@@ -114,6 +114,5 @@ COMP "RAM1_oe" LOCATE = SITE "M16" LEVEL 1;
 COMP "RAM2_oe" LOCATE = SITE "R9" LEVEL 1;
 COMP "RAM1_we" LOCATE = SITE "M18" LEVEL 1;
 COMP "RAM2_we" LOCATE = SITE "M9" LEVEL 1;
-NET "Clk_in_BUFGP/IBUFG" BEL "Clk_in_BUFGP/BUFG.GCLKMUX" USELOCALCONNECT;
 SCHEMATIC END;
 

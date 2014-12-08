@@ -59,7 +59,7 @@ begin
 		end if;
 	end process;
 	Clk_x4 <= Clk_base;
-	Clk_x2 <= Clk_x2_s;
-	Clk <= Clk_s;
+	Clk_x2 <= clk_base;--Clk_x2_s;
+	Clk <= clk_x2_s;--Clk_s;
 end RTL;
 

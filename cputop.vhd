@@ -80,6 +80,11 @@ component STAGE_IF is
 	port ( Clk : in  STD_LOGIC;
            Clk_x2 : in  STD_LOGIC;
            Clk_x4 : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
+		   RAM2_op : in  STD_LOGIC;
+		   Data_from_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   Data_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Addr_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
            Rst : in  STD_LOGIC;
            PC_src : in  STD_LOGIC;
 		   Branch_PC : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -99,6 +104,7 @@ COMPONENT STAGE_ID is
 		Rst : IN std_logic;
 		NPC : IN std_logic_vector(15 downto 0);
 		Inst : IN std_logic_vector(15 downto 0);
+		Freeze : in STD_LOGIC;
 		ID_exe_reg_des : IN std_logic_vector(3 downto 0);
 		Exe_mem_reg_des : IN std_logic_vector(3 downto 0);
 		Exe_mem_alu_out : IN std_logic_vector(15 downto 0);
@@ -122,19 +128,11 @@ COMPONENT STAGE_ID is
 		);
 END COMPONENT;
 
-component PC_branch_calc is
-    Port ( PC : in  STD_LOGIC_VECTOR (15 downto 0);
-           Immediate : in  STD_LOGIC_VECTOR (15 downto 0);
-           Reg : in  STD_LOGIC_VECTOR (15 downto 0);
-			  Condition_jump : in  STD_LOGIC_VECTOR(1 downto 0);
-           Branch_PC : out  STD_LOGIC_VECTOR (15 downto 0);
-           Equal_zero : in  STD_LOGIC);
-end component;
-
 COMPONENT STAGE_EXE is
 	PORT(
 		Clk : IN std_logic;
 		Rst : IN std_logic;
+		Freeze : IN std_logic;
 		ALU_src_a : IN std_logic_vector(3 downto 0);
 		ALU_src_b : IN std_logic_vector(3 downto 0);
 		Reg_src_b : IN std_logic_vector(3 downto 0);
@@ -158,6 +156,11 @@ END COMPONENT;
 COMPONENT STAGE_MEM PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
+	Freeze : out std_logic;
+	RAM2_op : out std_logic;
+	Data_from_RAM2 : in std_logic_vector (15 downto 0);
+	Data_to_RAM2 : out std_Logic_vector (15 downto 0);
+	Addr_to_RAM2 : out std_logic_vector (15 downto 0);
 	Clk_x2 : IN std_logic;
 	Clk_x4 : IN std_logic;
 	Step_out_msg : OUT std_logic;
@@ -212,14 +215,19 @@ signal Exe_mem_alu_out, Mem_WB_res, Exe_mem_mem_data, Mem_WB_alu_out : STD_LOGIC
 signal Mem_WB_mem_data : STD_LOGIC_VECTOR (15 downto 0);
 signal Exe_mem_mem_op, ID_exe_mem_op, Mem_WB_mem_op : STD_LOGIC_VECTOR (1 downto 0);
 
+signal Freeze, RAM2_op : STD_LOGIC;
+signal Data_to_RAM2, Addr_to_RAM2, Data_from_RAM2 : STD_LOGIC_VECTOR (15 downto 0);
+
 begin
 	
+	--LED(9 downto 0) <= NPC_ID(9 downto 0);
 	LED(9 downto 0) <= Inst_ID(9 downto 0);
 	LED(15) <= Clk;
 	LED(14) <= Clk_x2;
 	LED(13) <= Step_out_msg;
 	LED(12) <= Bubble;
-	LED(11 downto 10) <= Exe_mem_mem_op;
+	LED(11) <= Freeze;
+	LED(10) <= RAM2_op;
 	SSD_data <= Mem_WB_res(7 downto 0);
 	
 	Seven_seg_display_c : SEVEN_SEG_DISPLAY port map ( 
@@ -242,6 +250,11 @@ begin
 		Clk => Clk, 
 		Clk_x2 => Clk_x2, 
 		Clk_x4 => Clk_x4,
+		Freeze => Freeze,
+		RAM2_op => RAM2_op,
+		Data_to_RAM2 => Data_to_RAM2,
+		Data_from_RAM2 => Data_from_RAM2,
+		Addr_to_RAM2 => Addr_to_RAM2,
 		Rst => Rst, 
 		Branch_PC => Branch_PC,
 		Bubble => Bubble,
@@ -257,6 +270,7 @@ begin
 	Stage_ID_c : STAGE_ID PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze,
 		Branch_PC => Branch_PC,
 		Bubble_to_PC => Bubble,
 		PC_src => PC_src,
@@ -284,6 +298,7 @@ begin
 	Stage_exe_c: STAGE_EXE PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze,
 		ALU_src_a => ID_exe_ALU_src_a,
 		ALU_src_b => ID_exe_ALU_src_b,
 		Reg_src_b => ID_exe_Reg_src_b,
@@ -306,6 +321,11 @@ begin
 	Stage_mem_c : STAGE_MEM PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze,
+		Data_to_RAM2 => Data_to_RAM2,
+		Data_from_RAM2 => Data_from_RAM2,
+		Addr_to_RAM2 => Addr_to_RAM2,
+		RAM2_op => RAM2_op,
 		Clk_x2 => Clk_x2,
 		Clk_x4 => CLk_x4,
 		Step_out_msg => Step_out_msg,

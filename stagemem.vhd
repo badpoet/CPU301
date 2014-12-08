@@ -32,6 +32,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity STAGE_MEM is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : out  STD_LOGIC;
+		   Data_to_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   Data_from_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Addr_to_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   RAM2_op : out  STD_LOGIC;
            Clk_x2 : in  STD_LOGIC;
            Clk_x4 : in  STD_LOGIC;
            ALU_out : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -60,6 +65,11 @@ architecture STRUCTRAL of STAGE_MEM is
 COMPONENT MEMORY PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
+	Freeze : out std_logic;
+	Data_from_RAM2 : in STD_LOGIC_VECTOR (15 downto 0);
+	Data_to_RAM2 : out STD_LOGIC_VECTOR (15 downto 0);
+	Addr_to_RAM2 : out STD_LOGIC_VECTOR (15 downto 0);
+	RAM2_op : out std_logic;
 	MEMop : IN std_logic_vector(1 downto 0);
 	addr : IN std_logic_vector(15 downto 0);
 	data : IN std_logic_vector(15 downto 0);
@@ -82,6 +92,7 @@ END COMPONENT;
 COMPONENT MEM_WB_REGS PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
+	Freeze : IN std_logic;
 	ALU_out_d : IN std_logic_vector(15 downto 0);
 	Mem_out_d : IN std_logic_vector(15 downto 0);
 	Mem_op_d : IN std_logic_vector(1 downto 0);
@@ -94,12 +105,18 @@ COMPONENT MEM_WB_REGS PORT(
 END COMPONENT;
 
 signal Mem_out : STD_LOGIC_VECTOR (15 downto 0);
+signal Freeze_tmp : STD_LOGIC;
 
 begin
 
 	Memory_c : MEMORY PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze_tmp,
+		Data_to_RAM2 => Data_to_RAM2,
+		Data_from_RAM2 => Data_from_RAM2,
+		Addr_to_RAM2 => Addr_to_RAM2,
+		RAM2_op => RAM2_op,
 		RAM1_we => RAM1_we,
 		RAM1_oe => RAM1_oe,
 		RAM1_en => RAM1_en,
@@ -120,6 +137,7 @@ begin
 	Inst_MEM_WB_REGS: MEM_WB_REGS PORT MAP(
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze_tmp,
 		ALU_out_d => ALU_out,
 		Mem_out_d => Mem_out,
 		Mem_op_d => Mem_op,
@@ -129,6 +147,7 @@ begin
 		Mem_op_q => Mem_op_q,
 		Reg_des_q => Reg_des_q
 	);
+	Freeze <= Freeze_tmp;
 
 end STRUCTRAL;
 

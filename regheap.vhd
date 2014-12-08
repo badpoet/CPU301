@@ -32,6 +32,7 @@ use IEEE.NUMERIC_STD.ALL;
 entity REG_HEAP is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            Rx : in  STD_LOGIC_VECTOR (3 downto 0);
            Ry : in  STD_LOGIC_VECTOR (3 downto 0);
            Rw : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -58,7 +59,7 @@ begin
 	process (Clk, Rst) begin
 		if (Rst = '0') then
 			Reg <= (others => (others => '0'));
-		elsif (Clk'event and Clk = '1') then
+		elsif (Clk'event and Clk = '1' and Freeze = '0') then
 			Reg(TO_INTEGER(unsigned(Rw(3 downto 0)))) <= Rw_data;
 		end if;
 	end process;

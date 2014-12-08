@@ -32,6 +32,11 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity MEMORY is
     Port ( Clk : in  STD_LOGIC;
     	   Rst : in  STD_LOGIC;
+		   Freeze : out  STD_LOGIC;
+		   RAM2_op : out  STD_LOGIC;
+		   Data_from_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Data_to_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   Addr_to_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0); 
            RAM1_we : out  STD_LOGIC;
            RAM1_oe : out  STD_LOGIC;
            RAM1_en : out  STD_LOGIC;
@@ -52,10 +57,13 @@ end MEMORY;
 
 architecture RTL of MEMORY is
 	signal step : STD_LOGIC := '0';
+	signal Freeze_reg : STD_LOGIC := '0';
 begin
 
-	process (addr, COM_data_ready, COM_tsre, COM_tbre) begin
-		if addr = "1011111100000001" then
+	process (addr, COM_data_ready, COM_tsre, COM_tbre, Data_from_RAM2) begin
+		if (Freeze_reg = '0') and memop = "10" and addr(15 downto 14) = "01" then
+			memout <= Data_from_RAM2;
+		elsif addr = "1011111100000001" then
 			memout <= "00000000000000"&COM_data_ready&(COM_tsre and COM_tbre);
 		else
 			memout <= RAM1_data;
@@ -84,6 +92,27 @@ begin
 		end if;
 	end process;
 	
+	process (Clk, Rst, addr) begin
+		if (Rst = '0') then
+			Freeze_reg <= '0';
+		elsif (Clk'event and Clk = '1') then
+			if memop(1) = '1' and addr(15 downto 14) = "01" then -- to RAM2
+				Freeze_reg <= NOT(Freeze_reg);
+			elsif Freeze_reg = '1' then
+				Freeze_reg <= '0';
+			end if;
+		end if;
+	end process;
+	
+	process (Freeze_reg, addr, memop) begin
+		if (Freeze_reg = '0') and (memop(1) = '1' and addr(15 downto 14) = "01") then
+			Freeze <= '1';
+		else
+			Freeze <= '0';
+		end if;
+	end process;
+	
+	RAM2_op <= memop(0);
 	process (step, addr, memop, Rst) begin
 		if Rst = '0' then
 			RAM1_en <= '1';
@@ -93,62 +122,74 @@ begin
 			COM_wrn <= '1';
 			RAM1_data <= (others => '0');
 		else
-			case addr(15 downto 1) is
-				when "101111110000000"=>
-					RAM1_en <= '1';
-					RAM1_oe <= '1';
-					RAM1_we <= '1';
-					if addr(0) = '0' then
-						case MEMop is
-							when "10"=>
-								COM_wrn <= '1';
-								if (step = '0') then
-									COM_rdn <= '1';
-									RAM1_data <= (others => 'Z');
-								else
-									COM_rdn <= '0';
-								end if;
-							when "11"=>
-								COM_rdn <= '1';
-								RAM1_data <= data;
-								if (step = '0') then
+			if (Freeze_reg = '0') and memop(1) = '1' and addr(15 downto 14) = "01" then -- to RAM2
+				Data_to_RAM2 <= data;
+				Addr_to_RAM2 <= addr;
+				RAM1_en <= '1';
+				RAM1_oe <= '1';
+				RAM1_we <= '1';
+				COM_rdn <= '1';
+				COM_wrn <= '1';
+			else
+				Data_to_RAM2 <= (others => '0');
+				Addr_to_RAM2 <= (others => '0');
+				case addr(15 downto 1) is
+					when "101111110000000"=>
+						RAM1_en <= '1';
+						RAM1_oe <= '1';
+						RAM1_we <= '1';
+						if addr(0) = '0' then
+							case MEMop is
+								when "10"=>
 									COM_wrn <= '1';
-								else
-									COM_wrn <= '0';
-								end if;
-							when others=>
-								COM_rdn <= '1';
-								COM_wrn <= '1';
-								RAM1_data <= (others => '0');
-						end case;
-					else
+									if (step = '0') then
+										COM_rdn <= '1';
+										RAM1_data <= (others => 'Z');
+									else
+										COM_rdn <= '0';
+									end if;
+								when "11"=>
+									COM_rdn <= '1';
+									RAM1_data <= data;
+									if (step = '0') then
+										COM_wrn <= '1';
+									else
+										COM_wrn <= '0';
+									end if;
+								when others=>
+									COM_rdn <= '1';
+									COM_wrn <= '1';
+									RAM1_data <= (others => '0');
+							end case;
+						else
+							COM_rdn <= '1';
+							COM_wrn <= '1';
+							RAM1_data <= (others => 'Z');
+						end if;
+					when others=>
+						RAM1_en <= '0';
+						RAM1_oe <= '0';
 						COM_rdn <= '1';
 						COM_wrn <= '1';
-						RAM1_data <= (others => 'Z');
-					end if;
-				when others=>
-					RAM1_en <= '0';
-					RAM1_oe <= '0';
-					COM_rdn <= '1';
-					COM_wrn <= '1';
-					case MEMop is
-						when "10"=>
-							RAM1_we <= '1';
-							if (step = '0') then
-								RAM1_data <= (others => 'Z');
-							end if;
-						when "11"=>
-							RAM1_data <= data;
-							if (step = '0') then
+						case MEMop is
+							when "10"=>
 								RAM1_we <= '1';
-							else
-								RAM1_we <= '0';
-							end if;
-						when others=>
-							RAM1_we <= '1';
-							RAM1_data <= (others => '0');
-					end case;
-			end case;
+								if (step = '0') then
+									RAM1_data <= (others => 'Z');
+								end if;
+							when "11"=>
+								RAM1_data <= data;
+								if (step = '0') then
+									RAM1_we <= '1';
+								else
+									RAM1_we <= '0';
+								end if;
+							when others=>
+								RAM1_we <= '1';
+								RAM1_data <= (others => '0');
+						end case;
+				end case;
+			end if;
 		end if;
 	end process;
 	

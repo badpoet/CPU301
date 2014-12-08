@@ -33,8 +33,13 @@ entity STAGE_IF is
     Port ( Clk : in  STD_LOGIC;
            Clk_x2 : in  STD_LOGIC;
            Clk_x4 : in  STD_LOGIC;
+		   Data_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Data_from_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   Addr_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   RAM2_op : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            PC_src : in  STD_LOGIC;
 		   Branch_PC : in  STD_LOGIC_VECTOR (15 downto 0);
            RAM2_we : out  STD_LOGIC;
@@ -52,6 +57,7 @@ component PC_REG is
 	port ( Clk : in  STD_LOGIC;
 		   Rst : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            PC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            PC_q : out  STD_LOGIC_VECTOR (15 downto 0));
 end component;
@@ -59,6 +65,11 @@ end component;
 component INST_FETCHER is
 	port ( Clk : in  STD_LOGIC;
 		   Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
+		   RAM2_op : in  STD_LOGIC;
+		   Data_from_RAM2 : out  STD_LOGIC_VECTOR (15 downto 0);
+		   Data_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
+		   Addr_to_RAM2 : in  STD_LOGIC_VECTOR (15 downto 0);
            RAM2_we : out  STD_LOGIC;
            RAM2_oe : out  STD_LOGIC;
            RAM2_en : out  STD_LOGIC;
@@ -72,6 +83,7 @@ end component;
 component IF_ID_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
            NPC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Inst_d : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -101,12 +113,18 @@ begin
 	PC_reg_c : PC_REG port map ( 
 		Clk => Clk, 
 		Bubble => Bubble,
+		Freeze => Freeze,
 		PC_d => PC_d, 
 		PC_q => PC_q, 
 		Rst => Rst );
 	Inst_fetcher_c : INST_FETCHER port map ( 
 		Clk => Clk, 
-		RAM2_we => RAM2_we, 
+		Freeze => Freeze,
+		RAM2_op => RAM2_op,
+		Data_to_RAM2 => Data_to_RAM2,
+		Data_from_RAM2 => Data_from_RAM2,
+		Addr_to_RAM2 => Addr_to_RAM2,
+		RAM2_we => RAM2_we,
 		RAM2_oe => RAM2_oe, 
 		RAM2_en => RAM2_en, 
 		PC => PC_q, 
@@ -117,6 +135,7 @@ begin
 		Rst => Rst );
 	IF_ID_regs_c : IF_ID_REGS port map ( 
 		Clk => Clk, 
+		Freeze => Freeze,
 		Bubble => Bubble,
 		NPC_d => PC_next, 
 		NPC_q => NPC_ID, 

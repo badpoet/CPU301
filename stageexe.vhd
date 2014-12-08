@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity STAGE_EXE is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            ALU_src_a : in  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_b : in  STD_LOGIC_VECTOR (3 downto 0);
 		   Reg_src_b : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -94,6 +95,7 @@ end component;
 component EXE_MEM_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            ALU_out_d : in  STD_LOGIC_VECTOR (15 downto 0);
            ALU_out_q : out  STD_LOGIC_VECTOR (15 downto 0);
            Mem_data_d : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -145,6 +147,7 @@ begin
 	Exe_mem_regs_c : EXE_MEM_REGS port map (
 		Clk => Clk,
 		Rst => Rst,
+		Freeze => Freeze,
 		ALU_out_d => ALU_res,
 		ALU_out_q => ALU_out_q,
 		Mem_data_d => R2_data,

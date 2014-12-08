@@ -35,6 +35,7 @@ entity STAGE_ID is
 		   Bubble_to_PC : out std_logic;
 		   Branch_PC : out  STD_LOGIC_VECTOR (15 downto 0);
 		   PC_src : out  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            NPC : in  STD_LOGIC_VECTOR (15 downto 0);
            Inst : in  STD_LOGIC_VECTOR (15 downto 0);
 		   ID_exe_reg_des : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -74,6 +75,7 @@ END COMPONENT;
 COMPONENT REG_HEAP PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
+	Freeze : in  STD_LOGIC;
 	Rx : IN std_logic_vector(3 downto 0);
 	Ry : IN std_logic_vector(3 downto 0);
 	Rw : IN std_logic_vector(3 downto 0);
@@ -90,6 +92,7 @@ COMPONENT ID_EXE_REGS PORT(
 	Clk : IN std_logic;
 	Rst : IN std_logic;
 	Bubble : IN std_logic;
+	Freeze : in  STD_LOGIC;
 	ALU_src_a_d : IN std_logic_vector(3 downto 0);
 	ALU_src_b_d : IN std_logic_vector(3 downto 0);
 	Reg_src_b_d : IN std_logic_vector(3 downto 0);
@@ -167,6 +170,7 @@ begin
 		Ry => Reg_src_b,
 		Rw => Rw,
 		Rw_data => Rw_data,
+		Freeze => Freeze,
 		PC => NPC,
 		T_q => T,
 		Rx_q => Rx_data,
@@ -176,6 +180,7 @@ begin
 	ID_exe_regs_c: ID_EXE_REGS PORT MAP(
 		Clk => Clk,
 		Bubble => Bubble,
+		Freeze => Freeze,
 		Rst => Rst,
 		ALU_src_a_d => ALU_src_a,
 		ALU_src_b_d => ALU_src_b,

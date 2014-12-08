@@ -33,6 +33,7 @@ entity IF_ID_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            NPC_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Inst_d : in  STD_LOGIC_VECTOR (15 downto 0);
            NPC_q : out  STD_LOGIC_VECTOR (15 downto 0);
@@ -47,7 +48,7 @@ begin
 		if (Rst = '0') then
 			NPC <= (others => '0');
 			Inst <= (others => '0');
-		elsif (Clk'event and Clk = '1' and Bubble = '0') then
+		elsif (Clk'event and Clk = '1' and Bubble = '0' and Freeze = '0') then
 			NPC <= NPC_d;
 			Inst <= Inst_d;
 		end if;

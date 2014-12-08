@@ -143,12 +143,12 @@ Architecture rtl of Entity seven_seg_display is up to date.
 Compiling vhdl file "C:/COA/cpu301/clkbase.vhd" in Library work.
 Architecture rtl of Entity clk_base_gen is up to date.
 Compiling vhdl file "C:/COA/cpu301/clkgen.vhd" in Library work.
-Architecture rtl of Entity clk_gen is up to date.
+Entity <clk_gen> compiled.
+Entity <clk_gen> (Architecture <rtl>) compiled.
 Compiling vhdl file "C:/COA/cpu301/stageif.vhd" in Library work.
 Architecture structral of Entity stage_if is up to date.
 Compiling vhdl file "C:/COA/cpu301/stageid.vhd" in Library work.
-Entity <stage_id> compiled.
-Entity <stage_id> (Architecture <structral>) compiled.
+Architecture structral of Entity stage_id is up to date.
 Compiling vhdl file "C:/COA/cpu301/stageexe.vhd" in Library work.
 Architecture structral of Entity stage_exe is up to date.
 Compiling vhdl file "C:/COA/cpu301/stagemem.vhd" in Library work.
@@ -238,7 +238,8 @@ Analyzing Entity <PC_REG> in library <work> (Architecture <rtl>).
 Entity <PC_REG> analyzed. Unit <PC_REG> generated.
 
 Analyzing Entity <INST_FETCHER> in library <work> (Architecture <rtl>).
-INFO:Xst:2679 - Register <RAM2_data> in unit <INST_FETCHER> has a constant value of ZZZZZZZZZZZZZZZZ during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <RAM2_addr<17>> in unit <INST_FETCHER> has a constant value of 0 during circuit operation. The register is replaced by logic.
+INFO:Xst:2679 - Register <RAM2_addr<16>> in unit <INST_FETCHER> has a constant value of 0 during circuit operation. The register is replaced by logic.
 Entity <INST_FETCHER> analyzed. Unit <INST_FETCHER> generated.
 
 Analyzing Entity <IF_ID_REGS> in library <work> (Architecture <rtl>).
@@ -259,9 +260,9 @@ WARNING:Xst:819 - "C:/COA/cpu301/decoder.vhd" line 53: One or more signals are m
 Entity <DECODER> analyzed. Unit <DECODER> generated.
 
 Analyzing Entity <REG_HEAP> in library <work> (Architecture <rtl>).
-WARNING:Xst:819 - "C:/COA/cpu301/regheap.vhd" line 66: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "C:/COA/cpu301/regheap.vhd" line 67: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <PC>, <Reg>
-WARNING:Xst:819 - "C:/COA/cpu301/regheap.vhd" line 78: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+WARNING:Xst:819 - "C:/COA/cpu301/regheap.vhd" line 79: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
    <PC>, <Reg>
 Entity <REG_HEAP> analyzed. Unit <REG_HEAP> generated.
 
@@ -289,7 +290,7 @@ Entity <srcB_mux> analyzed. Unit <srcB_mux> generated.
 
 Analyzing Entity <R2_mux> in library <work> (Architecture <rtl>).
 WARNING:Xst:819 - "C:/COA/cpu301/r2mux.vhd" line 46: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <Mem_WB_res>, <Exe_mem_alu_out>, <ID_Exe_r2_data>
+   <Exe_mem_alu_out>, <Mem_WB_res>, <ID_Exe_r2_data>
 Entity <R2_mux> analyzed. Unit <R2_mux> generated.
 
 Analyzing Entity <ALU> in library <work> (Architecture <rtl>).
@@ -304,10 +305,10 @@ Analyzing Entity <STAGE_MEM> in library <work> (Architecture <structral>).
 Entity <STAGE_MEM> analyzed. Unit <STAGE_MEM> generated.
 
 Analyzing Entity <MEMORY> in library <work> (Architecture <rtl>).
-WARNING:Xst:819 - "C:/COA/cpu301/memory.vhd" line 57: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <RAM1_data>
-WARNING:Xst:819 - "C:/COA/cpu301/memory.vhd" line 87: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
-   <data>
+WARNING:Xst:819 - "C:/COA/cpu301/memory.vhd" line 63: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <Freeze_reg>, <MEMop>, <RAM1_data>
+WARNING:Xst:819 - "C:/COA/cpu301/memory.vhd" line 116: One or more signals are missing in the process sensitivity list. To enable synthesis of FPGA/CPLD hardware, XST will assume that all necessary signals are present in the sensitivity list. Please note that the result of the synthesis may differ from the initial design specification. The missing signals are:
+   <Freeze_reg>, <data>
 Entity <MEMORY> analyzed. Unit <MEMORY> generated.
 
 Analyzing Entity <MEM_WB_REGS> in library <work> (Architecture <rtl>).
@@ -322,7 +323,6 @@ Entity <WB_MUX> analyzed. Unit <WB_MUX> generated.
 =========================================================================
 
 Performing bidirectional port resolution...
-INFO:Xst:2561 - Always blocking tristate driving signal <RAM2_data> in unit <INST_FETCHER> is removed.
 
 Synthesizing Unit <SEVEN_SEG_DISPLAY>.
     Related source file is "C:/COA/cpu301/ssd.vhd".
@@ -335,13 +335,7 @@ Unit <SEVEN_SEG_DISPLAY> synthesized.
 
 Synthesizing Unit <CLK_BASE_GEN>.
     Related source file is "C:/COA/cpu301/clkbase.vhd".
-    Found 31-bit up counter for signal <Cnt>.
-    Found 31-bit comparator less for signal <Cnt$cmp_lt0000> created at line 47.
-    Found 1-bit register for signal <Tmp>.
-    Summary:
-	inferred   1 Counter(s).
-	inferred   1 D-type flip-flop(s).
-	inferred   1 Comparator(s).
+WARNING:Xst:1780 - Signal <Cnt> is never used or assigned. This unconnected signal will be trimmed during the optimization process.
 Unit <CLK_BASE_GEN> synthesized.
 
 
@@ -371,9 +365,15 @@ Unit <PC_REG> synthesized.
 Synthesizing Unit <INST_FETCHER>.
     Related source file is "C:/COA/cpu301/ifetcher.vhd".
 WARNING:Xst:647 - Input <Clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-    Found 16-bit register for signal <Inst_reg>.
+WARNING:Xst:646 - Signal <Inst_reg> is assigned but never used. This unconnected signal will be trimmed during the optimization process.
+WARNING:Xst:736 - Found 16-bit latch for signal <Mtridata_RAM2_data> created at line 78. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:736 - Found 1-bit latch for signal <Mtrien_RAM2_data> created at line 78. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
+    Found 16-bit tristate buffer for signal <RAM2_data>.
+    Found 1-bit register for signal <Step>.
     Summary:
-	inferred  16 D-type flip-flop(s).
+	inferred   1 D-type flip-flop(s).
+	inferred  16 Tristate(s).
 Unit <INST_FETCHER> synthesized.
 
 
@@ -406,11 +406,11 @@ Unit <DECODER> synthesized.
 
 Synthesizing Unit <REG_HEAP>.
     Related source file is "C:/COA/cpu301/regheap.vhd".
-    Found 16-bit 16-to-1 multiplexer for signal <$varindex0000> created at line 74.
-    Found 16-bit 16-to-1 multiplexer for signal <$varindex0001> created at line 86.
+    Found 16-bit 16-to-1 multiplexer for signal <$varindex0000> created at line 75.
+    Found 16-bit 16-to-1 multiplexer for signal <$varindex0001> created at line 87.
     Found 256-bit register for signal <Reg>.
-    Found 4-bit comparator equal for signal <Rx_q$cmp_eq0003> created at line 70.
-    Found 4-bit comparator equal for signal <Ry_q$cmp_eq0003> created at line 82.
+    Found 4-bit comparator equal for signal <Rx_q$cmp_eq0003> created at line 71.
+    Found 4-bit comparator equal for signal <Ry_q$cmp_eq0003> created at line 83.
 INFO:Xst:738 - HDL ADVISOR - 256 flip-flops were inferred for signal <Reg>. You may be trying to describe a RAM in a way that is incompatible with block and distributed RAM resources available on Xilinx devices, or with a specific template that is not supported. Please review the Xilinx resources documentation and the XST user manual for coding guidelines. Taking advantage of RAM resources will lead to improved device usage and reduced synthesis time.
     Summary:
 	inferred 256 D-type flip-flop(s).
@@ -508,15 +508,16 @@ Unit <EXE_MEM_REGS> synthesized.
 
 Synthesizing Unit <MEMORY>.
     Related source file is "C:/COA/cpu301/memory.vhd".
-WARNING:Xst:647 - Input <Clk> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
-WARNING:Xst:736 - Found 1-bit latch for signal <Mtrien_RAM1_data> created at line 94. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
-INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
-WARNING:Xst:736 - Found 16-bit latch for signal <Mtridata_RAM1_data> created at line 94. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <Addr_to_RAM2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:736 - Found 16-bit latch for signal <Mtridata_RAM1_data> created at line 123. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:737 - Found 16-bit latch for signal <Data_to_RAM2>. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
+WARNING:Xst:736 - Found 1-bit latch for signal <Mtrien_RAM1_data> created at line 123. Latches may be generated from incomplete case or if statements. We do not recommend the use of latches in FPGA/CPLD designs, as they may lead to timing problems.
 INFO:Xst:2371 - HDL ADVISOR - Logic functions respectively driving the data and gate enable inputs of this latch share common terms. This situation will potentially lead to setup/hold violations and, as a result, to simulation problems. This situation may come from an incomplete case statement (all selector values are not covered). You should carefully review if it was in your intentions to describe such a latch.
     Found 16-bit tristate buffer for signal <RAM1_data>.
+    Found 1-bit register for signal <Freeze_reg>.
     Found 1-bit register for signal <step>.
     Summary:
-	inferred   1 D-type flip-flop(s).
+	inferred   2 D-type flip-flop(s).
 	inferred  16 Tristate(s).
 Unit <MEMORY> synthesized.
 
@@ -570,26 +571,23 @@ Macro Statistics
 # Adders/Subtractors                                   : 3
  16-bit adder                                          : 2
  16-bit addsub                                         : 1
-# Counters                                             : 1
- 31-bit up counter                                     : 1
-# Registers                                            : 42
- 1-bit register                                        : 5
- 16-bit register                                       : 27
+# Registers                                            : 40
+ 1-bit register                                        : 4
+ 16-bit register                                       : 26
  2-bit register                                        : 3
  4-bit register                                        : 7
-# Latches                                              : 2
- 1-bit latch                                           : 1
- 16-bit latch                                          : 1
-# Comparators                                          : 14
- 31-bit comparator less                                : 1
+# Latches                                              : 6
+ 1-bit latch                                           : 2
+ 16-bit latch                                          : 4
+# Comparators                                          : 13
  4-bit comparator equal                                : 13
 # Multiplexers                                         : 2
  16-bit 16-to-1 multiplexer                            : 2
 # Logic shifters                                       : 2
  16-bit shifter arithmetic right                       : 1
  16-bit shifter logical left                           : 1
-# Tristates                                            : 1
- 16-bit tristate buffer                                : 1
+# Tristates                                            : 2
+ 16-bit tristate buffer                                : 2
 # Xors                                                 : 1
  16-bit xor2                                           : 1
 
@@ -609,15 +607,12 @@ Macro Statistics
 # Adders/Subtractors                                   : 3
  16-bit adder                                          : 2
  16-bit addsub                                         : 1
-# Counters                                             : 1
- 31-bit up counter                                     : 1
-# Registers                                            : 471
- Flip-Flops                                            : 471
-# Latches                                              : 2
- 1-bit latch                                           : 1
- 16-bit latch                                          : 1
-# Comparators                                          : 14
- 31-bit comparator less                                : 1
+# Registers                                            : 454
+ Flip-Flops                                            : 454
+# Latches                                              : 6
+ 1-bit latch                                           : 2
+ 16-bit latch                                          : 4
+# Comparators                                          : 13
  4-bit comparator equal                                : 13
 # Multiplexers                                         : 32
  1-bit 16-to-1 multiplexer                             : 32
@@ -635,12 +630,11 @@ Macro Statistics
 WARNING:Xst:2170 - Unit ALU : the following signal(s) form a combinatorial loop: result_shift0001<15>.
 
 Optimizing unit <CPU_TOP> ...
+WARNING:Xst:1710 - FF/Latch <Stage_mem_c/Memory_c/Addr_to_RAM2_15> (without init value) has a constant value of 0 in block <CPU_TOP>. This FF/Latch will be trimmed during the optimization process.
 
 Optimizing unit <DECODER> ...
 
 Optimizing unit <PC_REG> ...
-
-Optimizing unit <INST_FETCHER> ...
 
 Optimizing unit <IF_ID_REGS> ...
 
@@ -661,15 +655,13 @@ Optimizing unit <MEM_WB_REGS> ...
 Mapping all equations...
 Building and optimizing final netlist ...
 INFO:Xst:2261 - The FF/Latch <Stage_ID_c/ID_exe_regs_c/Immediate_15> in Unit <CPU_TOP> is equivalent to the following 5 FFs/Latches, which will be removed : <Stage_ID_c/ID_exe_regs_c/Immediate_14> <Stage_ID_c/ID_exe_regs_c/Immediate_13> <Stage_ID_c/ID_exe_regs_c/Immediate_12> <Stage_ID_c/ID_exe_regs_c/Immediate_11> <Stage_ID_c/ID_exe_regs_c/Immediate_10> 
-Found area constraint ratio of 100 (+ 5) on block CPU_TOP, actual ratio is 8.
+Found area constraint ratio of 100 (+ 5) on block CPU_TOP, actual ratio is 9.
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_0 has been replicated 1 time(s)
-FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_11 has been replicated 1 time(s)
-FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_12 has been replicated 2 time(s)
-FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_13 has been replicated 2 time(s)
-FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_14 has been replicated 1 time(s)
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_15 has been replicated 1 time(s)
+FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_2 has been replicated 1 time(s)
 FlipFlop Stage_IF_c/IF_ID_regs_c/Inst_3 has been replicated 1 time(s)
 Latch Stage_mem_c/Memory_c/Mtrien_RAM1_data has been replicated 15 time(s) to handle iob=true attribute.
+Latch Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data has been replicated 15 time(s) to handle iob=true attribute.
 
 Final Macro Processing ...
 
@@ -677,8 +669,8 @@ Final Macro Processing ...
 Final Register Report
 
 Macro Statistics
-# Registers                                            : 506
- Flip-Flops                                            : 506
+# Registers                                            : 453
+ Flip-Flops                                            : 453
 
 =========================================================================
 
@@ -707,36 +699,36 @@ Design Statistics
 # IOs                              : 111
 
 Cell Usage :
-# BELS                             : 1716
+# BELS                             : 1717
 #      GND                         : 1
-#      INV                         : 11
-#      LUT1                        : 19
-#      LUT2                        : 99
-#      LUT2_D                      : 4
-#      LUT2_L                      : 2
-#      LUT3                        : 464
-#      LUT3_D                      : 24
-#      LUT3_L                      : 9
-#      LUT4                        : 479
-#      LUT4_D                      : 41
-#      LUT4_L                      : 92
-#      MUXCY                       : 95
-#      MUXF5                       : 200
+#      INV                         : 5
+#      LUT1                        : 15
+#      LUT2                        : 95
+#      LUT2_D                      : 6
+#      LUT2_L                      : 5
+#      LUT3                        : 513
+#      LUT3_D                      : 30
+#      LUT3_L                      : 8
+#      LUT4                        : 508
+#      LUT4_D                      : 49
+#      LUT4_L                      : 88
+#      MUXCY                       : 53
+#      MUXF5                       : 196
 #      MUXF6                       : 64
 #      MUXF7                       : 32
 #      VCC                         : 1
-#      XORCY                       : 79
-# FlipFlops/Latches                : 538
-#      FDC                         : 144
-#      FDCE                        : 315
-#      FDE                         : 47
-#      LD                          : 32
+#      XORCY                       : 48
+# FlipFlops/Latches                : 548
+#      FDC                         : 3
+#      FDCE                        : 450
+#      LD                          : 63
+#      LDC                         : 16
+#      LDCP_1                      : 16
 # Clock Buffers                    : 2
-#      BUFG                        : 1
-#      BUFGP                       : 1
-# IO Buffers                       : 110
-#      IBUF                        : 20
-#      IOBUF                       : 16
+#      BUFG                        : 2
+# IO Buffers                       : 111
+#      IBUF                        : 5
+#      IOBUF                       : 32
 #      OBUF                        : 74
 =========================================================================
 
@@ -745,9 +737,9 @@ Device utilization summary:
 
 Selected Device : 3s1200efg320-4 
 
- Number of Slices:                      717  out of   8672     8%  
- Number of Slice Flip Flops:            490  out of  17344     2%  
- Number of 4 input LUTs:               1244  out of  17344     7%  
+ Number of Slices:                      725  out of   8672     8%  
+ Number of Slice Flip Flops:            500  out of  17344     2%  
+ Number of 4 input LUTs:               1322  out of  17344     7%  
  Number of IOs:                         111
  Number of bonded IOBs:                 111  out of    250    44%  
     IOB Flip Flops:                      48
@@ -771,179 +763,122 @@ NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
 
 Clock Information:
 ------------------
------------------------------------------------------------------------------------------------+----------------------------------------------------+-------+
-Clock Signal                                                                                   | Clock buffer(FF name)                              | Load  |
------------------------------------------------------------------------------------------------+----------------------------------------------------+-------+
-Clk_in                                                                                         | BUFGP                                              | 32    |
-Clk_base_gen_c/Tmp                                                                             | NONE(Clk_gen_c/Clk_s)                              | 19    |
-Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001(Stage_mem_c/Memory_c/Mtrien_RAM1_data_not00011:O)| NONE(*)(Stage_mem_c/Memory_c/Mtridata_RAM1_data_15)| 32    |
-Clk_gen_c/Clk_x2_s                                                                             | NONE(Stage_mem_c/Memory_c/step)                    | 1     |
-Clk_gen_c/Clk_s1                                                                               | BUFG                                               | 454   |
------------------------------------------------------------------------------------------------+----------------------------------------------------+-------+
-(*) This 1 clock signal(s) are generated by combinatorial logic,
+---------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
+Clock Signal                                                                                             | Clock buffer(FF name)                                | Load  |
+---------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
+Clk_base(Clk_base_gen_c/Tmp1:O)                                                                          | NONE(*)(Clk_gen_c/Clk_x2_s)                          | 3     |
+Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not0001(Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not00011:O)| NONE(*)(Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data)  | 16    |
+Rst                                                                                                      | IBUF+BUFG                                            | 31    |
+Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001(Stage_mem_c/Memory_c/Mtrien_RAM1_data_not000150_f5:O)      | NONE(*)(Stage_mem_c/Memory_c/Mtrien_RAM1_data)       | 16    |
+Clk_gen_c/Clk_x2_s1                                                                                      | BUFG                                                 | 450   |
+Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001(Stage_mem_c/Memory_c/Mtridata_RAM1_data_not00011:O)           | NONE(*)(Stage_mem_c/Memory_c/Mtridata_RAM1_data_15)  | 16    |
+N1                                                                                                       | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15)| 16    |
+---------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
+(*) These 4 clock signal(s) are generated by combinatorial logic,
 and XST is not able to identify which are the primary clock signals.
 Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
 INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
 
 Asynchronous Control Signals Information:
 ----------------------------------------
----------------------------------------------------------------------+-------------------------+-------+
-Control Signal                                                       | Buffer(FF name)         | Load  |
----------------------------------------------------------------------+-------------------------+-------+
-Clk_base_gen_c/Rst_inv(Stage_mem_c/Inst_MEM_WB_REGS/Rst_inv1_INV_0:O)| NONE(Clk_base_gen_c/Tmp)| 459   |
----------------------------------------------------------------------+-------------------------+-------+
+---------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
+Control Signal                                                                                                       | Buffer(FF name)                                      | Load  |
+---------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
+Clk_gen_c/Rst_inv(Stage_mem_c/Inst_MEM_WB_REGS/Rst_inv1_INV_0:O)                                                     | NONE(Clk_gen_c/Clk_x2_s)                             | 469   |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_0) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_10)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_11)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_12)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_13)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_14)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15__and00001:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15__and00011:O)| NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15)| 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_1) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_2) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_3) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_4) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_5) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_6) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_7) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_8) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9__and0000(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9__and00001:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9) | 1     |
+Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9__and0001(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9__and00011:O)  | NONE(Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_9) | 1     |
+---------------------------------------------------------------------------------------------------------------------+------------------------------------------------------+-------+
 
 Timing Summary:
 ---------------
 Speed Grade: -4
 
-   Minimum period: 18.831ns (Maximum Frequency: 53.105MHz)
-   Minimum input arrival time before clock: 5.401ns
-   Maximum output required time after clock: 17.094ns
-   Maximum combinational path delay: 8.223ns
+   Minimum period: 19.750ns (Maximum Frequency: 50.634MHz)
+   Minimum input arrival time before clock: 4.055ns
+   Maximum output required time after clock: 17.628ns
+   Maximum combinational path delay: 8.177ns
 
 Timing Detail:
 --------------
 All values displayed in nanoseconds (ns)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_in'
-  Clock period: 8.731ns (frequency: 114.541MHz)
-  Total number of paths / destination ports: 14225 / 33
+Timing constraint: Default period analysis for Clock 'Clk_base'
+  Clock period: 2.780ns (frequency: 359.712MHz)
+  Total number of paths / destination ports: 3 / 3
 -------------------------------------------------------------------------
-Delay:               8.731ns (Levels of Logic = 45)
-  Source:            Clk_base_gen_c/Cnt_5 (FF)
-  Destination:       Clk_base_gen_c/Cnt_30 (FF)
-  Source Clock:      Clk_in rising
-  Destination Clock: Clk_in rising
-
-  Data Path: Clk_base_gen_c/Cnt_5 to Clk_base_gen_c/Cnt_30
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     FDE:C->Q              2   0.591   0.622  Clk_base_gen_c/Cnt_5 (Clk_base_gen_c/Cnt_5)
-     LUT1:I0->O            1   0.704   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<0>_rt (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<0>_rt)
-     MUXCY:S->O            1   0.464   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<0> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<0>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<1> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<1>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<2> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<2>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<3> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<3>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<4> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<4>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<5> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<5>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<6> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<6>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<7> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<7>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<8> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<8>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<9> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<9>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<10> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<10>)
-     MUXCY:CI->O          33   0.331   1.438  Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<11> (Clk_base_gen_c/Mcompar_Cnt_cmp_lt0000_cy<11>)
-     LUT3:I0->O            1   0.704   0.000  Clk_base_gen_c/Mcount_Cnt_lut<0> (Clk_base_gen_c/Mcount_Cnt_lut<0>)
-     MUXCY:S->O            1   0.464   0.000  Clk_base_gen_c/Mcount_Cnt_cy<0> (Clk_base_gen_c/Mcount_Cnt_cy<0>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<1> (Clk_base_gen_c/Mcount_Cnt_cy<1>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<2> (Clk_base_gen_c/Mcount_Cnt_cy<2>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<3> (Clk_base_gen_c/Mcount_Cnt_cy<3>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<4> (Clk_base_gen_c/Mcount_Cnt_cy<4>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<5> (Clk_base_gen_c/Mcount_Cnt_cy<5>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<6> (Clk_base_gen_c/Mcount_Cnt_cy<6>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<7> (Clk_base_gen_c/Mcount_Cnt_cy<7>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<8> (Clk_base_gen_c/Mcount_Cnt_cy<8>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<9> (Clk_base_gen_c/Mcount_Cnt_cy<9>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<10> (Clk_base_gen_c/Mcount_Cnt_cy<10>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<11> (Clk_base_gen_c/Mcount_Cnt_cy<11>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<12> (Clk_base_gen_c/Mcount_Cnt_cy<12>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<13> (Clk_base_gen_c/Mcount_Cnt_cy<13>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<14> (Clk_base_gen_c/Mcount_Cnt_cy<14>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<15> (Clk_base_gen_c/Mcount_Cnt_cy<15>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<16> (Clk_base_gen_c/Mcount_Cnt_cy<16>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<17> (Clk_base_gen_c/Mcount_Cnt_cy<17>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<18> (Clk_base_gen_c/Mcount_Cnt_cy<18>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<19> (Clk_base_gen_c/Mcount_Cnt_cy<19>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<20> (Clk_base_gen_c/Mcount_Cnt_cy<20>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<21> (Clk_base_gen_c/Mcount_Cnt_cy<21>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<22> (Clk_base_gen_c/Mcount_Cnt_cy<22>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<23> (Clk_base_gen_c/Mcount_Cnt_cy<23>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<24> (Clk_base_gen_c/Mcount_Cnt_cy<24>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<25> (Clk_base_gen_c/Mcount_Cnt_cy<25>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<26> (Clk_base_gen_c/Mcount_Cnt_cy<26>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<27> (Clk_base_gen_c/Mcount_Cnt_cy<27>)
-     MUXCY:CI->O           1   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<28> (Clk_base_gen_c/Mcount_Cnt_cy<28>)
-     MUXCY:CI->O           0   0.059   0.000  Clk_base_gen_c/Mcount_Cnt_cy<29> (Clk_base_gen_c/Mcount_Cnt_cy<29>)
-     XORCY:CI->O           1   0.804   0.000  Clk_base_gen_c/Mcount_Cnt_xor<30> (Clk_base_gen_c/Mcount_Cnt30)
-     FDE:D                     0.308          Clk_base_gen_c/Cnt_30
-    ----------------------------------------
-    Total                      8.731ns (6.671ns logic, 2.060ns route)
-                                       (76.4% logic, 23.6% route)
-
-=========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_base_gen_c/Tmp'
-  Clock period: 2.717ns (frequency: 368.053MHz)
-  Total number of paths / destination ports: 4 / 4
--------------------------------------------------------------------------
-Delay:               2.717ns (Levels of Logic = 1)
-  Source:            Clk_gen_c/Cnt_0 (FF)
-  Destination:       Clk_gen_c/Clk_s (FF)
-  Source Clock:      Clk_base_gen_c/Tmp rising
-  Destination Clock: Clk_base_gen_c/Tmp rising
-
-  Data Path: Clk_gen_c/Cnt_0 to Clk_gen_c/Clk_s
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     FDC:C->Q              1   0.591   0.420  Clk_gen_c/Cnt_0 (Clk_gen_c/Cnt_0)
-     INV:I->O              2   0.704   0.447  Clk_gen_c/Cnt_inv1_INV_0 (Clk_gen_c/Cnt_inv)
-     FDCE:CE                   0.555          Clk_gen_c/Clk_s
-    ----------------------------------------
-    Total                      2.717ns (1.850ns logic, 0.867ns route)
-                                       (68.1% logic, 31.9% route)
-
-=========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_x2_s'
-  Clock period: 2.731ns (frequency: 366.166MHz)
-  Total number of paths / destination ports: 1 / 1
--------------------------------------------------------------------------
-Delay:               2.731ns (Levels of Logic = 1)
+Delay:               2.780ns (Levels of Logic = 1)
   Source:            Stage_mem_c/Memory_c/step (FF)
   Destination:       Stage_mem_c/Memory_c/step (FF)
-  Source Clock:      Clk_gen_c/Clk_x2_s rising
-  Destination Clock: Clk_gen_c/Clk_x2_s rising
+  Source Clock:      Clk_base rising
+  Destination Clock: Clk_base rising
 
   Data Path: Stage_mem_c/Memory_c/step to Stage_mem_c/Memory_c/step
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              7   0.591   0.708  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
+     FDC:C->Q              8   0.591   0.757  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
      INV:I->O              1   0.704   0.420  Stage_mem_c/Memory_c/step_not00011_INV_0 (Stage_mem_c/Memory_c/step_not0001)
      FDC:D                     0.308          Stage_mem_c/Memory_c/step
     ----------------------------------------
-    Total                      2.731ns (1.603ns logic, 1.128ns route)
-                                       (58.7% logic, 41.3% route)
+    Total                      2.780ns (1.603ns logic, 1.177ns route)
+                                       (57.7% logic, 42.3% route)
 
 =========================================================================
-Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_s1'
-  Clock period: 18.831ns (frequency: 53.105MHz)
-  Total number of paths / destination ports: 1529721 / 742
+Timing constraint: Default period analysis for Clock 'Clk_gen_c/Clk_x2_s1'
+  Clock period: 19.750ns (frequency: 50.634MHz)
+  Total number of paths / destination ports: 1585890 / 880
 -------------------------------------------------------------------------
-Delay:               18.831ns (Levels of Logic = 24)
-  Source:            Stage_IF_c/IF_ID_regs_c/Inst_14_1 (FF)
+Delay:               19.750ns (Levels of Logic = 21)
+  Source:            Stage_IF_c/IF_ID_regs_c/Inst_12 (FF)
   Destination:       Stage_IF_c/PC_reg_c/PC_15 (FF)
-  Source Clock:      Clk_gen_c/Clk_s1 rising
-  Destination Clock: Clk_gen_c/Clk_s1 rising
+  Source Clock:      Clk_gen_c/Clk_x2_s1 rising
+  Destination Clock: Clk_gen_c/Clk_x2_s1 rising
 
-  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_14_1 to Stage_IF_c/PC_reg_c/PC_15
+  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_12 to Stage_IF_c/PC_reg_c/PC_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             5   0.591   0.808  Stage_IF_c/IF_ID_regs_c/Inst_14_1 (Stage_IF_c/IF_ID_regs_c/Inst_14_1)
-     LUT3_D:I0->O          4   0.704   0.666  Stage_ID_c/Decoder_c/REG_des_cmp_eq000011 (Stage_ID_c/Decoder_c/N24)
-     LUT4:I1->O            1   0.704   0.499  Stage_ID_c/Decoder_c/ALU_src_a<2>2132 (Stage_ID_c/Decoder_c/ALU_src_a<2>2132)
-     LUT4_D:I1->LO         1   0.704   0.135  Stage_ID_c/Decoder_c/ALU_src_a<2>2145 (N683)
-     LUT3:I2->O            4   0.704   0.591  Stage_ID_c/Decoder_c/ALU_src_a<1>_SW0 (Stage_ID_c/Decoder_c/ALU_src_a<0>32)
-     LUT4_D:I3->O        135   0.704   1.330  Stage_ID_c/Decoder_c/ALU_src_a<0>38 (Stage_ID_c/ALU_src_a<0>)
-     LUT3:I2->O            1   0.704   0.000  Stage_ID_c/Reg_heap_c/mux13_5 (Stage_ID_c/Reg_heap_c/mux13_5)
-     MUXF5:I1->O           1   0.321   0.000  Stage_ID_c/Reg_heap_c/mux13_4_f5 (Stage_ID_c/Reg_heap_c/mux13_4_f5)
-     MUXF6:I1->O           1   0.521   0.000  Stage_ID_c/Reg_heap_c/mux13_3_f6 (Stage_ID_c/Reg_heap_c/mux13_3_f6)
-     MUXF7:I1->O           1   0.521   0.424  Stage_ID_c/Reg_heap_c/mux13_2_f7 (Stage_ID_c/Reg_heap_c/_varindex0000<7>)
-     LUT4:I3->O            1   0.704   0.000  Stage_ID_c/Reg_heap_c/Rx_q<7>14_F (N402)
-     MUXF5:I0->O           2   0.321   0.451  Stage_ID_c/Reg_heap_c/Rx_q<7>14 (Stage_ID_c/Rx_data<7>)
-     LUT4:I3->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/R_data<7>116_F (N422)
+     FDCE:C->Q            27   0.591   1.296  Stage_IF_c/IF_ID_regs_c/Inst_12 (Stage_IF_c/IF_ID_regs_c/Inst_12)
+     LUT3_D:I2->LO         1   0.704   0.104  Stage_ID_c/Decoder_c/REG_des_cmp_eq000011 (N733)
+     LUT4:I3->O           15   0.704   1.021  Stage_ID_c/Decoder_c/ALU_op<1>31 (Stage_ID_c/Decoder_c/N26)
+     LUT4:I3->O            1   0.704   0.455  Stage_ID_c/Decoder_c/ALU_src_a<2>5 (Stage_ID_c/Decoder_c/ALU_src_a<2>5)
+     LUT4:I2->O            1   0.704   0.424  Stage_ID_c/Decoder_c/ALU_src_a<2>29_SW0_SW0 (N382)
+     LUT4:I3->O           40   0.704   1.269  Stage_ID_c/Decoder_c/ALU_src_a<2>29 (Stage_ID_c/ALU_src_a<2>)
+     LUT4:I3->O            1   0.704   0.455  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456_SW0_SW0 (N384)
+     LUT4:I2->O           32   0.704   1.262  Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004456 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0004)
+     MUXF5:S->O            2   0.739   0.482  Stage_ID_c/Reg_heap_c/Rx_q<7>14 (Stage_ID_c/Rx_data<7>)
+     LUT3:I2->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/R_data<7>116_F (N472)
      MUXF5:I0->O           2   0.321   0.526  Stage_ID_c/Branch_calc_c/R_data<7>116 (Stage_ID_c/Branch_calc_c/N8)
      LUT3:I1->O            1   0.704   0.000  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_lut<0> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_lut<0>)
      MUXCY:S->O            1   0.464   0.000  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<0> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<0>)
@@ -955,210 +890,251 @@ Delay:               18.831ns (Levels of Logic = 24)
      MUXCY:CI->O           1   0.059   0.000  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<6> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<6>)
      MUXCY:CI->O           1   0.459   0.424  Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003_wg_cy<7> (Stage_ID_c/Branch_calc_c/PC_src_cmp_eq0003)
      LUT4_D:I3->O         15   0.704   1.052  Stage_ID_c/Branch_calc_c/PC_src1 (PC_src)
-     LUT3:I2->O            1   0.704   0.000  Stage_IF_c/PC_mux_c/NPC<9>66 (Stage_IF_c/PC_d<9>)
-     FDCE:D                    0.308          Stage_IF_c/PC_reg_c/PC_9
+     LUT3:I2->O            1   0.704   0.000  Stage_IF_c/PC_mux_c/NPC<8>66 (Stage_IF_c/PC_d<8>)
+     FDCE:D                    0.308          Stage_IF_c/PC_reg_c/PC_8
     ----------------------------------------
-    Total                     18.831ns (11.925ns logic, 6.906ns route)
-                                       (63.3% logic, 36.7% route)
+    Total                     19.750ns (10.980ns logic, 8.770ns route)
+                                       (55.6% logic, 44.4% route)
 
 =========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_in'
-  Total number of paths / destination ports: 31 / 31
+Timing constraint: Default period analysis for Clock 'Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001'
+  Clock period: 2.214ns (frequency: 451.671MHz)
+  Total number of paths / destination ports: 16 / 16
 -------------------------------------------------------------------------
-Offset:              3.048ns (Levels of Logic = 1)
-  Source:            Rst (PAD)
-  Destination:       Clk_base_gen_c/Cnt_0 (FF)
-  Destination Clock: Clk_in rising
+Delay:               2.214ns (Levels of Logic = 1)
+  Source:            Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (LATCH)
+  Destination:       Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (LATCH)
+  Source Clock:      Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001 falling
+  Destination Clock: Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001 falling
 
-  Data Path: Rst to Clk_base_gen_c/Cnt_0
+  Data Path: Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 to Stage_mem_c/Memory_c/Mtridata_RAM1_data_15
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            71   1.218   1.275  Rst_IBUF (Rst_IBUF)
-     FDE:CE                    0.555          Clk_base_gen_c/Cnt_0
+     LDC:G->Q              2   0.676   0.526  Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (Stage_mem_c/Memory_c/Mtridata_RAM1_data<15>)
+     LUT4:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>1 (Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>)
+     LDC:D                     0.308          Stage_mem_c/Memory_c/Mtridata_RAM1_data_15
     ----------------------------------------
-    Total                      3.048ns (1.773ns logic, 1.275ns route)
-                                       (58.2% logic, 41.8% route)
+    Total                      2.214ns (1.688ns logic, 0.526ns route)
+                                       (76.2% logic, 23.8% route)
 
 =========================================================================
 Timing constraint: Default OFFSET IN BEFORE for Clock 'Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001'
-  Total number of paths / destination ports: 32 / 32
+  Total number of paths / destination ports: 16 / 16
 -------------------------------------------------------------------------
-Offset:              5.401ns (Levels of Logic = 3)
+Offset:              3.569ns (Levels of Logic = 2)
   Source:            Rst (PAD)
-  Destination:       Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (LATCH)
+  Destination:       Stage_mem_c/Memory_c/Mtrien_RAM1_data (LATCH)
   Destination Clock: Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001 falling
 
-  Data Path: Rst to Stage_mem_c/Memory_c/Mtridata_RAM1_data_15
+  Data Path: Rst to Stage_mem_c/Memory_c/Mtrien_RAM1_data
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            71   1.218   1.354  Rst_IBUF (Rst_IBUF)
-     LUT4:I1->O           16   0.704   1.113  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<0>21 (N4)
-     LUT2:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<9>1 (Stage_mem_c/Memory_c/Mtridata_RAM1_data_mux0000<9>)
-     LD:D                      0.308          Stage_mem_c/Memory_c/Mtridata_RAM1_data_9
+     IBUF:I->O            26   1.218   1.339  Rst_IBUF (Rst_IBUF1)
+     LUT3:I1->O           16   0.704   0.000  Stage_mem_c/Memory_c/Mtrien_RAM1_data_mux0000 (Stage_mem_c/Memory_c/Mtrien_RAM1_data_mux0000)
+     LD:D                      0.308          Stage_mem_c/Memory_c/Mtrien_RAM1_data
     ----------------------------------------
-    Total                      5.401ns (2.934ns logic, 2.467ns route)
-                                       (54.3% logic, 45.7% route)
+    Total                      3.569ns (2.230ns logic, 1.339ns route)
+                                       (62.5% logic, 37.5% route)
 
 =========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_base_gen_c/Tmp'
-  Total number of paths / destination ports: 32 / 32
+Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_gen_c/Clk_x2_s1'
+  Total number of paths / destination ports: 56 / 36
 -------------------------------------------------------------------------
-Offset:              3.048ns (Levels of Logic = 1)
-  Source:            Rst (PAD)
-  Destination:       Stage_IF_c/Inst_fetcher_c/Inst_reg_15 (FF)
-  Destination Clock: Clk_base_gen_c/Tmp rising
-
-  Data Path: Rst to Stage_IF_c/Inst_fetcher_c/Inst_reg_15
-                                Gate     Net
-    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
-    ----------------------------------------  ------------
-     IBUF:I->O            71   1.218   1.275  Rst_IBUF (Rst_IBUF)
-     FDE:CE                    0.555          Stage_IF_c/Inst_fetcher_c/Inst_reg_0
-    ----------------------------------------
-    Total                      3.048ns (1.773ns logic, 1.275ns route)
-                                       (58.2% logic, 41.8% route)
-
-=========================================================================
-Timing constraint: Default OFFSET IN BEFORE for Clock 'Clk_gen_c/Clk_s1'
-  Total number of paths / destination ports: 20 / 16
--------------------------------------------------------------------------
-Offset:              3.077ns (Levels of Logic = 3)
-  Source:            RAM1_data<0> (PAD)
+Offset:              4.055ns (Levels of Logic = 3)
+  Source:            RAM2_data<0> (PAD)
   Destination:       Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0 (FF)
-  Destination Clock: Clk_gen_c/Clk_s1 rising
+  Destination Clock: Clk_gen_c/Clk_x2_s1 rising
 
-  Data Path: RAM1_data<0> to Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
+  Data Path: RAM2_data<0> to Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IOBUF:IO->O           2   1.218   0.526  RAM1_data_0_IOBUF (N269)
-     LUT4:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/memout<0>11 (Stage_mem_c/Memory_c/memout<0>1)
-     MUXF5:I1->O           1   0.321   0.000  Stage_mem_c/Memory_c/memout<0>1_f5 (Stage_mem_c/Mem_out<0>)
-     FDC:D                     0.308          Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
+     IOBUF:IO->O           4   1.218   0.622  RAM2_data_0_IOBUF (N301)
+     LUT3:I2->O            1   0.704   0.499  Stage_mem_c/Memory_c/memout<0>_SW0 (N90)
+     LUT4:I1->O            1   0.704   0.000  Stage_mem_c/Memory_c/memout<0> (Stage_mem_c/Mem_out<0>)
+     FDCE:D                    0.308          Stage_mem_c/Inst_MEM_WB_REGS/Mem_out_0
     ----------------------------------------
-    Total                      3.077ns (2.551ns logic, 0.526ns route)
-                                       (82.9% logic, 17.1% route)
+    Total                      4.055ns (2.934ns logic, 1.121ns route)
+                                       (72.4% logic, 27.6% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_s1'
-  Total number of paths / destination ports: 1946 / 64
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_x2_s1'
+  Total number of paths / destination ports: 2310 / 65
 -------------------------------------------------------------------------
-Offset:              17.094ns (Levels of Logic = 10)
-  Source:            Stage_IF_c/IF_ID_regs_c/Inst_14_1 (FF)
+Offset:              17.628ns (Levels of Logic = 10)
+  Source:            Stage_IF_c/IF_ID_regs_c/Inst_13 (FF)
   Destination:       LED<12> (PAD)
-  Source Clock:      Clk_gen_c/Clk_s1 rising
+  Source Clock:      Clk_gen_c/Clk_x2_s1 rising
 
-  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_14_1 to LED<12>
+  Data Path: Stage_IF_c/IF_ID_regs_c/Inst_13 to LED<12>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             5   0.591   0.808  Stage_IF_c/IF_ID_regs_c/Inst_14_1 (Stage_IF_c/IF_ID_regs_c/Inst_14_1)
-     LUT3_D:I0->O          4   0.704   0.666  Stage_ID_c/Decoder_c/REG_des_cmp_eq000011 (Stage_ID_c/Decoder_c/N24)
-     LUT4:I1->O            1   0.704   0.499  Stage_ID_c/Decoder_c/ALU_src_a<2>2132 (Stage_ID_c/Decoder_c/ALU_src_a<2>2132)
-     LUT4_D:I1->O          2   0.704   0.451  Stage_ID_c/Decoder_c/ALU_src_a<2>2145 (Stage_ID_c/Decoder_c/N41)
-     LUT4_D:I3->O          1   0.704   0.424  Stage_ID_c/Decoder_c/ALU_src_a<2>_SW0 (N248)
-     LUT4:I3->O           35   0.704   1.342  Stage_ID_c/Decoder_c/ALU_src_a<2> (Stage_ID_c/ALU_src_a<2>)
-     LUT4:I1->O            2   0.704   0.451  Stage_ID_c/Branch_calc_c/R_data_cmp_eq00001 (Stage_ID_c/Branch_calc_c/R_data_cmp_eq0000)
-     LUT4:I3->O            1   0.704   0.499  Stage_ID_c/Hazard_c/bubble_or000128 (Stage_ID_c/Hazard_c/bubble_or000128)
-     LUT4:I1->O            2   0.704   0.482  Stage_ID_c/Hazard_c/bubble_or000131 (Stage_ID_c/Hazard_c/bubble_or000131)
-     LUT4:I2->O           66   0.704   1.273  Stage_ID_c/Hazard_c/bubble_or0001205 (LED_12_OBUF)
+     FDCE:C->Q            29   0.591   1.296  Stage_IF_c/IF_ID_regs_c/Inst_13 (Stage_IF_c/IF_ID_regs_c/Inst_13)
+     LUT3_D:I2->O         11   0.704   0.968  Stage_ID_c/Decoder_c/ALU_op<1>21 (Stage_ID_c/Decoder_c/N19)
+     LUT3_D:I2->O          1   0.704   0.424  Stage_ID_c/Decoder_c/REG_src_b_cmp_eq00021 (Stage_ID_c/Decoder_c/REG_src_b_cmp_eq0002)
+     LUT4:I3->O            1   0.704   0.424  Stage_ID_c/Decoder_c/REG_src_b_or0000_SW0 (N209)
+     LUT4:I3->O            3   0.704   0.706  Stage_ID_c/Decoder_c/REG_src_b_or0000 (Stage_ID_c/Decoder_c/REG_src_b_or0000)
+     LUT4:I0->O           37   0.704   1.299  Stage_ID_c/Decoder_c/REG_src_b<2> (Stage_ID_c/Reg_src_b<2>)
+     LUT4:I2->O            1   0.704   0.455  Stage_ID_c/Hazard_c/bubble_or0001161 (Stage_ID_c/Hazard_c/bubble_or0001161)
+     LUT4_L:I2->LO         1   0.704   0.135  Stage_ID_c/Hazard_c/bubble_or0001191_SW0 (N584)
+     LUT3:I2->O            1   0.704   0.455  Stage_ID_c/Hazard_c/bubble_or0001191 (Stage_ID_c/Hazard_c/bubble_or0001191)
+     LUT4:I2->O           46   0.704   1.267  Stage_ID_c/Hazard_c/bubble_or0001202 (LED_12_OBUF)
      OBUF:I->O                 3.272          LED_12_OBUF (LED<12>)
     ----------------------------------------
-    Total                     17.094ns (10.199ns logic, 6.895ns route)
-                                       (59.7% logic, 40.3% route)
+    Total                     17.628ns (10.199ns logic, 7.429ns route)
+                                       (57.9% logic, 42.1% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_gen_c/Clk_x2_s'
-  Total number of paths / destination ports: 4 / 4
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_base'
+  Total number of paths / destination ports: 6 / 6
 -------------------------------------------------------------------------
-Offset:              6.933ns (Levels of Logic = 3)
+Offset:              7.078ns (Levels of Logic = 3)
   Source:            Stage_mem_c/Memory_c/step (FF)
   Destination:       COM_wrn (PAD)
-  Source Clock:      Clk_gen_c/Clk_x2_s rising
+  Source Clock:      Clk_base rising
 
   Data Path: Stage_mem_c/Memory_c/step to COM_wrn
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDC:C->Q              7   0.591   0.787  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
-     LUT3:I1->O            1   0.704   0.455  Stage_mem_c/Memory_c/COM_wrn_SW0 (N38)
-     LUT4:I2->O            1   0.704   0.420  Stage_mem_c/Memory_c/COM_wrn (COM_wrn_OBUF)
+     FDC:C->Q              8   0.591   0.792  Stage_mem_c/Memory_c/step (Stage_mem_c/Memory_c/step)
+     LUT4:I2->O            1   0.704   0.595  Stage_mem_c/Memory_c/COM_wrn_SW0 (N53)
+     LUT4:I0->O            1   0.704   0.420  Stage_mem_c/Memory_c/COM_wrn (COM_wrn_OBUF)
      OBUF:I->O                 3.272          COM_wrn_OBUF (COM_wrn)
     ----------------------------------------
-    Total                      6.933ns (5.271ns logic, 1.662ns route)
-                                       (76.0% logic, 24.0% route)
+    Total                      7.078ns (5.271ns logic, 1.807ns route)
+                                       (74.5% logic, 25.5% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001'
-  Total number of paths / destination ports: 32 / 16
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001'
+  Total number of paths / destination ports: 16 / 16
 -------------------------------------------------------------------------
-Offset:              4.368ns (Levels of Logic = 1)
+Offset:              4.395ns (Levels of Logic = 1)
   Source:            Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (LATCH)
   Destination:       RAM1_data<15> (PAD)
-  Source Clock:      Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001 falling
+  Source Clock:      Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001 falling
 
   Data Path: Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 to RAM1_data<15>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     LD:G->Q               1   0.676   0.420  Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (Stage_mem_c/Memory_c/Mtridata_RAM1_data<15>)
+     LDC:G->Q              2   0.676   0.447  Stage_mem_c/Memory_c/Mtridata_RAM1_data_15 (Stage_mem_c/Memory_c/Mtridata_RAM1_data<15>)
      IOBUF:I->IO               3.272          RAM1_data_15_IOBUF (RAM1_data<15>)
+    ----------------------------------------
+    Total                      4.395ns (3.948ns logic, 0.447ns route)
+                                       (89.8% logic, 10.2% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001'
+  Total number of paths / destination ports: 16 / 16
+-------------------------------------------------------------------------
+Offset:              4.368ns (Levels of Logic = 1)
+  Source:            Stage_mem_c/Memory_c/Mtrien_RAM1_data_1 (LATCH)
+  Destination:       RAM1_data<15> (PAD)
+  Source Clock:      Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001 falling
+
+  Data Path: Stage_mem_c/Memory_c/Mtrien_RAM1_data_1 to RAM1_data<15>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.676   0.420  Stage_mem_c/Memory_c/Mtrien_RAM1_data_1 (Stage_mem_c/Memory_c/Mtrien_RAM1_data_1)
+     IOBUF:T->IO               3.272          RAM1_data_15_IOBUF (RAM1_data<15>)
     ----------------------------------------
     Total                      4.368ns (3.948ns logic, 0.420ns route)
                                        (90.4% logic, 9.6% route)
 
 =========================================================================
-Timing constraint: Default OFFSET OUT AFTER for Clock 'Clk_base_gen_c/Tmp'
-  Total number of paths / destination ports: 2 / 2
+Timing constraint: Default OFFSET OUT AFTER for Clock 'N1'
+  Total number of paths / destination ports: 16 / 16
 -------------------------------------------------------------------------
-Offset:              4.394ns (Levels of Logic = 1)
-  Source:            Clk_gen_c/Clk_s (FF)
-  Destination:       LED<15> (PAD)
-  Source Clock:      Clk_base_gen_c/Tmp rising
+Offset:              4.368ns (Levels of Logic = 1)
+  Source:            Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15 (LATCH)
+  Destination:       RAM2_data<15> (PAD)
+  Source Clock:      N1 rising
 
-  Data Path: Clk_gen_c/Clk_s to LED<15>
+  Data Path: Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15 to RAM2_data<15>
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     FDCE:C->Q             3   0.591   0.531  Clk_gen_c/Clk_s (Clk_gen_c/Clk_s1)
-     OBUF:I->O                 3.272          LED_15_OBUF (LED<15>)
+     LDCP_1:G->Q           1   0.676   0.420  Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data_15 (Stage_IF_c/Inst_fetcher_c/Mtridata_RAM2_data<15>)
+     IOBUF:I->IO               3.272          RAM2_data_15_IOBUF (RAM2_data<15>)
     ----------------------------------------
-    Total                      4.394ns (3.863ns logic, 0.531ns route)
-                                       (87.9% logic, 12.1% route)
+    Total                      4.368ns (3.948ns logic, 0.420ns route)
+                                       (90.4% logic, 9.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not0001'
+  Total number of paths / destination ports: 16 / 16
+-------------------------------------------------------------------------
+Offset:              4.368ns (Levels of Logic = 1)
+  Source:            Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_1 (LATCH)
+  Destination:       RAM2_data<15> (PAD)
+  Source Clock:      Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not0001 falling
+
+  Data Path: Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_1 to RAM2_data<15>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.676   0.420  Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_1 (Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_1)
+     IOBUF:T->IO               3.272          RAM2_data_15_IOBUF (RAM2_data<15>)
+    ----------------------------------------
+    Total                      4.368ns (3.948ns logic, 0.420ns route)
+                                       (90.4% logic, 9.6% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'Rst'
+  Total number of paths / destination ports: 15 / 15
+-------------------------------------------------------------------------
+Offset:              5.527ns (Levels of Logic = 2)
+  Source:            Stage_mem_c/Memory_c/Addr_to_RAM2_14 (LATCH)
+  Destination:       RAM2_addr<14> (PAD)
+  Source Clock:      Rst falling
+
+  Data Path: Stage_mem_c/Memory_c/Addr_to_RAM2_14 to RAM2_addr<14>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     LD:G->Q               1   0.676   0.455  Stage_mem_c/Memory_c/Addr_to_RAM2_14 (Stage_mem_c/Memory_c/Addr_to_RAM2_14)
+     LUT3:I2->O            1   0.704   0.420  Stage_IF_c/Inst_fetcher_c/RAM2_addr_14_mux00001 (RAM2_addr_14_OBUF)
+     OBUF:I->O                 3.272          RAM2_addr_14_OBUF (RAM2_addr<14>)
+    ----------------------------------------
+    Total                      5.527ns (4.652ns logic, 0.875ns route)
+                                       (84.2% logic, 15.8% route)
 
 =========================================================================
 Timing constraint: Default path analysis
-  Total number of paths / destination ports: 21 / 21
+  Total number of paths / destination ports: 23 / 22
 -------------------------------------------------------------------------
-Delay:               8.223ns (Levels of Logic = 4)
+Delay:               8.177ns (Levels of Logic = 4)
   Source:            Rst (PAD)
-  Destination:       COM_rdn (PAD)
+  Destination:       COM_wrn (PAD)
 
-  Data Path: Rst to COM_rdn
+  Data Path: Rst to COM_wrn
                                 Gate     Net
     Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
     ----------------------------------------  ------------
-     IBUF:I->O            71   1.218   1.450  Rst_IBUF (Rst_IBUF)
-     LUT3:I0->O            1   0.704   0.455  Stage_mem_c/Memory_c/COM_rdn_SW0 (N36)
-     LUT4:I2->O            1   0.704   0.420  Stage_mem_c/Memory_c/COM_rdn (COM_rdn_OBUF)
-     OBUF:I->O                 3.272          COM_rdn_OBUF (COM_rdn)
+     IBUF:I->O            26   1.218   1.264  Rst_IBUF (Rst_IBUF1)
+     LUT4:I3->O            1   0.704   0.595  Stage_mem_c/Memory_c/COM_wrn_SW0 (N53)
+     LUT4:I0->O            1   0.704   0.420  Stage_mem_c/Memory_c/COM_wrn (COM_wrn_OBUF)
+     OBUF:I->O                 3.272          COM_wrn_OBUF (COM_wrn)
     ----------------------------------------
-    Total                      8.223ns (5.898ns logic, 2.325ns route)
-                                       (71.7% logic, 28.3% route)
+    Total                      8.177ns (5.898ns logic, 2.279ns route)
+                                       (72.1% logic, 27.9% route)
 
 =========================================================================
 
 
-Total REAL time to Xst completion: 14.00 secs
-Total CPU time to Xst completion: 14.47 secs
+Total REAL time to Xst completion: 15.00 secs
+Total CPU time to Xst completion: 15.29 secs
  
 --> 
 
-Total memory usage is 300184 kilobytes
+Total memory usage is 302168 kilobytes
 
 Number of errors   :    0 (   0 filtered)
-Number of warnings :   17 (   0 filtered)
+Number of warnings :   23 (   0 filtered)
 Number of infos    :   10 (   0 filtered)
 

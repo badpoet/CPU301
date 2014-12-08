@@ -32,6 +32,7 @@ use IEEE.STD_LOGIC_1164.ALL;
 entity MEM_WB_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            ALU_out_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Mem_out_d : in  STD_LOGIC_VECTOR (15 downto 0);
            Mem_op_d : in  STD_LOGIC_VECTOR (1 downto 0);
@@ -54,7 +55,7 @@ begin
 			Mem_out <= (others => '0');
 			Reg_des <= (others => '0');
 			Mem_op <= (others => '0');
-		elsif Clk'event and Clk = '1' then
+		elsif Clk'event and Clk = '1' and Freeze = '0' then
 			ALU_out <= ALU_out_d;
 			Mem_out <= Mem_out_d;
 			Reg_des <= Reg_des_d;

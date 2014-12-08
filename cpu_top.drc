@@ -1,7 +1,7 @@
 Release 14.7 Drc P.20131013 (nt64)
 Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 
-Sun Dec 07 03:03:30 2014
+Mon Dec 08 08:54:50 2014
 
 drc -z CPU_TOP.ncd CPU_TOP.pcf
 
@@ -9,5 +9,16 @@ WARNING:PhysDesignRules:372 - Gated clock. Clock net
    Stage_mem_c/Memory_c/Mtrien_RAM1_data_not0001 is sourced by a combinatorial
    pin. This is not good design practice. Use the CE pin to control the loading
    of data into the flip-flop.
-DRC detected 0 errors and 1 warnings.  Please see the previously displayed
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   Stage_IF_c/Inst_fetcher_c/Mtrien_RAM2_data_not0001 is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net Clk_base is sourced by a
+   combinatorial pin. This is not good design practice. Use the CE pin to
+   control the loading of data into the flip-flop.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   Stage_ID_c/ID_exe_regs_c/Reg_src_b_not0001 is sourced by a combinatorial pin.
+   This is not good design practice. Use the CE pin to control the loading of
+   data into the flip-flop.
+DRC detected 0 errors and 4 warnings.  Please see the previously displayed
 individual error or warning messages for more details.

@@ -33,6 +33,7 @@ entity ID_EXE_REGS is
     Port ( Clk : in  STD_LOGIC;
            Rst : in  STD_LOGIC;
 		   Bubble : in  STD_LOGIC;
+		   Freeze : in  STD_LOGIC;
            ALU_src_a_d : in  STD_LOGIC_VECTOR (3 downto 0);
            ALU_src_b_d : in  STD_LOGIC_VECTOR (3 downto 0);
            Reg_src_b_d : in  STD_LOGIC_VECTOR (3 downto 0);
@@ -76,7 +77,7 @@ begin
 			Mem_op <= (others => '0');
 			Reg_des <= (others => '0');
 		elsif Clk'event and Clk = '1' then
-			if Bubble = '1' then
+			if Bubble = '1' and Freeze = '0' then
 				ALU_src_a <= (others => '0');
 				ALU_src_b <= (others => '0');
 				Reg_src_b <= (others => '0');
@@ -86,7 +87,7 @@ begin
 				Immediate <= (others => '0');
 				Mem_op <= (others => '0');
 				Reg_des <= (others => '0');
-			else
+			elsif Freeze = '0' then
 				ALU_src_a <= ALU_src_a_d;
 				ALU_src_b <= ALU_src_b_d;
 				ALU_op <= ALU_op_d;

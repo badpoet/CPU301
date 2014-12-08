@@ -43,13 +43,13 @@ begin
 	process (Clk_in, Rst, Cnt) begin
 		if (Rst = '0') then
 			Tmp <= '0';
-		elsif (Clk_in'event and Clk_in = '1') then
-			if (Cnt < 12500000) then
-				Cnt <= Cnt + 1;
-			else 
-				Cnt <= 0;
-				Tmp <= NOT(Tmp);
-			end if;
+		else--if (Clk_in'event and Clk_in = '1') then
+			--if (Cnt < 0) then
+				--Cnt <= Cnt + 1;
+			--else 
+				--Cnt <= 0;
+				Tmp <= Clk_in;--NOT(Tmp);
+			--end if;
 		end if;
 	end process;
 	Clk_base <= Tmp;
